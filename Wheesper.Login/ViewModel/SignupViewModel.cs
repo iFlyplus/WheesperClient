@@ -23,14 +23,14 @@ namespace Wheesper.Login.ViewModel
         }
 
         #region Constructor
-        public SignupViewModel(IUnityContainer container)
+        public SignupViewModel(IUnityContainer container, LoginModel loginModel)
         {
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
-            loginModel = this.container.Resolve<LoginModel>();
+            this.loginModel = loginModel;
 
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler, ThreadOption.UIThread);
-            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
+            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler);
         }
         #endregion Constructor
 

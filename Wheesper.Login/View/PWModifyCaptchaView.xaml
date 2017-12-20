@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+    <Grid Background="#FFFBFBFB">
+        <TextBlock HorizontalAlignment="Left" Margin="113,18,0,0" TextWrapping="Wrap" Text="验证你的身份" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,127,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Button Content="取消" HorizontalAlignment="Left" Margin="41,219,0,0" VerticalAlignment="Top" Width="75" Command="{Binding pwModifyCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="下一步" HorizontalAlignment="Left" Margin="188,219,0,0" VerticalAlignment="Top" Width="75" Command="{Binding pwModifyCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="重新发送" HorizontalAlignment="Left" Margin="113,173,0,0" VerticalAlignment="Top" Width="75" Command="{Binding pwModifyCaptchaResendCommond, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,46,0,0" TextWrapping="Wrap" Text="我们刚才向" VerticalAlignment="Top" Height="15" Width="62"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,61,0,0" TextWrapping="Wrap" Text="发送了一个代码。请查看你的电子邮件中的邮件，然后在此处输入代码。" VerticalAlignment="Top" Height="32" Width="222"/>
+        <TextBlock HorizontalAlignment="Left" Margin="103,46,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="160"/>
+
     </Grid>
 </UserControl>

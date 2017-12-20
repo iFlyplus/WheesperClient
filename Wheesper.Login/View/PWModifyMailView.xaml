@@ -6,7 +6,12 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+    <Grid Background="#FFF9F6F6">
+        <TextBlock HorizontalAlignment="Left" Margin="109,25,0,0" TextWrapping="Wrap" Text="恢复你的账户" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="51,121,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="202"/>
+        <Button Content="取消" HorizontalAlignment="Left" Margin="51,190,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding pwModifyMailBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="下一步" HorizontalAlignment="Left" Margin="178,190,0,0" VerticalAlignment="Top" Width="75" Command="{Binding pwModifyMailNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="51,55,0,0" TextWrapping="Wrap" Text="我们可以帮助你重置密码和安全信息。首先，请输入你的电子邮件，然后按照下面饿说明操作" VerticalAlignment="Top" Height="49" Width="202"/>
+
     </Grid>
 </UserControl>

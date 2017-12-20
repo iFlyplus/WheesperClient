@@ -19,6 +19,18 @@ namespace Wheesper.Login
         private IRegionManager regionManager = null;
         IRegion mainRegion = null;
         IRegion loginFunctionRegion = null;
+
+        #region view model
+        private SigninViewModel signinViewModel = null;
+        private SignupViewModel signupViewModel = null;
+        private PWModifyViewModel pwModifyViewModel = null;
+        #endregion view model
+
+        #region view
+        private SigninMailView signinMailView = null;
+        private SigninPWView signinPWView = null;
+        #endregion view
+
         #region Constructor
         public LoginController(IUnityContainer container)
         {
@@ -32,7 +44,18 @@ namespace Wheesper.Login
             // loginFunctionRegion = regionManager.Regions[RegionNames.LoginFunctionRegion];
 
             subEvent();
-            loadSigninMailView(null);
+            //loadSigninMailView(null);
+            if(signinMailView == null)
+            {
+                signinMailView = (SigninMailView)container.Resolve(typeof(SigninMailView));
+                var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
+                signinMailView.DataContext = viewModel;
+            }
+            //var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
+            
+            //viewModel.Initialize(null);
+            
+            loadView(signinMailView);
         }
         #endregion Constructor
 
@@ -45,7 +68,7 @@ namespace Wheesper.Login
             eventAggregator.GetEvent<ShowLoginFaceViewEvent>().Subscribe(loadSigninMailView);
             eventAggregator.GetEvent<SigninMailNextEvent>().Subscribe(signinMailNextEventHandler);
             eventAggregator.GetEvent<SigninPWBackEvent>().Subscribe(signinPWBackEventHandler);
-            eventAggregator.GetEvent<SigninPWSigninEvent>().Subscribe(signinPWSigninEventHandler);
+            eventAggregator.GetEvent<SigninPWSigninEvent>().Subscribe(signinPWNextEventHandler);
             eventAggregator.GetEvent<CreateAccountEvent>().Subscribe(createAccountEventHandler);
             eventAggregator.GetEvent<ForgetPWEvent>().Subscribe(forgetPWEventHandler);
 
@@ -66,7 +89,8 @@ namespace Wheesper.Login
         private void loadSigninMailView(string email)
         {
             //var viewModel = container.Resolve<SigninViewModel>();
-            var view = container.Resolve<SigninMailView>();
+           // var view = container.Resolve<SigninMailView>();
+            var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
             var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
             viewModel.Initialize(email);
             view.DataContext = viewModel;
@@ -106,24 +130,41 @@ namespace Wheesper.Login
         #endregion helper function
 
         #region event handler
-        private void signinMailNextEventHandler(object o)
+        private void signinMailNextEventHandler(int o)
         {
             Debug.WriteLine("next hadler");
             // var viewModel = container.Resolve<SigninViewModel>();
             //container.RegisterInstance<SigninViewModel>(viewModel);
             //container.
-            var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
-            var view = container.Resolve<SigninPWView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            //signinPWView = (SigninPWView)container.Resolve(typeof(SigninPWView));
+            //var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
+            
+            //signinPWView.DataContext = viewModel;
+            //var view = (SigninPWView)container.Resolve(typeof(SigninPWView));
+            //var view = container.Resolve<SigninPWView>();
+            if(signinPWView==null)
+            {
+                signinPWView = (SigninPWView)container.Resolve(typeof(SigninPWView));
+                var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
+                signinPWView.DataContext = viewModel;
+            }
+            loadView(signinPWView);
         }
-        private void signinPWSigninEventHandler(object o)
+        private void signinPWNextEventHandler(object o)
         {
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
         }
         private void signinPWBackEventHandler(string email)
         {
-            loadSigninMailView(email);
+            Debug.WriteLine("signin pw bakc handler");
+            //var view = container.Resolve<SigninMailView>();
+            //var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
+            //var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
+            //viewModel.Password = null;
+            //view.DataContext = viewModel;
+            //viewModel.Initialize(email);
+            Debug.WriteLine(signinMailView.DataContext);
+            loadView(signinMailView);
         }
         private void createAccountEventHandler(object o)
         {

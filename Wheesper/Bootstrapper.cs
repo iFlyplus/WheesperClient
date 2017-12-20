@@ -9,13 +9,12 @@ using Wheesper.Messaging;
 using Wheesper.Test;
 using Microsoft.Practices.Prism.Modularity;
 using Wheesper.Login;
+using Wheesper.Chat;
 
 namespace Wheesper.Desktop
 {
     class Bootstrapper : UnityBootstrapper
     {
-
-
         #region override method
         protected override DependencyObject CreateShell()
         {
@@ -46,7 +45,8 @@ namespace Wheesper.Desktop
 
             Type loginModule = typeof(LoginModule);
             moduleCatalog.AddModule(new ModuleInfo() { ModuleName = loginModule.Name, ModuleType = loginModule.AssemblyQualifiedName });
-
+            Type chatModule = typeof(ChatModule);
+            moduleCatalog.AddModule(new ModuleInfo() { ModuleName = chatModule.Name, ModuleType = chatModule.AssemblyQualifiedName });
             return moduleCatalog;
         }
         #endregion overrire method

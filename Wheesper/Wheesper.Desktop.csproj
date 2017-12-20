@@ -125,6 +125,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Wheesper.Chat\Wheesper.Chat.csproj">
+      <Project>{834a91a5-e592-447c-b30a-a3ec6de61a46}</Project>
+      <Name>Wheesper.Chat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Wheesper.Infrastructure\Wheesper.Infrastructure.csproj">
       <Project>{a22310c9-6ec5-439c-a5d8-9ee672f10daa}</Project>
       <Name>Wheesper.Infrastructure</Name>

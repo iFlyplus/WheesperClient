@@ -47,15 +47,16 @@ namespace Wheesper.Login.ViewModel
         #endregion helper function
 
         #region Constructor
-        public SigninViewModel(IUnityContainer container)
+        public SigninViewModel(IUnityContainer container, LoginModel loginModel, IEventAggregator eventAggregator)
         {
             Debug.WriteLine("signinviewmodel con");
             this.container = container;
-            eventAggregator = this.container.Resolve<IEventAggregator>();
+            // eventAggregator = this.container.Resolve<IEventAggregator>();
+            this.eventAggregator = eventAggregator;
             // loginModel = this.container.Resolve<LoginModel>();
-            loginModel = (LoginModel)container.Resolve(typeof(LoginModel));
+            this.loginModel = loginModel;
 
-            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler);
         }
         #endregion Constructor
 
@@ -85,8 +86,8 @@ namespace Wheesper.Login.ViewModel
             set
             {
                 loginModel.password = value;
-                Debug.WriteLine(Password);
                 Debug.WriteLine(Email);
+                Debug.WriteLine(Password);
                 RaisePropertyChanged("Password");
                 SigninPWNextCommand.RaiseCanExecuteChanged();
             }
@@ -212,6 +213,7 @@ namespace Wheesper.Login.ViewModel
             {
                 prepare();
                 Debug.WriteLine("mail valid");
+                 
                 eventAggregator.GetEvent<SigninMailNextEvent>().Publish(0);
             }
             else
@@ -243,6 +245,7 @@ namespace Wheesper.Login.ViewModel
             // TODO: when user send signin request the button should be shutdowm?
             Password = null;
             PromtInfo = null;
+            Debug.WriteLine("signin pw back");
             eventAggregator.GetEvent<SigninPWBackEvent>().Publish(Email);
         }
         private bool canSigninPWBack()

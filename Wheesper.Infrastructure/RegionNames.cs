@@ -6,5 +6,7 @@
         public static readonly string LoginRegion = "LoginRegion";
         // public static readonly string LoginFrameRegion = "LoginFrameRegion";
         public static readonly string LoginFunctionRegion = "LoginFunctionRegion";
+        public static readonly string ContactRegion = "ContactRegion";
+        public static readonly string ChatRegion = "ChatRegion";
     }
 }

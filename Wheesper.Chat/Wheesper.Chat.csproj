@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5E0568D7-D76A-4E79-A82B-F0657F31B787}</ProjectGuid>
+    <ProjectGuid>{834A91A5-E592-447C-B30A-A3EC6DE61A46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wheesper.Login</RootNamespace>
-    <AssemblyName>Wheesper.Login</AssemblyName>
+    <RootNamespace>Wheesper.Chat</RootNamespace>
+    <AssemblyName>Wheesper.Chat</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,7 +35,6 @@
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Expression.Interactions.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
@@ -55,62 +54,23 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="events\LoginEvents.cs" />
-    <Compile Include="LoginController.cs" />
-    <Compile Include="LoginModule.cs" />
-    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="ChatController.cs" />
+    <Compile Include="ChatModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\PWModifyViewModel.cs" />
-    <Compile Include="ViewModel\SigninViewModel.cs" />
-    <Compile Include="ViewModel\SignupViewModel.cs" />
-    <Compile Include="ViewModel\WelcomeViewModel.cs" />
-    <Compile Include="View\PWModifyCaptchaView.xaml.cs">
-      <DependentUpon>PWModifyCaptchaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PWModifyMailView.xaml.cs">
-      <DependentUpon>PWModifyMailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PWModifyPWView.xaml.cs">
-      <DependentUpon>PWModifyPWView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SigninMailView.xaml.cs">
-      <DependentUpon>SigninMailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SigninPWView.xaml.cs">
-      <DependentUpon>SigninPWView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SignupCaptchaView.xaml.cs">
-      <DependentUpon>SignupCaptchaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SignupDetailsView.xaml.cs">
-      <DependentUpon>SignupDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SignupInfoView.xaml.cs">
-      <DependentUpon>SignupInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\WelcomeView.xaml.cs">
-      <DependentUpon>WelcomeView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -120,44 +80,15 @@
       <Project>{a22310c9-6ec5-439c-a5d8-9ee672f10daa}</Project>
       <Name>Wheesper.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Wheesper.Messaging\Wheesper.Messaging.csproj">
+      <Project>{43549c05-21e8-4cbe-97cb-af3707916659}</Project>
+      <Name>Wheesper.Messaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\PWModifyCaptchaView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\PWModifyMailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\PWModifyPWView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\SigninMailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\SigninPWView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\SignupCaptchaView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\SignupDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\SignupInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\WelcomeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

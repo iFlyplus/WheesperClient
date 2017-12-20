@@ -9,21 +9,21 @@
 
     <Grid>
         <Grid x:Name="Title_Grid" Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" MinHeight="100">
-            <TextBlock  TextWrapping="Wrap" Text="Start talking with Wheesper" 
-                VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Style="{DynamicResource Text Title}" />
-            <TextBlock  TextWrapping="Wrap" Text="Sign in using your email to experience the brand new messaging services!" 
-                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,85,0,0" Style="{DynamicResource Text Body}"/>
+            <TextBlock  TextWrapping="Wrap" 
+                VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Style="{DynamicResource Text Title}" ><Run Text="开始使用 "/><Run Text="Wheesper"/><Run Text=" 进行交谈"/></TextBlock>
+            <TextBlock  TextWrapping="Wrap" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,85,0,0" Style="{DynamicResource Text Body}"><Run Text="使用电子邮箱登陆以体验全新的"/><Run FontSize="20" Text="Wheesper"/><Run Text="聊天功能"/><Run Text="!"/></TextBlock>
         </Grid>
         <Grid x:Name="Email_Grid"
             VerticalAlignment="Top" Margin="0,225,0,0" HorizontalAlignment="Center" Width="532.847">
             <TextBox TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
                 FontSize="16" FontFamily="Purista" 
                 BorderThickness="0,0,0,1" BorderBrush="#FF141515" Background="{x:Null}" MaxLines="1" IsUndoEnabled="True" VerticalAlignment="Center" Margin="10,16.242,252.847,13.796" Style="{DynamicResource Input Box}" Height="38.758"/>
-            <Button x:Name="SigninMailNext_BTN" Content="Next" HorizontalAlignment="Right" Margin="0,16.242,87.847,13.796" Width="75" d:LayoutOverrides="Height"  
+            <Button x:Name="SigninMailNext_BTN" Content="下一步" HorizontalAlignment="Right" Margin="0,16,93.847,14" Width="95"  
                     Background="#FF0B7DB4" Foreground="White" BorderBrush="#FF0B7DB4" Style="{DynamicResource ButtonStyle1}" Command="{Binding SigninMailNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Grid Height="37.463" Margin="99.932,317.537,129.593,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="503.185">
-            <Button Content="Create a new account" Style="{DynamicResource LinkButton}" Background="{x:Null}" Margin="10,0,239.834,0" Command="{Binding CreateAccountCommand}"/>
+            <Button Content="创建新账户" Style="{DynamicResource LinkButton}" Background="{x:Null}" Margin="10,0,239.834,0" Command="{Binding CreateAccountCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <!--
         Text="Sign in using your email to experience the brand new messaging services!" FontFamily="Purista" FontSize="16"

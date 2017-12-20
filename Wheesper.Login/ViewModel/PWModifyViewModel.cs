@@ -23,11 +23,11 @@ namespace Wheesper.Login.ViewModel
         }
 
         #region Constructor
-        public PWModifyViewModel(IUnityContainer container)
+        public PWModifyViewModel(IUnityContainer container, LoginModel loginModel)
         {
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
-            loginModel = this.container.Resolve<LoginModel>();
+            this.loginModel = loginModel;
 
             eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler, ThreadOption.UIThread);
             eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler, ThreadOption.UIThread);

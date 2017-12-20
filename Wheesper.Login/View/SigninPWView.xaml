@@ -7,14 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
     <Grid>
-        <TextBlock Margin="0,44,0,0" TextWrapping="Wrap" Text="Enter password" VerticalAlignment="Top"
+        <TextBlock Margin="0,44,0,0" TextWrapping="Wrap" Text="输入密码" VerticalAlignment="Top"
                    d:LayoutOverrides="Width" HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
         <TextBlock HorizontalAlignment="Left" Margin="74.795,105,0,0" TextWrapping="Wrap" Text="{Binding UIInfo, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" VerticalAlignment="Top"/>
         <TextBox TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
             FontSize="16" FontFamily="Purista" 
-            BorderThickness="0,0,0,1" BorderBrush="#FF141515" Background="{x:Null}" MaxLines="1" IsUndoEnabled="True" VerticalAlignment="Center" Margin="19,152,10,109" Style="{DynamicResource Input Box}" Height="39"/>
-        <Button x:Name="SigninMailNext_BTN" Content="Next" HorizontalAlignment="Right" Margin="0,251,150,10" Width="75"  
-            Background="#FF0B7DB4" Foreground="White" BorderBrush="#FF0B7DB4" Style="{DynamicResource ButtonStyle1}" Command="{Binding SigninPWNextCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+            BorderThickness="0,0,0,1" BorderBrush="#FF141515" Background="{x:Null}" MaxLines="1" IsUndoEnabled="True" VerticalAlignment="Center" Margin="19,152,10,109" Style="{DynamicResource Input Box}" Height="39" TextChanged="TextBox_TextChanged"/>
+        <Button Content="上一步" HorizontalAlignment="Left" Margin="41,215,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding SigninPWBackCommand,NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+        <Button Content="登陆" HorizontalAlignment="Left" Margin="185,215,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding SigninPWNextCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+        <Button Content="忘记密码" HorizontalAlignment="Left" Margin="111,247,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ForgetPWCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,93,0,0" TextWrapping="Wrap" Text="输入" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="70,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Text="{Binding UIInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="227,93,0,0" TextWrapping="Wrap" Text="的密码" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
