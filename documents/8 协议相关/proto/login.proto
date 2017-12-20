@@ -1,0 +1,74 @@
+syntax = "proto3";
+// module: login
+
+package login;
+
+// func: sign in
+message SigninRequest{
+	string mail_address = 1;
+	string password = 2;
+}
+
+message SignonResponse{
+  bool status = 1;
+  string mail_address = 2;
+}
+// func: sign out
+// ①注销包（客户端->服务端，服务端接受到这个包，表示客户端主动登出，将为该用户执行登出操作，但并不释放连接，客户端也保证用户登出）
+message SignoutRequese{
+  // 服务没收到有影响吗
+}
+
+// func: sign up
+message SignupMailRequest{
+	string mail_address = 1;
+}
+
+message SignupMailResponse{
+	bool status = 1;
+	string mail_address = 2;
+}
+
+message RegisterCaptchaRequest{
+	string mail_address = 1;
+}
+
+message RegisterCaptchaResponse{
+	bool status = 1;//验证码是否发送成功
+	string mail_address = 2;
+}
+
+message SignupInfoRequest{
+	string mail_address = 1;
+	string captcha = 2;
+	string password = 3;
+	message UserInfo{}; 
+	UserInfo user_info = 4;
+}
+
+message SignupInfoResponse{
+  bool status = 1;
+  string mail_address = 2;
+}
+
+// func: change password
+
+message PasswordModifyCaptchaRequest{
+	string mail_address = 1;
+}
+
+message PasswordModifyCaptchaResponse{
+	bool status = 1;
+	string mail_address = 2;
+}
+
+message PassordModifyRequest{
+	string mail_address = 1;
+	string captcha = 2;
+	string password = 3;
+}
+
+message PassordModifyResponse{
+	bool status = 1;
+	string mail_address = 2;
+}

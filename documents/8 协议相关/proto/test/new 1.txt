@@ -1,0 +1,26 @@
+       case	MessageType.SIGNINREQUEST:
+	   break;
+       case MessageType.SIGNINRESPONSE:
+	   break;
+       case MessageType.SIGNOUTREQUEST:
+	   break;
+       case MessageType.SIGNUPMAILREQUEST:
+	   break;
+       case MessageType.SIGNUPMAILRESPONSE:
+	   break;
+       case MessageType.REGISTERCAPTCHAREQUEST:
+	   break;
+       case MessageType.REGISTERCAPTCHARESPONSE:
+	   break;
+       case MessageType.SIGNUPINFOREQUEST:
+	   break;
+       case MessageType.SIGNUPINFORESPONSE:
+	   break;
+       case MessageType.PASSWORDMODIFYCAPTCHAREQUEST:
+	   break;
+       case MessageType.PASSWORDMODIFYCAPTCHARESPONSE:
+	   break;
+       case MessageType.PASSORDMODIFYREQUEST:
+	   break;
+       case MessageType.PASSORDMODIFYRESPONSE:
+	   break;

@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.UI", "PrismDemo.UI\PrismDemo.UI.csproj", "{833FC4AC-8834-4770-A6EF-BE75A2F6A706}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Logging", "PrismDemo.Logging\PrismDemo.Logging.csproj", "{748B80AB-F7AA-4E32-95D1-764EB5BEB430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Infrastructure", "PrismDemo.Infrastructure\PrismDemo.Infrastructure.csproj", "{3E37BADB-53AE-43D5-8B52-72A16F8069DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Customers", "PrismDemo.Customers\PrismDemo.Customers.csproj", "{31CD56BC-5323-4E90-BFA9-0CF3A8AB55FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Dashboard", "PrismDemo Dashboard\PrismDemo.Dashboard.csproj", "{7A754F57-A08A-4898-B399-19D36C1C3901}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.Model", "PrismDemo.Model\PrismDemo.Model.csproj", "{C4C98436-240B-4F7A-BD0B-074F2661F8B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo.ModelDataAccess", "PrismDemo.ModelDataAccess\PrismDemo.ModelDataAccess.csproj", "{F4A85C1A-6E81-46A4-A096-8F7C4A88D897}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{833FC4AC-8834-4770-A6EF-BE75A2F6A706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{833FC4AC-8834-4770-A6EF-BE75A2F6A706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{833FC4AC-8834-4770-A6EF-BE75A2F6A706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{833FC4AC-8834-4770-A6EF-BE75A2F6A706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748B80AB-F7AA-4E32-95D1-764EB5BEB430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748B80AB-F7AA-4E32-95D1-764EB5BEB430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748B80AB-F7AA-4E32-95D1-764EB5BEB430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748B80AB-F7AA-4E32-95D1-764EB5BEB430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E37BADB-53AE-43D5-8B52-72A16F8069DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E37BADB-53AE-43D5-8B52-72A16F8069DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E37BADB-53AE-43D5-8B52-72A16F8069DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E37BADB-53AE-43D5-8B52-72A16F8069DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CD56BC-5323-4E90-BFA9-0CF3A8AB55FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CD56BC-5323-4E90-BFA9-0CF3A8AB55FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CD56BC-5323-4E90-BFA9-0CF3A8AB55FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CD56BC-5323-4E90-BFA9-0CF3A8AB55FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A754F57-A08A-4898-B399-19D36C1C3901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A754F57-A08A-4898-B399-19D36C1C3901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A754F57-A08A-4898-B399-19D36C1C3901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A754F57-A08A-4898-B399-19D36C1C3901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C98436-240B-4F7A-BD0B-074F2661F8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C98436-240B-4F7A-BD0B-074F2661F8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C98436-240B-4F7A-BD0B-074F2661F8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C98436-240B-4F7A-BD0B-074F2661F8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A85C1A-6E81-46A4-A096-8F7C4A88D897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A85C1A-6E81-46A4-A096-8F7C4A88D897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A85C1A-6E81-46A4-A096-8F7C4A88D897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A85C1A-6E81-46A4-A096-8F7C4A88D897}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

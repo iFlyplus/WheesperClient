@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package login;
+
+message SigninRequest{
+	string mail_address = 1;
+	string password = 2;
+}
+
+message SigninResponse{
+  bool status = 1;
+  string mail_address = 2;
+}
+
+message SignoutRequest{
+	int userid = 1;
+}
+
+message SignupMailRequest{
+	string mail_address = 1;
+}
+
+message SignupMailResponse{
+	bool status = 1;
+	string mail_address = 2;
+}
+
+message RegisterCaptchaRequest{
+	string mail_address = 1;
+}
+
+message RegisterCaptchaResponse{
+	string mail_address = 1;
+}
+
+message SignupInfoRequest{
+	string mail_address = 1;
+	string captcha = 2;
+	string password = 3;
+	message UserInfo{}; 
+	UserInfo user_info = 4;
+}
+
+message SignupInfoResponse{
+  bool status = 1;
+  string mail_address = 2;
+}
+
+
+message PasswordModifyCaptchaRequest{
+	string mail_address = 1;
+}
+
+message PasswordModifyCaptchaResponse{
+	bool status = 1;
+	string mail_address = 2;
+}
+
+message PassordModifyRequest{
+	string mail_address = 1;
+	string captcha = 2;
+	string password = 3;
+}
+
+message PassordModifyResponse{
+	bool status = 1;
+	string mail_address = 2;
+}

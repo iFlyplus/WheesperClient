@@ -1,0 +1,9 @@
+
+Wheesper
+	0.Bootstrap	服务器启动入口
+	1.Services 	包含业务逻辑
+	2.DAO		数据持久化	
+	3.Net		基于Netty框架的网络服务器，与数据传输相关的类
+	4.Protocol	prottobuf生成的协议包类
+	5.Util		服务器的配置、日志信息记录
+	6.Common	公共使用的类

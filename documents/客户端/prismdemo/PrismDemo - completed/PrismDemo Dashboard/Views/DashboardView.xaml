@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="PrismDemo.Dashboard.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignWidth="835"
+             mc:Ignorable="d">
+  <Grid>
+    <Border Background="LightBlue"
+            BorderBrush="Blue"
+            BorderThickness="1"
+            CornerRadius="5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="10"
+                   FontSize="21.333"
+                   FontStyle="Italic"
+                   FontWeight="Bold"
+                   Text="Welcome to Denali Outdoors - the store for all your outdoor needs!"
+                   TextWrapping="Wrap" />
+        <ScrollViewer Grid.Row="1"
+                      Margin="5"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+          <TextBlock ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctu."
+                     TextWrapping="Wrap" />
+        </ScrollViewer>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

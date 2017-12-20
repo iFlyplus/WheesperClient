@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package wheesper;
+
+import public "login.proto";
+import public "chat.proto";
+import public "contact.proto";
+
+message Wheesper{
+  //
+  int32 seq = 1;
+  
+  oneof msg{
+    // module: sys
+	// Heartbeat heartbeat;
+	
+    // module: login
+	login.SigninRequest signonRequest = 3;
+	login.SignonResponse signonResponse = 4;
+	// Version_requset version_request = 5;
+	// Version_respense Version_respense = 6;
+	login.SignoutRequese signoutRequest = 7;
+	login.SignupMailRequest signupMailRequest = 8;
+	login.SignupMailResponse signupMailResponse = 9;
+	login.RegisterCaptchaRequest registerCaptchaRequest = 10;
+	login.RegisterCaptchaResponse registerCaptchaResponse = 11;
+	login.SignupInfoRequest signupInfoRequest = 12;
+	login.SignupInfoResponse signupInfoResponse = 13;
+	login.PasswordModifyCaptchaRequest passwordModifyCaptchaRequest = 14;
+	login.PasswordModifyCaptchaResponse passwordModifyCaptchaResponse = 15;
+	login.PassordModifyRequest passordModifyRequest = 16;
+	login.PassordModifyResponse passordModifyResponse = 17;
+
+	// module: chat
+	
+	// module: contact
+  }
+}
+
+
+// 心跳包 ①客户端->服务端  ②服务端->客户端（模仿于万恶的断网客户端）
+message Heartbeat{
+
+}
