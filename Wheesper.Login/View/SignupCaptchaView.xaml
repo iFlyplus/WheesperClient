@@ -9,8 +9,8 @@
     <Grid Background="White">
         <TextBlock HorizontalAlignment="Left" Margin="114,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="输入"/><Run Text="验证码"/></TextBlock>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="95,103,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="后退" HorizontalAlignment="Left" Margin="49,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding signupCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="下一步" HorizontalAlignment="Left" Margin="191,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding signupCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="后退" HorizontalAlignment="Left" Margin="49,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="下一步" HorizontalAlignment="Left" Margin="191,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock HorizontalAlignment="Left" Margin="29,54,0,0" TextWrapping="Wrap" Text="我们刚向" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="82,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" Text="{Binding UIInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock HorizontalAlignment="Left" Margin="196,54,0,0" TextWrapping="Wrap" Text="发送了一个代码" VerticalAlignment="Top"/>

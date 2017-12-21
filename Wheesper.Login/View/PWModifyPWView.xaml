@@ -10,8 +10,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="115,25,0,0" TextWrapping="Wrap" Text="重新设置密码" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="92,61,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="92,137,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="取消" HorizontalAlignment="Left" Margin="46,208,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding pwModifyPWModifyBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="下一步" HorizontalAlignment="Left" Margin="182,208,0,0" VerticalAlignment="Top" Width="75" Command="{Binding pwModifyPWNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="取消" HorizontalAlignment="Left" Margin="46,208,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding PWModifyPWModifyBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="下一步" HorizontalAlignment="Left" Margin="182,208,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PWModifyPWNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock HorizontalAlignment="Left" Margin="80,103,0,0" TextWrapping="Wrap" Text="最少8个字符，区分大小写" VerticalAlignment="Top"/>
 
     </Grid>

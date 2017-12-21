@@ -26,9 +26,9 @@ namespace Wheesper.Messaging
         private Thread listenThread = null;
         private Socket client = null;
         // private const string serverIP = "110.64.89.243";
-        // private const int serverPort = 12345;
+        private const int serverPort = 12345;
         private const string serverIP = "127.0.0.1";
-        private const int serverPort = 10103;
+        // private const int serverPort = 10103;
 
         #region Constructor
         public Messaging(IUnityContainer container)
@@ -42,8 +42,11 @@ namespace Wheesper.Messaging
             bool state = setupClient();
             if(state ==true)
             {
-                //listenThread = new Thread(startListen);
-                //listenThread.Start();
+                listenThread = new Thread(startListen);
+                Debug.WriteLine("listenThread Info:", listenThread.ManagedThreadId, listenThread.ToString());
+                Debug.WriteLine(listenThread.ManagedThreadId);
+                Debug.WriteLine(listenThread.GetHashCode());
+                listenThread.Start();
             }
         }
         #endregion Constructor
@@ -92,13 +95,14 @@ namespace Wheesper.Messaging
                     client.Receive(bufferForMessage, messageLength, 0);
                     message = ProtoMessage.Parser.ParseFrom(bufferForMessage);
                     Debug.WriteLine("Message Income.");
-                    // Debug.WriteLine(message);
+                    Debug.WriteLine(message);
                     eventAggregator.GetEvent<MessageIncomeEvent>().Publish(message);
                 }
             }
             catch(Exception e)
             {
                 Debug.WriteLine(e);
+                startListen();
             }
         }
 

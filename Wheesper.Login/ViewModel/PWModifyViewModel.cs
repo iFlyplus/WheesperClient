@@ -28,7 +28,8 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler);
+            // TODO: PWModifyViewModel
+            eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler);
             eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler);
         }
         #endregion helper function

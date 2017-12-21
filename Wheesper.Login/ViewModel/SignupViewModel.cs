@@ -26,8 +26,8 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
-            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler);
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler, true);
+            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler, true);
         }
         #endregion helper function
 
@@ -338,25 +338,31 @@ namespace Wheesper.Login.ViewModel
             bool status = message.SignupMailResponse.Status;
             if (status)
             {
+                Debug.WriteLine("mail can be used");
                 // TODO: exit animate_2 and enter signup details view
-                eventAggregator.GetEvent<SignupInfoNextEvent>();
+                eventAggregator.GetEvent<SignupInfoNextEvent>().Publish(0);
             }
             else
             {
+                Debug.WriteLine("mail can not be used");
                 // TODO: exit animate_2 and return signup info view
                 PromtInfo = emailexistMessage.Insert(0, Email);
             }
         }
         private void SignupInfoResponseEventHandler(ProtoMessage message)
         {
-            bool status = message.SignupCaptchaResponse.Status;
+
+            Debug.WriteLine(message == null);
+            bool status = message.SignupInfoResponse.Status;
             if (status)
             {
+                Debug.WriteLine("Captcha is correct, and signup success");
                 // TODO: exit animate_1 and enter welcome
                 eventAggregator.GetEvent<SignupCaptchaNextEvent>().Publish(Nickname);
             }
             else
             {
+                Debug.WriteLine("Captcha is incorrect, and signup failed");
                 // TODO: exit animate_1 and return signup captcha view
                 PromtInfo = captchaWrongMessage;
             }

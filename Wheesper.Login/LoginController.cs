@@ -74,25 +74,25 @@ namespace Wheesper.Login
         private void subEvent()
         {
             Debug.WriteLine("LoginController subscribe evnet.");
-            eventAggregator.GetEvent<SigninMailNextEvent>().Subscribe(signinMailNextEventHandler, true);
-            eventAggregator.GetEvent<SigninPWBackEvent>().Subscribe(signinPWBackEventHandler, true);
-            eventAggregator.GetEvent<SigninPWNextEvent>().Subscribe(signinPWNextEventHandler, true);
-            eventAggregator.GetEvent<CreateAccountEvent>().Subscribe(createAccountEventHandler, true);
-            eventAggregator.GetEvent<ForgetPWEvent>().Subscribe(forgetPWEventHandler, true);
+            eventAggregator.GetEvent<SigninMailNextEvent>().Subscribe(signinMailNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SigninPWBackEvent>().Subscribe(signinPWBackEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SigninPWNextEvent>().Subscribe(signinPWNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<CreateAccountEvent>().Subscribe(createAccountEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<ForgetPWEvent>().Subscribe(forgetPWEventHandler, ThreadOption.UIThread, true);
 
-            eventAggregator.GetEvent<SignupInfoNextEvent>().Subscribe(signupInfoNextEventHandler, true);
-            eventAggregator.GetEvent<SignupInfoBackEvent>().Subscribe(signupInfoBackEventHandler, true);
-            eventAggregator.GetEvent<SignupDetailsNextEvent>().Subscribe(signupDetailsNextEventHandler, true);
-            eventAggregator.GetEvent<SignupDetailsBackEvent>().Subscribe(signupDetailsBackEventHandler, true);
-            eventAggregator.GetEvent<SignupCaptchaNextEvent>().Subscribe(signupCaptchaNextEventHandler, true);
-            eventAggregator.GetEvent<SignupCaptchaBackEvent>().Subscribe(signupCaptcahBackEventHandler, true);
+            eventAggregator.GetEvent<SignupInfoNextEvent>().Subscribe(signupInfoNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SignupInfoBackEvent>().Subscribe(signupInfoBackEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SignupDetailsNextEvent>().Subscribe(signupDetailsNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SignupDetailsBackEvent>().Subscribe(signupDetailsBackEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SignupCaptchaNextEvent>().Subscribe(signupCaptchaNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<SignupCaptchaBackEvent>().Subscribe(signupCaptcahBackEventHandler, ThreadOption.UIThread, true);
 
-            eventAggregator.GetEvent<PWModifyMailNextEvent>().Subscribe(pwModifyMailNextEventHandler, true);
-            eventAggregator.GetEvent<PWModifyMailCancelEvent>().Subscribe(pwModifyMailCancelEventHander, true);
-            eventAggregator.GetEvent<PWModifyPWNextEvent>().Subscribe(pwModifyPWNextEventHandler, true);
-            eventAggregator.GetEvent<PWModifyPWBackEvent>().Subscribe(pwModifyPWBackEventHandler, true);
-            eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Subscribe(pwModifyCaptchaNextEventHandler, true);
-            eventAggregator.GetEvent<PWModifyCaptchaBackEvent>().Subscribe(pwModifyCaptchaBackEventHandler, true);
+            eventAggregator.GetEvent<PWModifyMailNextEvent>().Subscribe(pwModifyMailNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<PWModifyMailCancelEvent>().Subscribe(pwModifyMailCancelEventHander, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<PWModifyPWNextEvent>().Subscribe(pwModifyPWNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<PWModifyPWBackEvent>().Subscribe(pwModifyPWBackEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Subscribe(pwModifyCaptchaNextEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<PWModifyCaptchaBackEvent>().Subscribe(pwModifyCaptchaBackEventHandler, ThreadOption.UIThread, true);
         }
 
         private void loadView(object view)
