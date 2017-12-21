@@ -10,7 +10,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="123,29,0,0" TextWrapping="Wrap" Text="创建用户" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,97,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,140,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="后退" HorizontalAlignment="Left" Margin="31,195,0,0" VerticalAlignment="Top" Width="75" Command="{Binding signupInfoBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="下一步" HorizontalAlignment="Left" Margin="186,195,0,0" VerticalAlignment="Top" Width="75" Command="{Binding signupInfoNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="后退" HorizontalAlignment="Left" Margin="31,195,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupInfoBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="下一步" HorizontalAlignment="Left" Margin="186,195,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupInfoNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>

@@ -2,26 +2,25 @@
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
-using Wheesper.Login.events;
-using Wheesper.Login.Model;
-
-using Wheesper.Messaging.events;
-using ProtocolBuffer;
 using Wheesper.Infrastructure.events;
+
+using System.Diagnostics;
 
 namespace Wheesper.Login.ViewModel
 {
     public class WelcomeViewModel : NotificationObject
     {
+        #region private member
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
+        #endregion private member
 
         #region Constructor
         public WelcomeViewModel(IUnityContainer container)
         {
+            Debug.WriteLine("SignupViewModel constructor");
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
-            
         }
 
         public void Initialize(string welcomeMessage_1, string welcomeMessage_2)
@@ -33,6 +32,8 @@ namespace Wheesper.Login.ViewModel
 
         #region properties
         private string welcomeMessage_1;
+        private string welcomeMessage_2;
+
         public string WelcomeMessage_1
         {
             get
@@ -45,7 +46,6 @@ namespace Wheesper.Login.ViewModel
                 RaisePropertyChanged("WelcomeMessage_1");
             }
         }
-        private string welcomeMessage_2;
         public string WelcomeMessage_2
         {
             get
@@ -62,6 +62,7 @@ namespace Wheesper.Login.ViewModel
 
         #region Command
         private DelegateCommand startCommnd;
+
         public DelegateCommand StartCommand
         {
             get
@@ -75,9 +76,11 @@ namespace Wheesper.Login.ViewModel
         }
         #endregion Command
 
+        #region event handler
         private void start()
         {
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
         }
+        #endregion event handler
     }
 }

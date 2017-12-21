@@ -42,8 +42,8 @@ namespace Wheesper.Messaging
             bool state = setupClient();
             if(state ==true)
             {
-                listenThread = new Thread(startListen);
-                listenThread.Start();
+                //listenThread = new Thread(startListen);
+                //listenThread.Start();
             }
         }
         #endregion Constructor

@@ -2,10 +2,10 @@
 
 namespace Wheesper.Login.events
 {
-    public class SigninMailNextEvent : CompositePresentationEvent<int> { };
+    public class SigninMailNextEvent : CompositePresentationEvent<object> { };
     public class SigninMailWrongEvent : CompositePresentationEvent<object> { };
     public class SigninPWBackEvent : CompositePresentationEvent<string> { };
-    public class SigninPWSigninEvent : CompositePresentationEvent<object> { };
+    public class SigninPWNextEvent : CompositePresentationEvent<object> { };
     public class CreateAccountEvent : CompositePresentationEvent<object> { };
     public class ForgetPWEvent : CompositePresentationEvent<string> { };
     public class SignupInfoNextEvent : CompositePresentationEvent<object> { };

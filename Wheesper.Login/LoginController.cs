@@ -7,18 +7,18 @@ using Wheesper.Infrastructure.events;
 using Wheesper.Login.events;
 using Wheesper.Login.View;
 using Wheesper.Login.ViewModel;
-
 using System;
 
 namespace Wheesper.Login
 {
     public class LoginController
     {
+        #region private menber
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         private IRegionManager regionManager = null;
         IRegion mainRegion = null;
-        IRegion loginFunctionRegion = null;
+        #endregion private menber
 
         #region view model
         private SigninViewModel signinViewModel = null;
@@ -27,11 +27,20 @@ namespace Wheesper.Login
         #endregion view model
 
         #region view
+        // make sure are there is the only view
+        // this maybe sth not needed
         private SigninMailView signinMailView = null;
         private SigninPWView signinPWView = null;
+        private SignupInfoView signupInfoView = null;
+        private PWModifyMailView pwModifyMailView = null;
+        private PWModifyPWView pwModifyPWView = null;
+        private PWModifyCaptchaView pwModifyCaptchaView = null;
+        private SignupDetailsView signupDetailsView = null;
+        private SignupCaptchaView signupCaptchaView = null;
+        private WelcomeView welcomeView = null;
         #endregion view
 
-        #region Constructor
+        #region Constructor & Deconstructor
         public LoginController(IUnityContainer container)
         {
 
@@ -41,61 +50,51 @@ namespace Wheesper.Login
             regionManager = this.container.Resolve<IRegionManager>();
 
             mainRegion = regionManager.Regions[RegionNames.MainRegion];
-            // loginFunctionRegion = regionManager.Regions[RegionNames.LoginFunctionRegion];
 
-            subEvent();
-            //loadSigninMailView(null);
-            if(signinMailView == null)
+            if (signinMailView == null)
             {
                 signinMailView = (SigninMailView)container.Resolve(typeof(SigninMailView));
                 var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
                 signinMailView.DataContext = viewModel;
             }
-            //var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
-            
-            //viewModel.Initialize(null);
-            
-            loadView(signinMailView);
-        }
-        #endregion Constructor
 
+            loadView(signinMailView);
+
+            // subscribe event to setup communication betwween different viewModel
+            subEvent();
+        }
+
+        ~LoginController()
+        {
+            Debug.WriteLine("LoginController Destructor.");
+        }
+        #endregion Constructor & Deconstructor
 
         #region helper function
         private void subEvent()
         {
-            Debug.WriteLine("subEvent");
-            // , ThreadOption.UIThread
-            eventAggregator.GetEvent<ShowLoginFaceViewEvent>().Subscribe(loadSigninMailView);
-            eventAggregator.GetEvent<SigninMailNextEvent>().Subscribe(signinMailNextEventHandler);
-            eventAggregator.GetEvent<SigninPWBackEvent>().Subscribe(signinPWBackEventHandler);
-            eventAggregator.GetEvent<SigninPWSigninEvent>().Subscribe(signinPWNextEventHandler);
-            eventAggregator.GetEvent<CreateAccountEvent>().Subscribe(createAccountEventHandler);
-            eventAggregator.GetEvent<ForgetPWEvent>().Subscribe(forgetPWEventHandler);
+            Debug.WriteLine("LoginController subscribe evnet.");
+            eventAggregator.GetEvent<SigninMailNextEvent>().Subscribe(signinMailNextEventHandler, true);
+            eventAggregator.GetEvent<SigninPWBackEvent>().Subscribe(signinPWBackEventHandler, true);
+            eventAggregator.GetEvent<SigninPWNextEvent>().Subscribe(signinPWNextEventHandler, true);
+            eventAggregator.GetEvent<CreateAccountEvent>().Subscribe(createAccountEventHandler, true);
+            eventAggregator.GetEvent<ForgetPWEvent>().Subscribe(forgetPWEventHandler, true);
 
-            eventAggregator.GetEvent<SignupInfoNextEvent>().Subscribe(signupInfoNextEventHandler);
-            eventAggregator.GetEvent<SignupInfoBackEvent>().Subscribe(signupInfoBackEventHandler);
-            eventAggregator.GetEvent<SignupDetailsNextEvent>().Subscribe(signupDetailsNextEventHandler);
-            eventAggregator.GetEvent<SignupDetailsBackEvent>().Subscribe(signupDetailsBackEventHandler);
-            eventAggregator.GetEvent<SignupCaptchaNextEvent>().Subscribe(signupCaptchaNextEventHandler);
-            eventAggregator.GetEvent<SignupCaptchaBackEvent>().Subscribe(signupCaptcahBackEventHandler);
+            eventAggregator.GetEvent<SignupInfoNextEvent>().Subscribe(signupInfoNextEventHandler, true);
+            eventAggregator.GetEvent<SignupInfoBackEvent>().Subscribe(signupInfoBackEventHandler, true);
+            eventAggregator.GetEvent<SignupDetailsNextEvent>().Subscribe(signupDetailsNextEventHandler, true);
+            eventAggregator.GetEvent<SignupDetailsBackEvent>().Subscribe(signupDetailsBackEventHandler, true);
+            eventAggregator.GetEvent<SignupCaptchaNextEvent>().Subscribe(signupCaptchaNextEventHandler, true);
+            eventAggregator.GetEvent<SignupCaptchaBackEvent>().Subscribe(signupCaptcahBackEventHandler, true);
 
-            eventAggregator.GetEvent<PWModifyMailNextEvent>().Subscribe(pwModifyMailNextEventHandler);
-            eventAggregator.GetEvent<PWModifyMailCancelEvent>().Subscribe(pwModifyMailCancelEventHander);
-            eventAggregator.GetEvent<PWModifyPWNextEvent>().Subscribe(pwModifyPWNextEventHandler);
-            eventAggregator.GetEvent<PWModifyPWBackEvent>().Subscribe(pwModifyPWBackEventHandler);
-            eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Subscribe(pwModifyCaptchaNextEventHandler);
-            eventAggregator.GetEvent<PWModifyCaptchaBackEvent>().Subscribe(pwModifyCaptchaBackEventHandler);
+            eventAggregator.GetEvent<PWModifyMailNextEvent>().Subscribe(pwModifyMailNextEventHandler, true);
+            eventAggregator.GetEvent<PWModifyMailCancelEvent>().Subscribe(pwModifyMailCancelEventHander, true);
+            eventAggregator.GetEvent<PWModifyPWNextEvent>().Subscribe(pwModifyPWNextEventHandler, true);
+            eventAggregator.GetEvent<PWModifyPWBackEvent>().Subscribe(pwModifyPWBackEventHandler, true);
+            eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Subscribe(pwModifyCaptchaNextEventHandler, true);
+            eventAggregator.GetEvent<PWModifyCaptchaBackEvent>().Subscribe(pwModifyCaptchaBackEventHandler, true);
         }
-        private void loadSigninMailView(string email)
-        {
-            //var viewModel = container.Resolve<SigninViewModel>();
-           // var view = container.Resolve<SigninMailView>();
-            var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
-            var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
-            viewModel.Initialize(email);
-            view.DataContext = viewModel;
-            loadView(view);
-        }
+
         private void loadView(object view)
         {
             foreach (var v in mainRegion.Views)
@@ -105,44 +104,13 @@ namespace Wheesper.Login
             mainRegion.Add(view);
             mainRegion.Activate(view);
         }
-        /*
-        private void loadLoginFucntionView()
-        {
-
-            var loginFucntionView = container.Resolve<LoginFunctionView>();
-            foreach (var v in mainRegion.Views)
-            {
-                mainRegion.Remove(v);
-            }
-            mainRegion.Activate(loginFucntionView);
-        }
-        
-        private void loadFunc2FunctionRegion(object view)
-        {
-            foreach(var v in loginFunctionRegion.Views)
-            {
-                loginFunctionRegion.Remove(v);
-            }
-            loginFunctionRegion.Add(view);
-            loginFunctionRegion.Activate(view);
-        }
-        */
         #endregion helper function
 
         #region event handler
-        private void signinMailNextEventHandler(int o)
+        private void signinMailNextEventHandler(object o)
         {
-            Debug.WriteLine("next hadler");
-            // var viewModel = container.Resolve<SigninViewModel>();
-            //container.RegisterInstance<SigninViewModel>(viewModel);
-            //container.
-            //signinPWView = (SigninPWView)container.Resolve(typeof(SigninPWView));
-            //var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
-            
-            //signinPWView.DataContext = viewModel;
-            //var view = (SigninPWView)container.Resolve(typeof(SigninPWView));
-            //var view = container.Resolve<SigninPWView>();
-            if(signinPWView==null)
+            Debug.WriteLine("SigninMailNextEvent hadler");
+            if (signinPWView==null)
             {
                 signinPWView = (SigninPWView)container.Resolve(typeof(SigninPWView));
                 var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
@@ -152,126 +120,144 @@ namespace Wheesper.Login
         }
         private void signinPWNextEventHandler(object o)
         {
+            Debug.WriteLine("SigninPWNextEvent hadler");
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
         }
         private void signinPWBackEventHandler(string email)
         {
-            Debug.WriteLine("signin pw bakc handler");
-            //var view = container.Resolve<SigninMailView>();
-            //var view = (SigninMailView)container.Resolve(typeof(SigninMailView));
-            //var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
-            //viewModel.Password = null;
-            //view.DataContext = viewModel;
-            //viewModel.Initialize(email);
-            Debug.WriteLine(signinMailView.DataContext);
+            Debug.WriteLine("SigninPWBackEvent hadler");
             loadView(signinMailView);
         }
         private void createAccountEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupInfoView>();
-            viewModel.Initialize(null);
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("CreateAccountEvent hadler");
+            if (signupInfoView == null)
+            {
+                signupInfoView = (SignupInfoView)container.Resolve(typeof(SignupInfoView));
+                var viewModel = (SignupViewModel)container.Resolve(typeof(SignupViewModel));
+                signupInfoView.DataContext = viewModel;
+            }
+            loadView(signupInfoView);
         }
         private void forgetPWEventHandler(string email)
         {
-            var viewModel = container.Resolve<PWModifyViewModel>();
-            var view = container.Resolve<PWModifyMailView>();
-            viewModel.Initialize(email);
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("ForgetPWEvent hadler");
+            if (pwModifyMailView == null)
+            {
+                pwModifyMailView = (PWModifyMailView)container.Resolve(typeof(PWModifyMailView));
+                var viewModel = (PWModifyViewModel)container.Resolve(typeof(PWModifyViewModel));
+                pwModifyMailView.DataContext = viewModel;
+            }
+            loadView(pwModifyMailView);
         }
 
         private void signupInfoNextEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupDetailsView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupInfoNextEvent hadler");
+            if (signupDetailsView == null)
+            {
+                signupDetailsView = (SignupDetailsView)container.Resolve(typeof(SignupDetailsView));
+                var viewModel = (SignupViewModel)container.Resolve(typeof(SignupViewModel));
+                signupDetailsView.DataContext = viewModel;
+            }
+            loadView(signupDetailsView);
         }
         private void signupInfoBackEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupInfoView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupInfoBackEvent hadler");
+            loadView(signinMailView);
         }
         private void signupDetailsNextEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupCaptchaView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupDetailsNextEvent hadler");
+            if (signupCaptchaView == null)
+            {
+                signupCaptchaView = (SignupCaptchaView)container.Resolve(typeof(SignupCaptchaView));
+                var viewModel = (SignupViewModel)container.Resolve(typeof(SignupViewModel));
+                signupCaptchaView.DataContext = viewModel;
+            }
+            loadView(signupCaptchaView);
         }
         private void signupDetailsBackEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupInfoView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupDetailsBackEvent hadler");
+            loadView(signupInfoView);
         }
         private void signupCaptchaNextEventHandler(string name)
         {
-            var viewModel = container.Resolve<WelcomeViewModel>();
-            var view = container.Resolve<WelcomeView>();
-            string welcomeMessage_1 = "Hi, ";
-            welcomeMessage_1 = welcomeMessage_1.Insert(welcomeMessage_1.Length, name);
-            viewModel.Initialize(welcomeMessage_1, " Welcome to Wheesper!");
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupCaptchaNextEvent hadler");
+            if (welcomeView == null)
+            {
+                welcomeView = (WelcomeView)container.Resolve(typeof(WelcomeView));
+                var viewModel = (WelcomeViewModel)container.Resolve(typeof(WelcomeViewModel));
+
+                string welcomeMessage_1 = "Hi, ";
+                welcomeMessage_1 = welcomeMessage_1.Insert(welcomeMessage_1.Length, name);
+                string welcomeMessage_2 = " Welcome to Wheesper!";
+                viewModel.Initialize(welcomeMessage_1, welcomeMessage_2);
+
+                welcomeView.DataContext = viewModel;
+            }
+            loadView(welcomeView);
         }
         private void signupCaptcahBackEventHandler(object o)
         {
-            var viewModel = container.Resolve<SignupViewModel>();
-            var view = container.Resolve<SignupDetailsView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("SignupCaptchaBackEvent hadler");
+            loadView(signupDetailsView);
         }
 
         private void pwModifyMailNextEventHandler(object o)
         {
-            var viewModel = container.Resolve<PWModifyViewModel>();
-            var view = container.Resolve<PWModifyPWView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine(" hadler");
+            if (pwModifyPWView == null)
+            {
+                pwModifyPWView = (PWModifyPWView)container.Resolve(typeof(PWModifyPWView));
+                var viewModel = (PWModifyViewModel)container.Resolve(typeof(PWModifyViewModel));
+                pwModifyPWView.DataContext = viewModel;
+            }
+            loadView(pwModifyPWView);
         }
         private void pwModifyMailCancelEventHander(string email)
         {
-            var viewModel = container.Resolve<SigninViewModel>();
-            var view = container.Resolve<SigninPWView>();
-            viewModel.Initialize(email);
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("PWModifyMailCancelEvent hadler");
+            loadView(signinPWView);
         }
         private void pwModifyPWNextEventHandler(object o)
         {
-            var viewModel = container.Resolve<PWModifyViewModel>();
-            var view = container.Resolve<PWModifyCaptchaView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("PWModifyPWNextEvent hadler");
+            if (pwModifyCaptchaView == null)
+            {
+                pwModifyCaptchaView = (PWModifyCaptchaView)container.Resolve(typeof(PWModifyCaptchaView));
+                var viewModel = (PWModifyViewModel)container.Resolve(typeof(PWModifyViewModel));
+                pwModifyCaptchaView.DataContext = viewModel;
+            }
+            loadView(pwModifyCaptchaView);
         }
         private void pwModifyPWBackEventHandler(object o)
         {
-            var viewModel = container.Resolve<PWModifyViewModel>();
-            var view = container.Resolve<PWModifyMailView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("PWModifyPWBackEvent hadler");
+            loadView(pwModifyMailView);
         }
         private void pwModifyCaptchaNextEventHandler(object o)
         {
-            var viewModel = container.Resolve<WelcomeViewModel>();
-            var view = container.Resolve<WelcomeView>();
-            viewModel.Initialize("Congratulations!", " Password reset successful");
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("PWModifyCaptchaNextEvent hadler");
+            if (welcomeView == null)
+            {
+                welcomeView = (WelcomeView)container.Resolve(typeof(WelcomeView));
+                var viewModel = (WelcomeViewModel)container.Resolve(typeof(WelcomeViewModel));
+
+                string welcomeMessage_1 = "Congratulations!";
+                string welcomeMessage_2 = " Password reset successful";
+                viewModel.Initialize(welcomeMessage_1, welcomeMessage_2);
+
+                welcomeView.DataContext = viewModel;
+            }
+            loadView(welcomeView);
         }
         private void pwModifyCaptchaBackEventHandler(object o)
         {
-            var viewModel = container.Resolve<PWModifyViewModel>();
-            var view = container.Resolve<PWModifyPWView>();
-            view.DataContext = viewModel;
-            loadView(view);
+            Debug.WriteLine("PWModifyCaptchaBackEvent hadler");
+            loadView(pwModifyPWView);
         }
         #endregion event handler
     }

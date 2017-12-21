@@ -14,54 +14,14 @@ namespace Wheesper.Login.ViewModel
 {
     public class SigninViewModel : NotificationObject
     {
+        #region private menber
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         private LoginModel loginModel = null;
-
-        //private Regex emailRgx = null;
-        //private string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-
-        public void Initialize(string email)
-        {
-            loginModel.clearAllField();
-            Email = email;
-        }
-
-        #region private helper variable
-        private string enterPW = "Enter the password for ";
-        private string emailInvalidMessage = "The email address you entered isn's vaild.";
-        private string pwWrongMessage = "Your account or password is incorrect. If you don't remember your password, ";
-        private string networkFailMessage = "There's some problem with network. Please try again. If you continue to get this message, try again later.";
-        // private bool signinRequeststate = false;
-        #endregion helper variable
-
-        #region helper function
-        private void prepare()
-        {
-            Password = null;
-            PromtInfo = null;
-            UIInfo = enterPW.Insert(enterPW.Length, loginModel.email);
-        }
-
-
-        #endregion helper function
-
-        #region Constructor
-        public SigninViewModel(IUnityContainer container, LoginModel loginModel, IEventAggregator eventAggregator)
-        {
-            Debug.WriteLine("signinviewmodel con");
-            this.container = container;
-            // eventAggregator = this.container.Resolve<IEventAggregator>();
-            this.eventAggregator = eventAggregator;
-            // loginModel = this.container.Resolve<LoginModel>();
-            this.loginModel = loginModel;
-
-            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler);
-        }
-        #endregion Constructor
+        #endregion private menber
 
         #region properties
-        private string uiInfo = null; 
+        private string uiInfo = null;
         private string promtInfo = null; // email wrong, pw wrong
         public string Email
         {
@@ -206,6 +166,46 @@ namespace Wheesper.Login.ViewModel
         }
         #endregion command
 
+        public void Initialize(string email)
+        {
+            loginModel.clearAllField();
+            Email = email;
+        }
+
+        #region private helper variable
+        private string enterPW = "Enter the password for ";
+        private string emailInvalidMessage = "The email address you entered isn's vaild.";
+        private string pwWrongMessage = "Your account or password is incorrect. If you don't remember your password, ";
+        private string networkFailMessage = "There's some problem with network. Please try again. If you continue to get this message, try again later.";
+        // private bool signinRequeststate = false;
+        #endregion helper variable
+
+        #region helper function
+        private void subevent()
+        {
+            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler);
+        }
+        
+        private void prepare()
+        {
+            Password = null;
+            PromtInfo = null;
+            UIInfo = enterPW.Insert(enterPW.Length, loginModel.email);
+        }
+        #endregion helper function
+
+        #region Constructor
+        public SigninViewModel(IUnityContainer container, LoginModel loginModel)
+        {
+            Debug.WriteLine("SigninViewModel constructor");
+            this.container = container;
+            eventAggregator = this.container.Resolve<IEventAggregator>();
+            this.loginModel = loginModel;
+
+            subevent();
+        }
+        #endregion Constructor
+
         #region Command Delegate Method
         private void signinMailNext()
         {
@@ -213,7 +213,6 @@ namespace Wheesper.Login.ViewModel
             {
                 prepare();
                 Debug.WriteLine("mail valid");
-                 
                 eventAggregator.GetEvent<SigninMailNextEvent>().Publish(0);
             }
             else
@@ -247,6 +246,8 @@ namespace Wheesper.Login.ViewModel
             PromtInfo = null;
             Debug.WriteLine("signin pw back");
             eventAggregator.GetEvent<SigninPWBackEvent>().Publish(Email);
+            // var e = eventAggregator.GetEvent<SigninPWBackEvent>();
+            
         }
         private bool canSigninPWBack()
         {
@@ -280,7 +281,7 @@ namespace Wheesper.Login.ViewModel
             if (status)
             {
                 // sign in successfully
-                eventAggregator.GetEvent<SigninPWSigninEvent>().Publish(0);
+                eventAggregator.GetEvent<SigninPWNextEvent>().Publish(0);
             }
             else
             {
@@ -290,6 +291,5 @@ namespace Wheesper.Login.ViewModel
             }
         }
         #endregion event handler
-
     }
 }

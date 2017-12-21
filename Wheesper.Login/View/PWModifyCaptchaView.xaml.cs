@@ -23,6 +23,7 @@ namespace Wheesper.Login.View
         public PWModifyCaptchaView()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -7,14 +7,17 @@ using Wheesper.Login.Model;
 
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
+using System.Diagnostics;
 
 namespace Wheesper.Login.ViewModel
 {
     public class PWModifyViewModel : NotificationObject
     {
+        #region private member
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         private LoginModel loginModel = null;
+        #endregion private menber
 
         public void Initialize(string email)
         {
@@ -22,15 +25,23 @@ namespace Wheesper.Login.ViewModel
             Email = email;
         }
 
+        #region helper function
+        private void subevent()
+        {
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler);
+            eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler);
+        }
+        #endregion helper function
+
         #region Constructor
         public PWModifyViewModel(IUnityContainer container, LoginModel loginModel)
         {
+            Debug.WriteLine("PWModifyViewModel constructor");
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
             this.loginModel = loginModel;
 
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler, ThreadOption.UIThread);
-            eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler, ThreadOption.UIThread);
+            subevent();
         }
         #endregion Constructor
 

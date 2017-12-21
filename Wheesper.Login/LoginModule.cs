@@ -8,8 +8,10 @@ namespace Wheesper.Login
 {
     public class LoginModule : IModule
     {
+        #region private member
         private IUnityContainer container = null;
         private LoginController controller = null;
+        #endregion private member
 
         #region Constructor
         public LoginModule(IUnityContainer container)
@@ -37,24 +39,6 @@ namespace Wheesper.Login
             container.RegisterInstance(typeof(SigninMailView), signinMailView);
             SigninPWView signinPWView = container.Resolve<SigninPWView>();
             container.RegisterInstance(typeof(SigninPWView), signinPWView);
-            /*
-
-            SignupInfoView signupInfoView = container.Resolve<SignupInfoView>();
-            container.RegisterInstance(typeof(SignupInfoView), signupInfoView);
-            SignupDetailsView signupDetailsView = container.Resolve<SignupDetailsView>();
-            container.RegisterInstance(typeof(SignupDetailsView), signupDetailsView);
-            SignupCaptchaView signupCaptchaView = container.Resolve<SignupCaptchaView>();
-            container.RegisterInstance(typeof(SignupCaptchaView), signupCaptchaView);
-            PWModifyMailView pwModifyMailView = container.Resolve<PWModifyMailView>();
-            container.RegisterInstance(typeof(PWModifyMailView), pwModifyMailView);
-            PWModifyCaptchaView pwModifyCaptchaView = container.Resolve<PWModifyCaptchaView>();
-            container.RegisterInstance(typeof(PWModifyCaptchaView), pwModifyCaptchaView);
-            PWModifyPWView pwModifyPWView = container.Resolve<PWModifyPWView>();
-            container.RegisterInstance(typeof(PWModifyPWView), pwModifyPWView);
-            WelcomeView welcomeView = container.Resolve<WelcomeView>();
-            container.RegisterInstance(typeof(WelcomeView), welcomeView);
-            */
-
         }
         # endregion Private Method
 

@@ -7,6 +7,7 @@ using Wheesper.Login.Model;
 
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
+using System.Diagnostics;
 
 namespace Wheesper.Login.ViewModel
 {
@@ -22,15 +23,23 @@ namespace Wheesper.Login.ViewModel
             Email = email;
         }
 
+        #region helper function
+        private void subevent()
+        {
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
+            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler);
+        }
+        #endregion helper function
+
         #region Constructor
         public SignupViewModel(IUnityContainer container, LoginModel loginModel)
         {
+            Debug.WriteLine("SignupViewModel constructor");
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
             this.loginModel = loginModel;
 
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
-            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler);
+            subevent();
         }
         #endregion Constructor
 
