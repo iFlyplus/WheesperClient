@@ -33,12 +33,10 @@ namespace Wheesper.Login
             container.RegisterInstance(typeof(SignupViewModel), signupViewModel);
             PWModifyViewModel pwModifyViewModel = container.Resolve<PWModifyViewModel>(); 
             container.RegisterInstance(typeof(PWModifyViewModel), pwModifyViewModel);
-
-
-            SigninMailView signinMailView = container.Resolve<SigninMailView>();
-            container.RegisterInstance(typeof(SigninMailView), signinMailView);
-            SigninPWView signinPWView = container.Resolve<SigninPWView>();
-            container.RegisterInstance(typeof(SigninPWView), signinPWView);
+            WelcomeViewModel welcomeViewModel = container.Resolve<WelcomeViewModel>();
+            container.RegisterInstance(typeof(WelcomeViewModel), welcomeViewModel);
+            CongratulationViewModel congratulationViewModel = container.Resolve<CongratulationViewModel>();
+            container.RegisterInstance(typeof(CongratulationViewModel), congratulationViewModel);
         }
         # endregion Private Method
 

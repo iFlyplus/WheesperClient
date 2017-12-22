@@ -8,6 +8,7 @@ using Wheesper.Login.Model;
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
 using System.Diagnostics;
+using Wheesper.Infrastructure.events;
 
 namespace Wheesper.Login.ViewModel
 {
@@ -28,13 +29,12 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
-            // TODO: PWModifyViewModel
-            eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyMailResponseEventHandler);
+            eventAggregator.GetEvent<MsgPasswordModifyCaptchaResponseEvent>().Subscribe(PasswordModifyCaptchaResponseEventHandler);
             eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler);
         }
         #endregion helper function
 
-        #region Constructor
+        #region Constructor & deconstructor
         public PWModifyViewModel(IUnityContainer container, LoginModel loginModel)
         {
             Debug.WriteLine("PWModifyViewModel constructor");
@@ -44,7 +44,11 @@ namespace Wheesper.Login.ViewModel
 
             subevent();
         }
-        #endregion Constructor
+        ~PWModifyViewModel()
+        {
+            Debug.WriteLine("PWModifyViewModel deconstructor"); 
+        }
+        #endregion Constructor & deconstructor
 
         #region helper variable
         private string emailNotExistMessage = " is already a Microsoft account. Try another name or claim one of these that's available. If it's yours, sign in now.";
@@ -117,7 +121,7 @@ namespace Wheesper.Login.ViewModel
         private DelegateCommand pwModifyMailNextCommand;
         private DelegateCommand pwModifyMailBackCommand;
         private DelegateCommand pwModifyPWNextCommand;
-        private DelegateCommand pwModifyPWModifyBackCommand;
+        private DelegateCommand pwModifyPWBackCommand;
         private DelegateCommand pwModifyCaptchaNextCommand;
         private DelegateCommand pwModifyCaptchaBackCommand;
         private DelegateCommand pwModifyCaptchaResendCommond;
@@ -174,15 +178,15 @@ namespace Wheesper.Login.ViewModel
         {
             get
             {
-                if (pwModifyPWModifyBackCommand == null)
+                if (pwModifyPWBackCommand == null)
                 {
-                    pwModifyPWModifyBackCommand = new DelegateCommand(pwModifyPWModifyBack, canPWModifyPWModifyBack);
+                    pwModifyPWBackCommand = new DelegateCommand(pwModifyPWModifyBack, canPWModifyPWModifyBack);
                 }
-                return pwModifyPWModifyBackCommand;
+                return pwModifyPWBackCommand;
             }
             set
             {
-                pwModifyPWModifyBackCommand = value;
+                pwModifyPWBackCommand = value;
             }
         }
 
@@ -224,7 +228,7 @@ namespace Wheesper.Login.ViewModel
             {
                 if(pwModifyCaptchaResendCommond==null)
                 {
-                    pwModifyCaptchaResendCommond = new DelegateCommand(pwModifyCaptchaResend);
+                    pwModifyCaptchaResendCommond = new DelegateCommand(pwModifyCaptchaResend, canPWModifyCaptchaResend);
                 }
                 return pwModifyCaptchaResendCommond;
             }
@@ -241,7 +245,7 @@ namespace Wheesper.Login.ViewModel
             if (loginModel.isEmailAddress(Email))
             {
                 // TODO: enter animate_3
-                loginModel.sendSignupMailRequest();
+                loginModel.sendPWCaptchaRequest();
             }
             else
             {
@@ -256,6 +260,9 @@ namespace Wheesper.Login.ViewModel
 
         private void pwModifyPMailCancel()
         {
+            loginModel.currentState = State.SIGNIN;
+            Debug.Write("Client State change to ");
+            Debug.WriteLine(loginModel.currentState.ToString());
             eventAggregator.GetEvent<PWModifyMailCancelEvent>().Publish(Email);
         }
         private bool canPWModifyMailCancel()
@@ -268,7 +275,6 @@ namespace Wheesper.Login.ViewModel
             if(loginModel.isPWQualified(Password))
             {
                 eventAggregator.GetEvent<PWModifyPWNextEvent>().Publish(0);
-                pwModifyCaptchaResend();
                 PromtInfo = null;
             }
             else
@@ -289,12 +295,17 @@ namespace Wheesper.Login.ViewModel
         {
             return true;
         }
-
+        
         private void pwModifyCaptchaResend()
         {
-            PromtInfo = captchaSend.Insert(PromtInfo.Length, Email);
+            PromtInfo = captchaSend.Insert(captchaSend.Length, Email);
             loginModel.sendPWCaptchaRequest();
         }
+        private bool canPWModifyCaptchaResend()
+        {
+            return true;
+        }
+
 
         private void pwModifyCaptchaNext()
         {
@@ -328,9 +339,9 @@ namespace Wheesper.Login.ViewModel
         #endregion Command Delegate Method
 
         #region event handler
-        private void PasswordModifyMailResponseEventHandler(ProtoMessage message)
+        private void PasswordModifyCaptchaResponseEventHandler(ProtoMessage message)
         {
-            bool status = message.SignupMailResponse.Status;
+            bool status = message.PasswordModifyCaptchaResponse.Status;
             if(status)
             {
                 // TODO: exit animate_3 and enter pwModify pw view
@@ -338,16 +349,19 @@ namespace Wheesper.Login.ViewModel
             }
             else
             {
-                // TODO: exit animate_3 and return spwModify mail view
+                // TODO: exit animate_3 and return pwModify mail view
                 PromtInfo = emailNotExistMessage.Insert(0, Email);
             }
         }
+
         private void PasswordModifyResponseEventHandler(ProtoMessage message)
         {
-            bool status = message.PassordModifyResponse.Status;
+            bool status = message.PasswordModifyResponse.Status;
             if (status)
             {
                 // TODO: enter congratulation
+                //loginModel.sendSigninRequest();
+                //eventAggregator.GetEvent<LoginEvent>().Publish(Email);
                 eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Publish(0);
             }
             else

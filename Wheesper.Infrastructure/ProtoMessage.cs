@@ -22,7 +22,7 @@ namespace ProtocolBuffer {
     static ProtoMessageReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm90b01lc3NhZ2UucHJvdG8SDlByb3RvY29sQnVmZmVyIswHCgxQcm90",
+            "ChJQcm90b01lc3NhZ2UucHJvdG8SDlByb3RvY29sQnVmZmVyIuwdCgxQcm90",
             "b01lc3NhZ2USCwoDc2VxGAEgASgFEi4KCWhlYXJ0YmVhdBgFIAEoCzIZLlBy",
             "b3RvY29sQnVmZmVyLkhlYXJ0YmVhdEgAEjYKDXNpZ25pblJlcXVlc3QYCyAB",
             "KAsyHS5Qcm90b2NvbEJ1ZmZlci5TaWduaW5SZXF1ZXN0SAASOAoOc2lnbmlu",
@@ -41,31 +41,179 @@ namespace ProtocolBuffer {
             "GBQgASgLMiwuUHJvdG9jb2xCdWZmZXIuUGFzc3dvcmRNb2RpZnlDYXB0Y2hh",
             "UmVxdWVzdEgAElYKHXBhc3N3b3JkTW9kaWZ5Q2FwdGNoYVJlc3BvbnNlGBUg",
             "ASgLMi0uUHJvdG9jb2xCdWZmZXIuUGFzc3dvcmRNb2RpZnlDYXB0Y2hhUmVz",
-            "cG9uc2VIABJEChRwYXNzb3JkTW9kaWZ5UmVxdWVzdBgWIAEoCzIkLlByb3Rv",
-            "Y29sQnVmZmVyLlBhc3NvcmRNb2RpZnlSZXF1ZXN0SAASRgoVcGFzc29yZE1v",
-            "ZGlmeVJlc3BvbnNlGBcgASgLMiUuUHJvdG9jb2xCdWZmZXIuUGFzc29yZE1v",
-            "ZGlmeVJlc3BvbnNlSABCBQoDbXNnIgsKCUhlYXJ0YmVhdCI3Cg1TaWduaW5S",
+            "cG9uc2VIABJGChVwYXNzd29yZE1vZGlmeVJlcXVlc3QYFiABKAsyJS5Qcm90",
+            "b2NvbEJ1ZmZlci5QYXNzd29yZE1vZGlmeVJlcXVlc3RIABJIChZwYXNzd29y",
+            "ZE1vZGlmeVJlc3BvbnNlGBcgASgLMiYuUHJvdG9jb2xCdWZmZXIuUGFzc3dv",
+            "cmRNb2RpZnlSZXNwb25zZUgAEkQKFHVzZXJJbmZvUXVlcnlSZXF1ZXN0GBsg",
+            "ASgLMiQuUHJvdG9jb2xCdWZmZXIuVXNlckluZm9RdWVyeVJlcXVlc3RIABJG",
+            "ChV1c2VySW5mb1F1ZXJ5UmVzcG9uc2UYHCABKAsyJS5Qcm90b2NvbEJ1ZmZl",
+            "ci5Vc2VySW5mb1F1ZXJ5UmVzcG9uc2VIABJGChV1c2VySW5mb01vZGlmeVJl",
+            "cXVlc3QYHSABKAsyJS5Qcm90b2NvbEJ1ZmZlci5Vc2VySW5mb01vZGlmeVJl",
+            "cXVlc3RIABJIChZ1c2VySW5mb01vZGlmeVJlc3BvbnNlGB4gASgLMiYuUHJv",
+            "dG9jb2xCdWZmZXIuVXNlckluZm9Nb2RpZnlSZXNwb25zZUgAEk4KGWNoYXRQ",
+            "cml2YXRlTWVzc2FnZVJlcXVlc3QYKSABKAsyKS5Qcm90b2NvbEJ1ZmZlci5D",
+            "aGF0UHJpdmF0ZU1lc3NhZ2VSZXF1ZXN0SAASUAoaY2hhdFByaXZhdGVNZXNz",
+            "YWdlUmVzcG9uc2UYKiABKAsyKi5Qcm90b2NvbEJ1ZmZlci5DaGF0UHJpdmF0",
+            "ZU1lc3NhZ2VSZXNwb25zZUgAElYKHWNoYXRQcml2YXRlTWVzc2FnZVB1c2hN",
+            "ZXNzYWdlGCsgASgLMi0uUHJvdG9jb2xCdWZmZXIuQ2hhdFByaXZhdGVNZXNz",
+            "YWdlUHVzaE1lc3NhZ2VIABJcCiBjaGF0UHJpdmF0ZU1lc3NhZ2VQdXNoQWNr",
+            "TWVzc2FnZRgsIAEoCzIwLlByb3RvY29sQnVmZmVyLkNoYXRQcml2YXRlTWVz",
+            "c2FnZVB1c2hBY2tNZXNzYWdlSAASSgoXY2hhdEdyb3VwTWVzc2FnZVJlcXVl",
+            "c3QYLSABKAsyJy5Qcm90b2NvbEJ1ZmZlci5DaGF0R3JvdXBNZXNzYWdlUmVx",
+            "dWVzdEgAEkwKGGNoYXRHcm91cE1lc3NhZ2VSZXNwb25zZRguIAEoCzIoLlBy",
+            "b3RvY29sQnVmZmVyLkNoYXRHcm91cE1lc3NhZ2VSZXNwb25zZUgAElIKG2No",
+            "YXRHcm91cE1lc3NhZ2VQdXNoTWVzc2FnZRgvIAEoCzIrLlByb3RvY29sQnVm",
+            "ZmVyLkNoYXRHcm91cE1lc3NhZ2VQdXNoTWVzc2FnZUgAElgKHkNoYXRHcm91",
+            "cE1lc3NhZ2VQdXNoQWNrTWVzc2FnZRgwIAEoCzIuLlByb3RvY29sQnVmZmVy",
+            "LkNoYXRHcm91cE1lc3NhZ2VQdXNoQWNrTWVzc2FnZUgAEkoKF2dyb3VwQ3Jl",
+            "YXRlQXBwbHlSZXF1ZXN0GDEgASgLMicuUHJvdG9jb2xCdWZmZXIuR3JvdXBD",
+            "cmVhdGVBcHBseVJlcXVlc3RIABJMChhncm91cENyZWF0ZUFwcGx5UmVzcG9u",
+            "c2UYMiABKAsyKC5Qcm90b2NvbEJ1ZmZlci5Hcm91cENyZWF0ZUFwcGx5UmVz",
+            "cG9uc2VIABJYCh5ncm91cFBhcnRpY2lwYXRlSW5BcHBseVJlcXVlc3QYMyAB",
+            "KAsyLi5Qcm90b2NvbEJ1ZmZlci5Hcm91cFBhcnRpY2lwYXRlSW5BcHBseVJl",
+            "cXVlc3RIABJaCh9ncm91cFBhcnRpY2lwYXRlSW5BcHBseVJlc3BvbnNlGDQg",
+            "ASgLMi8uUHJvdG9jb2xCdWZmZXIuR3JvdXBQYXJ0aWNpcGF0ZUluQXBwbHlS",
+            "ZXNwb25zZUgAEmAKImdyb3VwUGFydGljaXBhdGVJbkFwcGx5UHVzaE1lc3Nh",
+            "Z2UYNSABKAsyMi5Qcm90b2NvbEJ1ZmZlci5Hcm91cFBhcnRpY2lwYXRlSW5B",
+            "cHBseVB1c2hNZXNzYWdlSAASWAoeZ3JvdXBQYXJ0aWNpcGF0ZUluUmVwbHlS",
+            "ZXF1ZXN0GDYgASgLMi4uUHJvdG9jb2xCdWZmZXIuR3JvdXBQYXJ0aWNpcGF0",
+            "ZUluUmVwbHlSZXF1ZXN0SAASWgofZ3JvdXBQYXJ0aWNpcGF0ZUluUmVwbHlS",
+            "ZXNwb25zZRg3IAEoCzIvLlByb3RvY29sQnVmZmVyLkdyb3VwUGFydGljaXBh",
+            "dGVJblJlcGx5UmVzcG9uc2VIABJgCiJncm91cFBhcnRpY2lwYXRlSW5SZXBs",
+            "eVB1c2hNZXNzYWdlGDggASgLMjIuUHJvdG9jb2xCdWZmZXIuR3JvdXBQYXJ0",
+            "aWNpcGF0ZUluUmVwbHlQdXNoTWVzc2FnZUgAEkAKEmdyb3VwU2VhcmNoUmVx",
+            "dWVzdBg5IAEoCzIiLlByb3RvY29sQnVmZmVyLkdyb3VwU2VhcmNoUmVxdWVz",
+            "dEgAEkIKE2dyb3VwU2VhcmNoUmVzcG9uc2UYOiABKAsyIy5Qcm90b2NvbEJ1",
+            "ZmZlci5Hcm91cFNlYXJjaFJlc3BvbnNlSAASPAoQZ3JvdXBMaXN0UmVxdWVz",
+            "dBg7IAEoCzIgLlByb3RvY29sQnVmZmVyLkdyb3VwTGlzdFJlcXVlc3RIABI+",
+            "ChFncm91cExpc3RSZXNwb25zZRg8IAEoCzIhLlByb3RvY29sQnVmZmVyLkdy",
+            "b3VwTGlzdFJlc3BvbnNlSAASQAoSY29udGFjdExpc3RSZXF1ZXN0GEcgASgL",
+            "MiIuUHJvdG9jb2xCdWZmZXIuQ29udGFjdExpc3RSZXF1ZXN0SAASQgoTY29u",
+            "dGFjdExpc3RSZXNwb25zZRhIIAEoCzIjLlByb3RvY29sQnVmZmVyLkNvbnRh",
+            "Y3RMaXN0UmVzcG9uc2VIABJKChdjb250YWN0TWFpbENoZWNrUmVxdWVzdBhJ",
+            "IAEoCzInLlByb3RvY29sQnVmZmVyLkNvbnRhY3RNYWlsQ2hlY2tSZXF1ZXN0",
+            "SAASTAoYY29udGFjdE1haWxDaGVja1Jlc3BvbnNlGEogASgLMiguUHJvdG9j",
+            "b2xCdWZmZXIuQ29udGFjdE1haWxDaGVja1Jlc3BvbnNlSAASQgoTY29udGFj",
+            "dEFwcGx5UmVxdWVzdBhLIAEoCzIjLlByb3RvY29sQnVmZmVyLkNvbnRhY3RB",
+            "cHBseVJlcXVlc3RIABJEChRjb250YWN0QXBwbHlSZXNwb25zZRhMIAEoCzIk",
+            "LlByb3RvY29sQnVmZmVyLkNvbnRhY3RBcHBseVJlc3BvbnNlSAASWAoeY29u",
+            "dGFjdEFwcGx5aW5nSW5mb1B1c2hNZXNzYWdlGE0gASgLMi4uUHJvdG9jb2xC",
+            "dWZmZXIuQ29udGFjdEFwcGx5aW5nSW5mb1B1c2hNZXNzYWdlSAASQgoTY29u",
+            "dGFjdFJlcGx5UmVxdWVzdBhOIAEoCzIjLlByb3RvY29sQnVmZmVyLkNvbnRh",
+            "Y3RSZXBseVJlcXVlc3RIABJEChRjb250YWN0UmVwbHlSZXNwb25zZRhPIAEo",
+            "CzIkLlByb3RvY29sQnVmZmVyLkNvbnRhY3RSZXBseVJlc3BvbnNlSAASWAoe",
+            "Y29udGFjdFJlcGx5aW5nSW5mb1B1c2hNZXNzYWdlGFAgASgLMi4uUHJvdG9j",
+            "b2xCdWZmZXIuQ29udGFjdFJlcGx5aW5nSW5mb1B1c2hNZXNzYWdlSAASUAoa",
+            "Y29udGFjdFJlbWFya01vZGlmeVJlcXVlc3QYUSABKAsyKi5Qcm90b2NvbEJ1",
+            "ZmZlci5Db250YWN0UmVtYXJrTW9kaWZ5UmVxdWVzdEgAElIKG2NvbnRhY3RS",
+            "ZW1hcmtNb2RpZnlSZXNwb25zZRhSIAEoCzIrLlByb3RvY29sQnVmZmVyLkNv",
+            "bnRhY3RSZW1hcmtNb2RpZnlSZXNwb25zZUgAQgUKA21zZyILCglIZWFydGJl",
+            "YXQiNwoNU2lnbmluUmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASABKAkSEAoI",
+            "cGFzc3dvcmQYAiABKAkiNgoOU2lnbmluUmVzcG9uc2USDgoGc3RhdHVzGAEg",
+            "ASgIEhQKDG1haWxfYWRkcmVzcxgCIAEoCSIQCg5TaWdub3V0UmVxdWVzdCIp",
+            "ChFTaWdudXBNYWlsUmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASABKAkiOgoS",
+            "U2lnbnVwTWFpbFJlc3BvbnNlEg4KBnN0YXR1cxgBIAEoCBIUCgxtYWlsX2Fk",
+            "ZHJlc3MYAiABKAkiLAoUU2lnbnVwQ2FwdGNoYVJlcXVlc3QSFAoMbWFpbF9h",
+            "ZGRyZXNzGAEgASgJIj0KFVNpZ251cENhcHRjaGFSZXNwb25zZRIOCgZzdGF0",
+            "dXMYASABKAgSFAoMbWFpbF9hZGRyZXNzGAIgASgJIl4KEVNpZ251cEluZm9S",
             "ZXF1ZXN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCRIQCghwYXNzd29yZBgCIAEo",
-            "CSI2Cg5TaWduaW5SZXNwb25zZRIOCgZzdGF0dXMYASABKAgSFAoMbWFpbF9h",
-            "ZGRyZXNzGAIgASgJIhAKDlNpZ25vdXRSZXF1ZXN0IikKEVNpZ251cE1haWxS",
-            "ZXF1ZXN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCSI6ChJTaWdudXBNYWlsUmVz",
-            "cG9uc2USDgoGc3RhdHVzGAEgASgIEhQKDG1haWxfYWRkcmVzcxgCIAEoCSIs",
-            "ChRTaWdudXBDYXB0Y2hhUmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASABKAki",
-            "PQoVU2lnbnVwQ2FwdGNoYVJlc3BvbnNlEg4KBnN0YXR1cxgBIAEoCBIUCgxt",
-            "YWlsX2FkZHJlc3MYAiABKAkiXgoRU2lnbnVwSW5mb1JlcXVlc3QSFAoMbWFp",
-            "bF9hZGRyZXNzGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEhAKCG5pY2tuYW1l",
-            "GAMgASgJEg8KB2NhcHRjaGEYBCABKAkiOgoSU2lnbnVwSW5mb1Jlc3BvbnNl",
-            "Eg4KBnN0YXR1cxgBIAEoCBIUCgxtYWlsX2FkZHJlc3MYAiABKAkiNAocUGFz",
-            "c3dvcmRNb2RpZnlDYXB0Y2hhUmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASAB",
-            "KAkiRQodUGFzc3dvcmRNb2RpZnlDYXB0Y2hhUmVzcG9uc2USDgoGc3RhdHVz",
-            "GAEgASgIEhQKDG1haWxfYWRkcmVzcxgCIAEoCSJPChRQYXNzb3JkTW9kaWZ5",
-            "UmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASABKAkSDwoHY2FwdGNoYRgCIAEo",
-            "CRIQCghwYXNzd29yZBgDIAEoCSI9ChVQYXNzb3JkTW9kaWZ5UmVzcG9uc2US",
-            "DgoGc3RhdHVzGAEgASgIEhQKDG1haWxfYWRkcmVzcxgCIAEoCWIGcHJvdG8z"));
+            "CRIQCghuaWNrbmFtZRgDIAEoCRIPCgdjYXB0Y2hhGAQgASgJIjoKElNpZ251",
+            "cEluZm9SZXNwb25zZRIOCgZzdGF0dXMYASABKAgSFAoMbWFpbF9hZGRyZXNz",
+            "GAIgASgJIjQKHFBhc3N3b3JkTW9kaWZ5Q2FwdGNoYVJlcXVlc3QSFAoMbWFp",
+            "bF9hZGRyZXNzGAEgASgJIkUKHVBhc3N3b3JkTW9kaWZ5Q2FwdGNoYVJlc3Bv",
+            "bnNlEg4KBnN0YXR1cxgBIAEoCBIUCgxtYWlsX2FkZHJlc3MYAiABKAkiUAoV",
+            "UGFzc3dvcmRNb2RpZnlSZXF1ZXN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCRIP",
+            "CgdjYXB0Y2hhGAIgASgJEhAKCHBhc3N3b3JkGAMgASgJIj4KFlBhc3N3b3Jk",
+            "TW9kaWZ5UmVzcG9uc2USDgoGc3RhdHVzGAEgASgIEhQKDG1haWxfYWRkcmVz",
+            "cxgCIAEoCSIsChRVc2VySW5mb1F1ZXJ5UmVxdWVzdBIUCgxtYWlsX2FkZHJl",
+            "c3MYASABKAkinwEKFVVzZXJJbmZvUXVlcnlSZXNwb25zZRIUCgxtYWlsX2Fk",
+            "ZHJlc3MYASABKAkSEAoIbmlja25hbWUYAiABKAkSCwoDc2V4GAMgASgJEgsK",
+            "A2FnZRgEIAEoBRIPCgdjb3VudHJ5GAUgASgJEhAKCHByb3ZpbmNlGAYgASgJ",
+            "EgwKBGNpdHkYByABKAkSEwoLY3JlYXRlX2RhdGUYCCABKAkiigEKFVVzZXJJ",
+            "bmZvTW9kaWZ5UmVxdWVzdBIUCgxtYWlsX2FkZHJlc3MYASABKAkSEAoIbmlj",
+            "a25hbWUYAiABKAkSCwoDc2V4GAMgASgJEgsKA2FnZRgEIAEoBRIPCgdjb3Vu",
+            "dHJ5GAUgASgJEhAKCHByb3ZpbmNlGAYgASgJEgwKBGNpdHkYByABKAkiLgoW",
+            "VXNlckluZm9Nb2RpZnlSZXNwb25zZRIUCgxtYWlsX2FkZHJlc3MYASABKAki",
+            "KgoSQ29udGFjdExpc3RSZXF1ZXN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCSKn",
+            "AQoTQ29udGFjdExpc3RSZXNwb25zZRI9Cghjb250YWN0cxgBIAMoCzIrLlBy",
+            "b3RvY29sQnVmZmVyLkNvbnRhY3RMaXN0UmVzcG9uc2UuQ29udGFjdBpRCgdD",
+            "b250YWN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCRIQCghuaWNrbmFtZRgCIAEo",
+            "CRINCgVncm91cBgDIAEoCRIPCgdyZW1hcmtzGAQgASgJIi8KF0NvbnRhY3RN",
+            "YWlsQ2hlY2tSZXF1ZXN0EhQKDG1haWxfYWRkcmVzcxgBIAEoCSJAChhDb250",
+            "YWN0TWFpbENoZWNrUmVzcG9uc2USFAoMbWFpbF9hZGRyZXNzGAEgASgJEg4K",
+            "BnN0YXR1cxgCIAEoCCJoChNDb250YWN0QXBwbHlSZXF1ZXN0EhwKFGFwcGx5",
+            "ZXJfbWFpbF9hZGRyZXNzGAEgASgJEhsKE3RhcmdldF9tYWlsX2FkZHJlc3MY",
+            "AiABKAkSFgoOYWRkaXRpb25hbF9tc2cYAyABKAkiUQoUQ29udGFjdEFwcGx5",
+            "UmVzcG9uc2USHAoUYXBwbHllcl9tYWlsX2FkZHJlc3MYASABKAkSGwoTdGFy",
+            "Z2V0X21haWxfYWRkcmVzcxgCIAEoCSJ9ChNDb250YWN0UmVwbHlSZXF1ZXN0",
+            "EhwKFGFwcGx5ZXJfbWFpbF9hZGRyZXNzGAEgASgJEhsKE3RhcmdldF9tYWls",
+            "X2FkZHJlc3MYAiABKAkSEwoLaXNfYWNjZXB0ZWQYAyABKAgSFgoOYWRkaXRp",
+            "b25hbF9tc2cYBCABKAkiUQoUQ29udGFjdFJlcGx5UmVzcG9uc2USHAoUYXBw",
+            "bHllcl9tYWlsX2FkZHJlc3MYASABKAkSGwoTdGFyZ2V0X21haWxfYWRkcmVz",
+            "cxgCIAEoCSKAAgoeQ29udGFjdEFwcGx5aW5nSW5mb1B1c2hNZXNzYWdlEhwK",
+            "FGFwcGx5ZXJfbWFpbF9hZGRyZXNzGAEgASgJEhsKE3RhcmdldF9tYWlsX2Fk",
+            "ZHJlc3MYAiABKAkSUAoMYXBwbHllcl9pbmZvGAMgASgLMjouUHJvdG9jb2xC",
+            "dWZmZXIuQ29udGFjdEFwcGx5aW5nSW5mb1B1c2hNZXNzYWdlLkFwcGx5ZXJJ",
+            "bmZvEhYKDmFkZGl0aW9uYWxfbXNnGAQgASgJGjkKC0FwcGx5ZXJJbmZvEhAK",
+            "CG5pY2tuYW1lGAEgASgJEgsKA3NleBgCIAEoCRILCgNhZ2UYAyABKAkiiAEK",
+            "HkNvbnRhY3RSZXBseWluZ0luZm9QdXNoTWVzc2FnZRIcChRhcHBseWVyX21h",
+            "aWxfYWRkcmVzcxgBIAEoCRIbChN0YXJnZXRfbWFpbF9hZGRyZXNzGAIgASgJ",
+            "EhYKDmFkZGl0aW9uYWxfbXNnGAMgASgJEhMKC2lzX2FjY2VwdGVkGAQgASgI",
+            "ImIKGkNvbnRhY3RSZW1hcmtNb2RpZnlSZXF1ZXN0EhUKDWNvbnRhY3RfZW1h",
+            "aWwYASABKAkSFgoOY29udGFjdF9yZW1hcmsYAiABKAkSFQoNY29udGFjdF9n",
+            "cm91cBgDIAEoCSJIChtDb250YWN0UmVtYXJrTW9kaWZ5UmVzcG9uc2USEgoK",
+            "dXNlcl9lbWFpbBgBIAEoCRIVCg1jb250YWN0X2VtYWlsGAIgASgJIkwKC0No",
+            "YXRNZXNzYWdlEhQKDHNlbmRlcl9lbWFpbBgBIAEoCRIRCglkYXRlX3RpbWUY",
+            "AiABKAkSFAoMbXNnX2NvbnRlbnRzGAMgASgJImEKGUNoYXRQcml2YXRlTWVz",
+            "c2FnZVJlcXVlc3QSLAoHbWVzc2FnZRgBIAEoCzIbLlByb3RvY29sQnVmZmVy",
+            "LkNoYXRNZXNzYWdlEhYKDnJlY2lpdmVyX2VtYWlsGAIgASgJIloKGkNoYXRQ",
+            "cml2YXRlTWVzc2FnZVJlc3BvbnNlEhQKDHNlbmRlcl9lbWFpbBgBIAEoCRIW",
+            "Cg5yZWNlaXZlcl9lbWFpbBgCIAEoCRIOCgZzdGF0dXMYAyABKAgiewodQ2hh",
+            "dFByaXZhdGVNZXNzYWdlUHVzaE1lc3NhZ2USFAoMc2VuZGVyX2VtYWlsGAEg",
+            "ASgJEhYKDnJlY2VpdmVyX2VtYWlsGAIgASgJEiwKB21lc3NhZ2UYAyABKAsy",
+            "Gy5Qcm90b2NvbEJ1ZmZlci5DaGF0TWVzc2FnZSIiCiBDaGF0UHJpdmF0ZU1l",
+            "c3NhZ2VQdXNoQWNrTWVzc2FnZSJZChdDaGF0R3JvdXBNZXNzYWdlUmVxdWVz",
+            "dBIQCghncm91cF9JRBgBIAEoBRIsCgdtZXNzYWdlGAIgASgLMhsuUHJvdG9j",
+            "b2xCdWZmZXIuQ2hhdE1lc3NhZ2UiQgoYQ2hhdEdyb3VwTWVzc2FnZVJlc3Bv",
+            "bnNlEhAKCGdyb3VwX0lEGAEgASgFEhQKDHNlbmRlcl9lbWFpbBgCIAEoCSJz",
+            "ChtDaGF0R3JvdXBNZXNzYWdlUHVzaE1lc3NhZ2USEAoIZ3JvdXBfSUQYASAB",
+            "KAUSFAoMc2VuZGVyX2VtYWlsGAIgASgJEiwKB21lc3NhZ2UYAyABKAsyGy5Q",
+            "cm90b2NvbEJ1ZmZlci5DaGF0TWVzc2FnZSIgCh5DaGF0R3JvdXBNZXNzYWdl",
+            "UHVzaEFja01lc3NhZ2Ui5gEKCUdyb3VwSW5mbxIQCghncm91cF9pZBgBIAEo",
+            "BRISCgpncm91cF9uYW1lGAIgASgJEhMKC2dyb3VwX2ludHJvGAMgASgJEhsK",
+            "E2dyb3VwX21lbWJlcl9udW1iZXIYBCABKAUSFQoNY3JlYXRvcl9lbWFpbBgF",
+            "IAEoCRIxCgdtZW1iZXJzGAYgAygLMiAuUHJvdG9jb2xCdWZmZXIuR3JvdXBJ",
+            "bmZvLk1lbWJlcho3CgZNZW1iZXISFAoMbWVtYmVyX2VtYWlsGAEgASgJEhcK",
+            "D21lbWJlcl9uaWNrbmFtZRgCIAEoCSIoChJHcm91cFNlYXJjaFJlcXVlc3QS",
+            "EgoKZ3JvdXBfbmFtZRgBIAEoCSJVChNHcm91cFNlYXJjaFJlc3BvbnNlEhIK",
+            "Cmdyb3VwX25hbWUYASABKAkSKgoHcmVzdWx0cxgCIAMoCzIZLlByb3RvY29s",
+            "QnVmZmVyLkdyb3VwSW5mbyJZChdHcm91cENyZWF0ZUFwcGx5UmVxdWVzdBIV",
+            "Cg1jcmVhdG9yX2VtYWlsGAEgASgJEhIKCmdyb3VwX25hbWUYAiABKAkSEwoL",
+            "Z3JvdXBfaW50cm8YAyABKAkicgoYR3JvdXBDcmVhdGVBcHBseVJlc3BvbnNl",
+            "EhAKCGdyb3VwX2lkGAEgASgFEhIKCmdyb3VwX25hbWUYAiABKAkSGwoTZ3Jv",
+            "dXBfY3JlYXRvcl9lbWFpbBgDIAEoCRITCgtncm91cF9pbnRybxgEIAEoCSJJ",
+            "Ch5Hcm91cFBhcnRpY2lwYXRlSW5BcHBseVJlcXVlc3QSFQoNYXBwbHllcl9l",
+            "bWFpbBgBIAEoCRIQCghnb3VycF9pZBgCIAEoBSJaCh9Hcm91cFBhcnRpY2lw",
+            "YXRlSW5BcHBseVJlc3BvbnNlEhUKDWFwcGx5ZXJfZW1haWwYASABKAkSEAoI",
+            "Z3JvdXBfaWQYAiABKAUSDgoGc3RhdHVzGAMgASgIInsKIkdyb3VwUGFydGlj",
+            "aXBhdGVJbkFwcGx5UHVzaE1lc3NhZ2USEAoIZ291cnBfaWQYASABKAUSEgoK",
+            "Z3JvdXBfbmFtZRgCIAEoCRIVCg1hcHBseWVyX2VtYWlsGAMgASgJEhgKEGFw",
+            "cGx5ZXJfbmlja25hbWUYBCABKAkijAEKHkdyb3VwUGFydGljaXBhdGVJblJl",
+            "cGx5UmVxdWVzdBIQCghncm91cF9pZBgBIAEoBRISCgpncm91cF9uYW1lGAIg",
+            "ASgJEhUKDWFwcGx5ZXJfZW1haWwYAyABKAkSGAoQYXBwbHllcl9uaWNrbmFt",
+            "ZRgEIAEoCRITCgtpc19hY2NlcHRlZBgFIAEoCCKNAQofR3JvdXBQYXJ0aWNp",
+            "cGF0ZUluUmVwbHlSZXNwb25zZRIQCghncm91cF9pZBgBIAEoBRISCgpncm91",
+            "cF9uYW1lGAIgASgJEhUKDWFwcGx5ZXJfZW1haWwYAyABKAkSGAoQYXBwbHll",
+            "cl9uaWNrbmFtZRgEIAEoCRITCgtpc19hY2NlcHRlZBgFIAEoCCJfCiJHcm91",
+            "cFBhcnRpY2lwYXRlSW5SZXBseVB1c2hNZXNzYWdlEhAKCGdyb3VwX2lkGAEg",
+            "ASgFEhIKCmdyb3VwX25hbWUYAiABKAkSEwoLaXNfYWNjZXB0ZWQYAyABKAgi",
+            "JgoQR3JvdXBMaXN0UmVxdWVzdBISCgp1c2VyX2VtYWlsGAEgASgJIlIKEUdy",
+            "b3VwTGlzdFJlc3BvbnNlEhIKCnVzZXJfZW1haWwYASABKAkSKQoGZ3JvdXBz",
+            "GAIgAygLMhkuUHJvdG9jb2xCdWZmZXIuR3JvdXBJbmZvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ProtoMessage), global::ProtocolBuffer.ProtoMessage.Parser, new[]{ "Seq", "Heartbeat", "SigninRequest", "SigninResponse", "SignoutRequest", "SignupMailRequest", "SignupMailResponse", "SignupCaptchaRequest", "SignupCaptchaResponse", "SignupInfoRequest", "SignupInfoResponse", "PasswordModifyCaptchaRequest", "PasswordModifyCaptchaResponse", "PassordModifyRequest", "PassordModifyResponse" }, new[]{ "Msg" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ProtoMessage), global::ProtocolBuffer.ProtoMessage.Parser, new[]{ "Seq", "Heartbeat", "SigninRequest", "SigninResponse", "SignoutRequest", "SignupMailRequest", "SignupMailResponse", "SignupCaptchaRequest", "SignupCaptchaResponse", "SignupInfoRequest", "SignupInfoResponse", "PasswordModifyCaptchaRequest", "PasswordModifyCaptchaResponse", "PasswordModifyRequest", "PasswordModifyResponse", "UserInfoQueryRequest", "UserInfoQueryResponse", "UserInfoModifyRequest", "UserInfoModifyResponse", "ChatPrivateMessageRequest", "ChatPrivateMessageResponse", "ChatPrivateMessagePushMessage", "ChatPrivateMessagePushAckMessage", "ChatGroupMessageRequest", "ChatGroupMessageResponse", "ChatGroupMessagePushMessage", "ChatGroupMessagePushAckMessage", "GroupCreateApplyRequest", "GroupCreateApplyResponse", "GroupParticipateInApplyRequest", "GroupParticipateInApplyResponse", "GroupParticipateInApplyPushMessage", "GroupParticipateInReplyRequest", "GroupParticipateInReplyResponse", "GroupParticipateInReplyPushMessage", "GroupSearchRequest", "GroupSearchResponse", "GroupListRequest", "GroupListResponse", "ContactListRequest", "ContactListResponse", "ContactMailCheckRequest", "ContactMailCheckResponse", "ContactApplyRequest", "ContactApplyResponse", "ContactApplyingInfoPushMessage", "ContactReplyRequest", "ContactReplyResponse", "ContactReplyingInfoPushMessage", "ContactRemarkModifyRequest", "ContactRemarkModifyResponse" }, new[]{ "Msg" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.Heartbeat), global::ProtocolBuffer.Heartbeat.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.SigninRequest), global::ProtocolBuffer.SigninRequest.Parser, new[]{ "MailAddress", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.SigninResponse), global::ProtocolBuffer.SigninResponse.Parser, new[]{ "Status", "MailAddress" }, null, null, null),
@@ -78,8 +226,46 @@ namespace ProtocolBuffer {
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.SignupInfoResponse), global::ProtocolBuffer.SignupInfoResponse.Parser, new[]{ "Status", "MailAddress" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PasswordModifyCaptchaRequest), global::ProtocolBuffer.PasswordModifyCaptchaRequest.Parser, new[]{ "MailAddress" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PasswordModifyCaptchaResponse), global::ProtocolBuffer.PasswordModifyCaptchaResponse.Parser, new[]{ "Status", "MailAddress" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PassordModifyRequest), global::ProtocolBuffer.PassordModifyRequest.Parser, new[]{ "MailAddress", "Captcha", "Password" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PassordModifyResponse), global::ProtocolBuffer.PassordModifyResponse.Parser, new[]{ "Status", "MailAddress" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PasswordModifyRequest), global::ProtocolBuffer.PasswordModifyRequest.Parser, new[]{ "MailAddress", "Captcha", "Password" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.PasswordModifyResponse), global::ProtocolBuffer.PasswordModifyResponse.Parser, new[]{ "Status", "MailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.UserInfoQueryRequest), global::ProtocolBuffer.UserInfoQueryRequest.Parser, new[]{ "MailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.UserInfoQueryResponse), global::ProtocolBuffer.UserInfoQueryResponse.Parser, new[]{ "MailAddress", "Nickname", "Sex", "Age", "Country", "Province", "City", "CreateDate" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.UserInfoModifyRequest), global::ProtocolBuffer.UserInfoModifyRequest.Parser, new[]{ "MailAddress", "Nickname", "Sex", "Age", "Country", "Province", "City" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.UserInfoModifyResponse), global::ProtocolBuffer.UserInfoModifyResponse.Parser, new[]{ "MailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactListRequest), global::ProtocolBuffer.ContactListRequest.Parser, new[]{ "MailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactListResponse), global::ProtocolBuffer.ContactListResponse.Parser, new[]{ "Contacts" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactListResponse.Types.Contact), global::ProtocolBuffer.ContactListResponse.Types.Contact.Parser, new[]{ "MailAddress", "Nickname", "Group", "Remarks" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactMailCheckRequest), global::ProtocolBuffer.ContactMailCheckRequest.Parser, new[]{ "MailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactMailCheckResponse), global::ProtocolBuffer.ContactMailCheckResponse.Parser, new[]{ "MailAddress", "Status" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactApplyRequest), global::ProtocolBuffer.ContactApplyRequest.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress", "AdditionalMsg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactApplyResponse), global::ProtocolBuffer.ContactApplyResponse.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactReplyRequest), global::ProtocolBuffer.ContactReplyRequest.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress", "IsAccepted", "AdditionalMsg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactReplyResponse), global::ProtocolBuffer.ContactReplyResponse.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactApplyingInfoPushMessage), global::ProtocolBuffer.ContactApplyingInfoPushMessage.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress", "ApplyerInfo", "AdditionalMsg" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo), global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo.Parser, new[]{ "Nickname", "Sex", "Age" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactReplyingInfoPushMessage), global::ProtocolBuffer.ContactReplyingInfoPushMessage.Parser, new[]{ "ApplyerMailAddress", "TargetMailAddress", "AdditionalMsg", "IsAccepted" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactRemarkModifyRequest), global::ProtocolBuffer.ContactRemarkModifyRequest.Parser, new[]{ "ContactEmail", "ContactRemark", "ContactGroup" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ContactRemarkModifyResponse), global::ProtocolBuffer.ContactRemarkModifyResponse.Parser, new[]{ "UserEmail", "ContactEmail" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatMessage), global::ProtocolBuffer.ChatMessage.Parser, new[]{ "SenderEmail", "DateTime", "MsgContents" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatPrivateMessageRequest), global::ProtocolBuffer.ChatPrivateMessageRequest.Parser, new[]{ "Message", "ReciiverEmail" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatPrivateMessageResponse), global::ProtocolBuffer.ChatPrivateMessageResponse.Parser, new[]{ "SenderEmail", "ReceiverEmail", "Status" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatPrivateMessagePushMessage), global::ProtocolBuffer.ChatPrivateMessagePushMessage.Parser, new[]{ "SenderEmail", "ReceiverEmail", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatPrivateMessagePushAckMessage), global::ProtocolBuffer.ChatPrivateMessagePushAckMessage.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatGroupMessageRequest), global::ProtocolBuffer.ChatGroupMessageRequest.Parser, new[]{ "GroupID", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatGroupMessageResponse), global::ProtocolBuffer.ChatGroupMessageResponse.Parser, new[]{ "GroupID", "SenderEmail" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatGroupMessagePushMessage), global::ProtocolBuffer.ChatGroupMessagePushMessage.Parser, new[]{ "GroupID", "SenderEmail", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.ChatGroupMessagePushAckMessage), global::ProtocolBuffer.ChatGroupMessagePushAckMessage.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupInfo), global::ProtocolBuffer.GroupInfo.Parser, new[]{ "GroupId", "GroupName", "GroupIntro", "GroupMemberNumber", "CreatorEmail", "Members" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupInfo.Types.Member), global::ProtocolBuffer.GroupInfo.Types.Member.Parser, new[]{ "MemberEmail", "MemberNickname" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupSearchRequest), global::ProtocolBuffer.GroupSearchRequest.Parser, new[]{ "GroupName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupSearchResponse), global::ProtocolBuffer.GroupSearchResponse.Parser, new[]{ "GroupName", "Results" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupCreateApplyRequest), global::ProtocolBuffer.GroupCreateApplyRequest.Parser, new[]{ "CreatorEmail", "GroupName", "GroupIntro" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupCreateApplyResponse), global::ProtocolBuffer.GroupCreateApplyResponse.Parser, new[]{ "GroupId", "GroupName", "GroupCreatorEmail", "GroupIntro" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInApplyRequest), global::ProtocolBuffer.GroupParticipateInApplyRequest.Parser, new[]{ "ApplyerEmail", "GourpId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInApplyResponse), global::ProtocolBuffer.GroupParticipateInApplyResponse.Parser, new[]{ "ApplyerEmail", "GroupId", "Status" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInApplyPushMessage), global::ProtocolBuffer.GroupParticipateInApplyPushMessage.Parser, new[]{ "GourpId", "GroupName", "ApplyerEmail", "ApplyerNickname" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInReplyRequest), global::ProtocolBuffer.GroupParticipateInReplyRequest.Parser, new[]{ "GroupId", "GroupName", "ApplyerEmail", "ApplyerNickname", "IsAccepted" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInReplyResponse), global::ProtocolBuffer.GroupParticipateInReplyResponse.Parser, new[]{ "GroupId", "GroupName", "ApplyerEmail", "ApplyerNickname", "IsAccepted" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupParticipateInReplyPushMessage), global::ProtocolBuffer.GroupParticipateInReplyPushMessage.Parser, new[]{ "GroupId", "GroupName", "IsAccepted" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupListRequest), global::ProtocolBuffer.GroupListRequest.Parser, new[]{ "UserEmail" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ProtocolBuffer.GroupListResponse), global::ProtocolBuffer.GroupListResponse.Parser, new[]{ "UserEmail", "Groups" }, null, null, null)
           }));
     }
     #endregion
@@ -154,11 +340,119 @@ namespace ProtocolBuffer {
         case MsgOneofCase.PasswordModifyCaptchaResponse:
           PasswordModifyCaptchaResponse = other.PasswordModifyCaptchaResponse.Clone();
           break;
-        case MsgOneofCase.PassordModifyRequest:
-          PassordModifyRequest = other.PassordModifyRequest.Clone();
+        case MsgOneofCase.PasswordModifyRequest:
+          PasswordModifyRequest = other.PasswordModifyRequest.Clone();
           break;
-        case MsgOneofCase.PassordModifyResponse:
-          PassordModifyResponse = other.PassordModifyResponse.Clone();
+        case MsgOneofCase.PasswordModifyResponse:
+          PasswordModifyResponse = other.PasswordModifyResponse.Clone();
+          break;
+        case MsgOneofCase.UserInfoQueryRequest:
+          UserInfoQueryRequest = other.UserInfoQueryRequest.Clone();
+          break;
+        case MsgOneofCase.UserInfoQueryResponse:
+          UserInfoQueryResponse = other.UserInfoQueryResponse.Clone();
+          break;
+        case MsgOneofCase.UserInfoModifyRequest:
+          UserInfoModifyRequest = other.UserInfoModifyRequest.Clone();
+          break;
+        case MsgOneofCase.UserInfoModifyResponse:
+          UserInfoModifyResponse = other.UserInfoModifyResponse.Clone();
+          break;
+        case MsgOneofCase.ChatPrivateMessageRequest:
+          ChatPrivateMessageRequest = other.ChatPrivateMessageRequest.Clone();
+          break;
+        case MsgOneofCase.ChatPrivateMessageResponse:
+          ChatPrivateMessageResponse = other.ChatPrivateMessageResponse.Clone();
+          break;
+        case MsgOneofCase.ChatPrivateMessagePushMessage:
+          ChatPrivateMessagePushMessage = other.ChatPrivateMessagePushMessage.Clone();
+          break;
+        case MsgOneofCase.ChatPrivateMessagePushAckMessage:
+          ChatPrivateMessagePushAckMessage = other.ChatPrivateMessagePushAckMessage.Clone();
+          break;
+        case MsgOneofCase.ChatGroupMessageRequest:
+          ChatGroupMessageRequest = other.ChatGroupMessageRequest.Clone();
+          break;
+        case MsgOneofCase.ChatGroupMessageResponse:
+          ChatGroupMessageResponse = other.ChatGroupMessageResponse.Clone();
+          break;
+        case MsgOneofCase.ChatGroupMessagePushMessage:
+          ChatGroupMessagePushMessage = other.ChatGroupMessagePushMessage.Clone();
+          break;
+        case MsgOneofCase.ChatGroupMessagePushAckMessage:
+          ChatGroupMessagePushAckMessage = other.ChatGroupMessagePushAckMessage.Clone();
+          break;
+        case MsgOneofCase.GroupCreateApplyRequest:
+          GroupCreateApplyRequest = other.GroupCreateApplyRequest.Clone();
+          break;
+        case MsgOneofCase.GroupCreateApplyResponse:
+          GroupCreateApplyResponse = other.GroupCreateApplyResponse.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInApplyRequest:
+          GroupParticipateInApplyRequest = other.GroupParticipateInApplyRequest.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInApplyResponse:
+          GroupParticipateInApplyResponse = other.GroupParticipateInApplyResponse.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInApplyPushMessage:
+          GroupParticipateInApplyPushMessage = other.GroupParticipateInApplyPushMessage.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInReplyRequest:
+          GroupParticipateInReplyRequest = other.GroupParticipateInReplyRequest.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInReplyResponse:
+          GroupParticipateInReplyResponse = other.GroupParticipateInReplyResponse.Clone();
+          break;
+        case MsgOneofCase.GroupParticipateInReplyPushMessage:
+          GroupParticipateInReplyPushMessage = other.GroupParticipateInReplyPushMessage.Clone();
+          break;
+        case MsgOneofCase.GroupSearchRequest:
+          GroupSearchRequest = other.GroupSearchRequest.Clone();
+          break;
+        case MsgOneofCase.GroupSearchResponse:
+          GroupSearchResponse = other.GroupSearchResponse.Clone();
+          break;
+        case MsgOneofCase.GroupListRequest:
+          GroupListRequest = other.GroupListRequest.Clone();
+          break;
+        case MsgOneofCase.GroupListResponse:
+          GroupListResponse = other.GroupListResponse.Clone();
+          break;
+        case MsgOneofCase.ContactListRequest:
+          ContactListRequest = other.ContactListRequest.Clone();
+          break;
+        case MsgOneofCase.ContactListResponse:
+          ContactListResponse = other.ContactListResponse.Clone();
+          break;
+        case MsgOneofCase.ContactMailCheckRequest:
+          ContactMailCheckRequest = other.ContactMailCheckRequest.Clone();
+          break;
+        case MsgOneofCase.ContactMailCheckResponse:
+          ContactMailCheckResponse = other.ContactMailCheckResponse.Clone();
+          break;
+        case MsgOneofCase.ContactApplyRequest:
+          ContactApplyRequest = other.ContactApplyRequest.Clone();
+          break;
+        case MsgOneofCase.ContactApplyResponse:
+          ContactApplyResponse = other.ContactApplyResponse.Clone();
+          break;
+        case MsgOneofCase.ContactApplyingInfoPushMessage:
+          ContactApplyingInfoPushMessage = other.ContactApplyingInfoPushMessage.Clone();
+          break;
+        case MsgOneofCase.ContactReplyRequest:
+          ContactReplyRequest = other.ContactReplyRequest.Clone();
+          break;
+        case MsgOneofCase.ContactReplyResponse:
+          ContactReplyResponse = other.ContactReplyResponse.Clone();
+          break;
+        case MsgOneofCase.ContactReplyingInfoPushMessage:
+          ContactReplyingInfoPushMessage = other.ContactReplyingInfoPushMessage.Clone();
+          break;
+        case MsgOneofCase.ContactRemarkModifyRequest:
+          ContactRemarkModifyRequest = other.ContactRemarkModifyRequest.Clone();
+          break;
+        case MsgOneofCase.ContactRemarkModifyResponse:
+          ContactRemarkModifyResponse = other.ContactRemarkModifyResponse.Clone();
           break;
       }
 
@@ -173,6 +467,7 @@ namespace ProtocolBuffer {
     public const int SeqFieldNumber = 1;
     private int seq_;
     /// <summary>
+    ///
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Seq {
@@ -320,25 +615,463 @@ namespace ProtocolBuffer {
       }
     }
 
-    /// <summary>Field number for the "passordModifyRequest" field.</summary>
-    public const int PassordModifyRequestFieldNumber = 22;
+    /// <summary>Field number for the "passwordModifyRequest" field.</summary>
+    public const int PasswordModifyRequestFieldNumber = 22;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::ProtocolBuffer.PassordModifyRequest PassordModifyRequest {
-      get { return msgCase_ == MsgOneofCase.PassordModifyRequest ? (global::ProtocolBuffer.PassordModifyRequest) msg_ : null; }
+    public global::ProtocolBuffer.PasswordModifyRequest PasswordModifyRequest {
+      get { return msgCase_ == MsgOneofCase.PasswordModifyRequest ? (global::ProtocolBuffer.PasswordModifyRequest) msg_ : null; }
       set {
         msg_ = value;
-        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.PassordModifyRequest;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.PasswordModifyRequest;
       }
     }
 
-    /// <summary>Field number for the "passordModifyResponse" field.</summary>
-    public const int PassordModifyResponseFieldNumber = 23;
+    /// <summary>Field number for the "passwordModifyResponse" field.</summary>
+    public const int PasswordModifyResponseFieldNumber = 23;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::ProtocolBuffer.PassordModifyResponse PassordModifyResponse {
-      get { return msgCase_ == MsgOneofCase.PassordModifyResponse ? (global::ProtocolBuffer.PassordModifyResponse) msg_ : null; }
+    public global::ProtocolBuffer.PasswordModifyResponse PasswordModifyResponse {
+      get { return msgCase_ == MsgOneofCase.PasswordModifyResponse ? (global::ProtocolBuffer.PasswordModifyResponse) msg_ : null; }
       set {
         msg_ = value;
-        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.PassordModifyResponse;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.PasswordModifyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "userInfoQueryRequest" field.</summary>
+    public const int UserInfoQueryRequestFieldNumber = 27;
+    /// <summary>
+    ///Query
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.UserInfoQueryRequest UserInfoQueryRequest {
+      get { return msgCase_ == MsgOneofCase.UserInfoQueryRequest ? (global::ProtocolBuffer.UserInfoQueryRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.UserInfoQueryRequest;
+      }
+    }
+
+    /// <summary>Field number for the "userInfoQueryResponse" field.</summary>
+    public const int UserInfoQueryResponseFieldNumber = 28;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.UserInfoQueryResponse UserInfoQueryResponse {
+      get { return msgCase_ == MsgOneofCase.UserInfoQueryResponse ? (global::ProtocolBuffer.UserInfoQueryResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.UserInfoQueryResponse;
+      }
+    }
+
+    /// <summary>Field number for the "userInfoModifyRequest" field.</summary>
+    public const int UserInfoModifyRequestFieldNumber = 29;
+    /// <summary>
+    ///Modify
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.UserInfoModifyRequest UserInfoModifyRequest {
+      get { return msgCase_ == MsgOneofCase.UserInfoModifyRequest ? (global::ProtocolBuffer.UserInfoModifyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.UserInfoModifyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "userInfoModifyResponse" field.</summary>
+    public const int UserInfoModifyResponseFieldNumber = 30;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.UserInfoModifyResponse UserInfoModifyResponse {
+      get { return msgCase_ == MsgOneofCase.UserInfoModifyResponse ? (global::ProtocolBuffer.UserInfoModifyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.UserInfoModifyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "chatPrivateMessageRequest" field.</summary>
+    public const int ChatPrivateMessageRequestFieldNumber = 41;
+    /// <summary>
+    ///Private Chat
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatPrivateMessageRequest ChatPrivateMessageRequest {
+      get { return msgCase_ == MsgOneofCase.ChatPrivateMessageRequest ? (global::ProtocolBuffer.ChatPrivateMessageRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatPrivateMessageRequest;
+      }
+    }
+
+    /// <summary>Field number for the "chatPrivateMessageResponse" field.</summary>
+    public const int ChatPrivateMessageResponseFieldNumber = 42;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatPrivateMessageResponse ChatPrivateMessageResponse {
+      get { return msgCase_ == MsgOneofCase.ChatPrivateMessageResponse ? (global::ProtocolBuffer.ChatPrivateMessageResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatPrivateMessageResponse;
+      }
+    }
+
+    /// <summary>Field number for the "chatPrivateMessagePushMessage" field.</summary>
+    public const int ChatPrivateMessagePushMessageFieldNumber = 43;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatPrivateMessagePushMessage ChatPrivateMessagePushMessage {
+      get { return msgCase_ == MsgOneofCase.ChatPrivateMessagePushMessage ? (global::ProtocolBuffer.ChatPrivateMessagePushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatPrivateMessagePushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "chatPrivateMessagePushAckMessage" field.</summary>
+    public const int ChatPrivateMessagePushAckMessageFieldNumber = 44;
+    /// <summary>
+    ///Qos
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatPrivateMessagePushAckMessage ChatPrivateMessagePushAckMessage {
+      get { return msgCase_ == MsgOneofCase.ChatPrivateMessagePushAckMessage ? (global::ProtocolBuffer.ChatPrivateMessagePushAckMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatPrivateMessagePushAckMessage;
+      }
+    }
+
+    /// <summary>Field number for the "chatGroupMessageRequest" field.</summary>
+    public const int ChatGroupMessageRequestFieldNumber = 45;
+    /// <summary>
+    ///group Chat
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatGroupMessageRequest ChatGroupMessageRequest {
+      get { return msgCase_ == MsgOneofCase.ChatGroupMessageRequest ? (global::ProtocolBuffer.ChatGroupMessageRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatGroupMessageRequest;
+      }
+    }
+
+    /// <summary>Field number for the "chatGroupMessageResponse" field.</summary>
+    public const int ChatGroupMessageResponseFieldNumber = 46;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatGroupMessageResponse ChatGroupMessageResponse {
+      get { return msgCase_ == MsgOneofCase.ChatGroupMessageResponse ? (global::ProtocolBuffer.ChatGroupMessageResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatGroupMessageResponse;
+      }
+    }
+
+    /// <summary>Field number for the "chatGroupMessagePushMessage" field.</summary>
+    public const int ChatGroupMessagePushMessageFieldNumber = 47;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatGroupMessagePushMessage ChatGroupMessagePushMessage {
+      get { return msgCase_ == MsgOneofCase.ChatGroupMessagePushMessage ? (global::ProtocolBuffer.ChatGroupMessagePushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatGroupMessagePushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "ChatGroupMessagePushAckMessage" field.</summary>
+    public const int ChatGroupMessagePushAckMessageFieldNumber = 48;
+    /// <summary>
+    ///Qos
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatGroupMessagePushAckMessage ChatGroupMessagePushAckMessage {
+      get { return msgCase_ == MsgOneofCase.ChatGroupMessagePushAckMessage ? (global::ProtocolBuffer.ChatGroupMessagePushAckMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ChatGroupMessagePushAckMessage;
+      }
+    }
+
+    /// <summary>Field number for the "groupCreateApplyRequest" field.</summary>
+    public const int GroupCreateApplyRequestFieldNumber = 49;
+    /// <summary>
+    ///建群
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupCreateApplyRequest GroupCreateApplyRequest {
+      get { return msgCase_ == MsgOneofCase.GroupCreateApplyRequest ? (global::ProtocolBuffer.GroupCreateApplyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupCreateApplyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "groupCreateApplyResponse" field.</summary>
+    public const int GroupCreateApplyResponseFieldNumber = 50;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupCreateApplyResponse GroupCreateApplyResponse {
+      get { return msgCase_ == MsgOneofCase.GroupCreateApplyResponse ? (global::ProtocolBuffer.GroupCreateApplyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupCreateApplyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInApplyRequest" field.</summary>
+    public const int GroupParticipateInApplyRequestFieldNumber = 51;
+    /// <summary>
+    ///申请加群
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInApplyRequest GroupParticipateInApplyRequest {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInApplyRequest ? (global::ProtocolBuffer.GroupParticipateInApplyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInApplyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInApplyResponse" field.</summary>
+    public const int GroupParticipateInApplyResponseFieldNumber = 52;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInApplyResponse GroupParticipateInApplyResponse {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInApplyResponse ? (global::ProtocolBuffer.GroupParticipateInApplyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInApplyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInApplyPushMessage" field.</summary>
+    public const int GroupParticipateInApplyPushMessageFieldNumber = 53;
+    /// <summary>
+    ///加群申请推送，推送给建群者
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInApplyPushMessage GroupParticipateInApplyPushMessage {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInApplyPushMessage ? (global::ProtocolBuffer.GroupParticipateInApplyPushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInApplyPushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInReplyRequest" field.</summary>
+    public const int GroupParticipateInReplyRequestFieldNumber = 54;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInReplyRequest GroupParticipateInReplyRequest {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInReplyRequest ? (global::ProtocolBuffer.GroupParticipateInReplyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInReplyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInReplyResponse" field.</summary>
+    public const int GroupParticipateInReplyResponseFieldNumber = 55;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInReplyResponse GroupParticipateInReplyResponse {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInReplyResponse ? (global::ProtocolBuffer.GroupParticipateInReplyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInReplyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "groupParticipateInReplyPushMessage" field.</summary>
+    public const int GroupParticipateInReplyPushMessageFieldNumber = 56;
+    /// <summary>
+    ///加群申请结果推送，推送给申请者
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupParticipateInReplyPushMessage GroupParticipateInReplyPushMessage {
+      get { return msgCase_ == MsgOneofCase.GroupParticipateInReplyPushMessage ? (global::ProtocolBuffer.GroupParticipateInReplyPushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupParticipateInReplyPushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "groupSearchRequest" field.</summary>
+    public const int GroupSearchRequestFieldNumber = 57;
+    /// <summary>
+    ///群查询，根据群名字
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupSearchRequest GroupSearchRequest {
+      get { return msgCase_ == MsgOneofCase.GroupSearchRequest ? (global::ProtocolBuffer.GroupSearchRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupSearchRequest;
+      }
+    }
+
+    /// <summary>Field number for the "groupSearchResponse" field.</summary>
+    public const int GroupSearchResponseFieldNumber = 58;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupSearchResponse GroupSearchResponse {
+      get { return msgCase_ == MsgOneofCase.GroupSearchResponse ? (global::ProtocolBuffer.GroupSearchResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupSearchResponse;
+      }
+    }
+
+    /// <summary>Field number for the "groupListRequest" field.</summary>
+    public const int GroupListRequestFieldNumber = 59;
+    /// <summary>
+    ///获取用户的所有群
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupListRequest GroupListRequest {
+      get { return msgCase_ == MsgOneofCase.GroupListRequest ? (global::ProtocolBuffer.GroupListRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupListRequest;
+      }
+    }
+
+    /// <summary>Field number for the "groupListResponse" field.</summary>
+    public const int GroupListResponseFieldNumber = 60;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.GroupListResponse GroupListResponse {
+      get { return msgCase_ == MsgOneofCase.GroupListResponse ? (global::ProtocolBuffer.GroupListResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.GroupListResponse;
+      }
+    }
+
+    /// <summary>Field number for the "contactListRequest" field.</summary>
+    public const int ContactListRequestFieldNumber = 71;
+    /// <summary>
+    /// module: contact
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactListRequest ContactListRequest {
+      get { return msgCase_ == MsgOneofCase.ContactListRequest ? (global::ProtocolBuffer.ContactListRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactListRequest;
+      }
+    }
+
+    /// <summary>Field number for the "contactListResponse" field.</summary>
+    public const int ContactListResponseFieldNumber = 72;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactListResponse ContactListResponse {
+      get { return msgCase_ == MsgOneofCase.ContactListResponse ? (global::ProtocolBuffer.ContactListResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactListResponse;
+      }
+    }
+
+    /// <summary>Field number for the "contactMailCheckRequest" field.</summary>
+    public const int ContactMailCheckRequestFieldNumber = 73;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactMailCheckRequest ContactMailCheckRequest {
+      get { return msgCase_ == MsgOneofCase.ContactMailCheckRequest ? (global::ProtocolBuffer.ContactMailCheckRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactMailCheckRequest;
+      }
+    }
+
+    /// <summary>Field number for the "contactMailCheckResponse" field.</summary>
+    public const int ContactMailCheckResponseFieldNumber = 74;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactMailCheckResponse ContactMailCheckResponse {
+      get { return msgCase_ == MsgOneofCase.ContactMailCheckResponse ? (global::ProtocolBuffer.ContactMailCheckResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactMailCheckResponse;
+      }
+    }
+
+    /// <summary>Field number for the "contactApplyRequest" field.</summary>
+    public const int ContactApplyRequestFieldNumber = 75;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactApplyRequest ContactApplyRequest {
+      get { return msgCase_ == MsgOneofCase.ContactApplyRequest ? (global::ProtocolBuffer.ContactApplyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactApplyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "contactApplyResponse" field.</summary>
+    public const int ContactApplyResponseFieldNumber = 76;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactApplyResponse ContactApplyResponse {
+      get { return msgCase_ == MsgOneofCase.ContactApplyResponse ? (global::ProtocolBuffer.ContactApplyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactApplyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "contactApplyingInfoPushMessage" field.</summary>
+    public const int ContactApplyingInfoPushMessageFieldNumber = 77;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactApplyingInfoPushMessage ContactApplyingInfoPushMessage {
+      get { return msgCase_ == MsgOneofCase.ContactApplyingInfoPushMessage ? (global::ProtocolBuffer.ContactApplyingInfoPushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactApplyingInfoPushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "contactReplyRequest" field.</summary>
+    public const int ContactReplyRequestFieldNumber = 78;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactReplyRequest ContactReplyRequest {
+      get { return msgCase_ == MsgOneofCase.ContactReplyRequest ? (global::ProtocolBuffer.ContactReplyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactReplyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "contactReplyResponse" field.</summary>
+    public const int ContactReplyResponseFieldNumber = 79;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactReplyResponse ContactReplyResponse {
+      get { return msgCase_ == MsgOneofCase.ContactReplyResponse ? (global::ProtocolBuffer.ContactReplyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactReplyResponse;
+      }
+    }
+
+    /// <summary>Field number for the "contactReplyingInfoPushMessage" field.</summary>
+    public const int ContactReplyingInfoPushMessageFieldNumber = 80;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactReplyingInfoPushMessage ContactReplyingInfoPushMessage {
+      get { return msgCase_ == MsgOneofCase.ContactReplyingInfoPushMessage ? (global::ProtocolBuffer.ContactReplyingInfoPushMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactReplyingInfoPushMessage;
+      }
+    }
+
+    /// <summary>Field number for the "contactRemarkModifyRequest" field.</summary>
+    public const int ContactRemarkModifyRequestFieldNumber = 81;
+    /// <summary>
+    ///好友备注 + 好友分组
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactRemarkModifyRequest ContactRemarkModifyRequest {
+      get { return msgCase_ == MsgOneofCase.ContactRemarkModifyRequest ? (global::ProtocolBuffer.ContactRemarkModifyRequest) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactRemarkModifyRequest;
+      }
+    }
+
+    /// <summary>Field number for the "contactRemarkModifyResponse" field.</summary>
+    public const int ContactRemarkModifyResponseFieldNumber = 82;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactRemarkModifyResponse ContactRemarkModifyResponse {
+      get { return msgCase_ == MsgOneofCase.ContactRemarkModifyResponse ? (global::ProtocolBuffer.ContactRemarkModifyResponse) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ContactRemarkModifyResponse;
       }
     }
 
@@ -358,8 +1091,44 @@ namespace ProtocolBuffer {
       SignupInfoResponse = 19,
       PasswordModifyCaptchaRequest = 20,
       PasswordModifyCaptchaResponse = 21,
-      PassordModifyRequest = 22,
-      PassordModifyResponse = 23,
+      PasswordModifyRequest = 22,
+      PasswordModifyResponse = 23,
+      UserInfoQueryRequest = 27,
+      UserInfoQueryResponse = 28,
+      UserInfoModifyRequest = 29,
+      UserInfoModifyResponse = 30,
+      ChatPrivateMessageRequest = 41,
+      ChatPrivateMessageResponse = 42,
+      ChatPrivateMessagePushMessage = 43,
+      ChatPrivateMessagePushAckMessage = 44,
+      ChatGroupMessageRequest = 45,
+      ChatGroupMessageResponse = 46,
+      ChatGroupMessagePushMessage = 47,
+      ChatGroupMessagePushAckMessage = 48,
+      GroupCreateApplyRequest = 49,
+      GroupCreateApplyResponse = 50,
+      GroupParticipateInApplyRequest = 51,
+      GroupParticipateInApplyResponse = 52,
+      GroupParticipateInApplyPushMessage = 53,
+      GroupParticipateInReplyRequest = 54,
+      GroupParticipateInReplyResponse = 55,
+      GroupParticipateInReplyPushMessage = 56,
+      GroupSearchRequest = 57,
+      GroupSearchResponse = 58,
+      GroupListRequest = 59,
+      GroupListResponse = 60,
+      ContactListRequest = 71,
+      ContactListResponse = 72,
+      ContactMailCheckRequest = 73,
+      ContactMailCheckResponse = 74,
+      ContactApplyRequest = 75,
+      ContactApplyResponse = 76,
+      ContactApplyingInfoPushMessage = 77,
+      ContactReplyRequest = 78,
+      ContactReplyResponse = 79,
+      ContactReplyingInfoPushMessage = 80,
+      ContactRemarkModifyRequest = 81,
+      ContactRemarkModifyResponse = 82,
     }
     private MsgOneofCase msgCase_ = MsgOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -399,8 +1168,44 @@ namespace ProtocolBuffer {
       if (!object.Equals(SignupInfoResponse, other.SignupInfoResponse)) return false;
       if (!object.Equals(PasswordModifyCaptchaRequest, other.PasswordModifyCaptchaRequest)) return false;
       if (!object.Equals(PasswordModifyCaptchaResponse, other.PasswordModifyCaptchaResponse)) return false;
-      if (!object.Equals(PassordModifyRequest, other.PassordModifyRequest)) return false;
-      if (!object.Equals(PassordModifyResponse, other.PassordModifyResponse)) return false;
+      if (!object.Equals(PasswordModifyRequest, other.PasswordModifyRequest)) return false;
+      if (!object.Equals(PasswordModifyResponse, other.PasswordModifyResponse)) return false;
+      if (!object.Equals(UserInfoQueryRequest, other.UserInfoQueryRequest)) return false;
+      if (!object.Equals(UserInfoQueryResponse, other.UserInfoQueryResponse)) return false;
+      if (!object.Equals(UserInfoModifyRequest, other.UserInfoModifyRequest)) return false;
+      if (!object.Equals(UserInfoModifyResponse, other.UserInfoModifyResponse)) return false;
+      if (!object.Equals(ChatPrivateMessageRequest, other.ChatPrivateMessageRequest)) return false;
+      if (!object.Equals(ChatPrivateMessageResponse, other.ChatPrivateMessageResponse)) return false;
+      if (!object.Equals(ChatPrivateMessagePushMessage, other.ChatPrivateMessagePushMessage)) return false;
+      if (!object.Equals(ChatPrivateMessagePushAckMessage, other.ChatPrivateMessagePushAckMessage)) return false;
+      if (!object.Equals(ChatGroupMessageRequest, other.ChatGroupMessageRequest)) return false;
+      if (!object.Equals(ChatGroupMessageResponse, other.ChatGroupMessageResponse)) return false;
+      if (!object.Equals(ChatGroupMessagePushMessage, other.ChatGroupMessagePushMessage)) return false;
+      if (!object.Equals(ChatGroupMessagePushAckMessage, other.ChatGroupMessagePushAckMessage)) return false;
+      if (!object.Equals(GroupCreateApplyRequest, other.GroupCreateApplyRequest)) return false;
+      if (!object.Equals(GroupCreateApplyResponse, other.GroupCreateApplyResponse)) return false;
+      if (!object.Equals(GroupParticipateInApplyRequest, other.GroupParticipateInApplyRequest)) return false;
+      if (!object.Equals(GroupParticipateInApplyResponse, other.GroupParticipateInApplyResponse)) return false;
+      if (!object.Equals(GroupParticipateInApplyPushMessage, other.GroupParticipateInApplyPushMessage)) return false;
+      if (!object.Equals(GroupParticipateInReplyRequest, other.GroupParticipateInReplyRequest)) return false;
+      if (!object.Equals(GroupParticipateInReplyResponse, other.GroupParticipateInReplyResponse)) return false;
+      if (!object.Equals(GroupParticipateInReplyPushMessage, other.GroupParticipateInReplyPushMessage)) return false;
+      if (!object.Equals(GroupSearchRequest, other.GroupSearchRequest)) return false;
+      if (!object.Equals(GroupSearchResponse, other.GroupSearchResponse)) return false;
+      if (!object.Equals(GroupListRequest, other.GroupListRequest)) return false;
+      if (!object.Equals(GroupListResponse, other.GroupListResponse)) return false;
+      if (!object.Equals(ContactListRequest, other.ContactListRequest)) return false;
+      if (!object.Equals(ContactListResponse, other.ContactListResponse)) return false;
+      if (!object.Equals(ContactMailCheckRequest, other.ContactMailCheckRequest)) return false;
+      if (!object.Equals(ContactMailCheckResponse, other.ContactMailCheckResponse)) return false;
+      if (!object.Equals(ContactApplyRequest, other.ContactApplyRequest)) return false;
+      if (!object.Equals(ContactApplyResponse, other.ContactApplyResponse)) return false;
+      if (!object.Equals(ContactApplyingInfoPushMessage, other.ContactApplyingInfoPushMessage)) return false;
+      if (!object.Equals(ContactReplyRequest, other.ContactReplyRequest)) return false;
+      if (!object.Equals(ContactReplyResponse, other.ContactReplyResponse)) return false;
+      if (!object.Equals(ContactReplyingInfoPushMessage, other.ContactReplyingInfoPushMessage)) return false;
+      if (!object.Equals(ContactRemarkModifyRequest, other.ContactRemarkModifyRequest)) return false;
+      if (!object.Equals(ContactRemarkModifyResponse, other.ContactRemarkModifyResponse)) return false;
       if (MsgCase != other.MsgCase) return false;
       return true;
     }
@@ -421,8 +1226,44 @@ namespace ProtocolBuffer {
       if (msgCase_ == MsgOneofCase.SignupInfoResponse) hash ^= SignupInfoResponse.GetHashCode();
       if (msgCase_ == MsgOneofCase.PasswordModifyCaptchaRequest) hash ^= PasswordModifyCaptchaRequest.GetHashCode();
       if (msgCase_ == MsgOneofCase.PasswordModifyCaptchaResponse) hash ^= PasswordModifyCaptchaResponse.GetHashCode();
-      if (msgCase_ == MsgOneofCase.PassordModifyRequest) hash ^= PassordModifyRequest.GetHashCode();
-      if (msgCase_ == MsgOneofCase.PassordModifyResponse) hash ^= PassordModifyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.PasswordModifyRequest) hash ^= PasswordModifyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.PasswordModifyResponse) hash ^= PasswordModifyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.UserInfoQueryRequest) hash ^= UserInfoQueryRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.UserInfoQueryResponse) hash ^= UserInfoQueryResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.UserInfoModifyRequest) hash ^= UserInfoModifyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.UserInfoModifyResponse) hash ^= UserInfoModifyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageRequest) hash ^= ChatPrivateMessageRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageResponse) hash ^= ChatPrivateMessageResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushMessage) hash ^= ChatPrivateMessagePushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushAckMessage) hash ^= ChatPrivateMessagePushAckMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageRequest) hash ^= ChatGroupMessageRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageResponse) hash ^= ChatGroupMessageResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushMessage) hash ^= ChatGroupMessagePushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushAckMessage) hash ^= ChatGroupMessagePushAckMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyRequest) hash ^= GroupCreateApplyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyResponse) hash ^= GroupCreateApplyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyRequest) hash ^= GroupParticipateInApplyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyResponse) hash ^= GroupParticipateInApplyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyPushMessage) hash ^= GroupParticipateInApplyPushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyRequest) hash ^= GroupParticipateInReplyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyResponse) hash ^= GroupParticipateInReplyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyPushMessage) hash ^= GroupParticipateInReplyPushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupSearchRequest) hash ^= GroupSearchRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupSearchResponse) hash ^= GroupSearchResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupListRequest) hash ^= GroupListRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.GroupListResponse) hash ^= GroupListResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactListRequest) hash ^= ContactListRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactListResponse) hash ^= ContactListResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactMailCheckRequest) hash ^= ContactMailCheckRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactMailCheckResponse) hash ^= ContactMailCheckResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactApplyRequest) hash ^= ContactApplyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactApplyResponse) hash ^= ContactApplyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactApplyingInfoPushMessage) hash ^= ContactApplyingInfoPushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactReplyRequest) hash ^= ContactReplyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactReplyResponse) hash ^= ContactReplyResponse.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactReplyingInfoPushMessage) hash ^= ContactReplyingInfoPushMessage.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyRequest) hash ^= ContactRemarkModifyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyResponse) hash ^= ContactRemarkModifyResponse.GetHashCode();
       hash ^= (int) msgCase_;
       return hash;
     }
@@ -486,13 +1327,157 @@ namespace ProtocolBuffer {
         output.WriteRawTag(170, 1);
         output.WriteMessage(PasswordModifyCaptchaResponse);
       }
-      if (msgCase_ == MsgOneofCase.PassordModifyRequest) {
+      if (msgCase_ == MsgOneofCase.PasswordModifyRequest) {
         output.WriteRawTag(178, 1);
-        output.WriteMessage(PassordModifyRequest);
+        output.WriteMessage(PasswordModifyRequest);
       }
-      if (msgCase_ == MsgOneofCase.PassordModifyResponse) {
+      if (msgCase_ == MsgOneofCase.PasswordModifyResponse) {
         output.WriteRawTag(186, 1);
-        output.WriteMessage(PassordModifyResponse);
+        output.WriteMessage(PasswordModifyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoQueryRequest) {
+        output.WriteRawTag(218, 1);
+        output.WriteMessage(UserInfoQueryRequest);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoQueryResponse) {
+        output.WriteRawTag(226, 1);
+        output.WriteMessage(UserInfoQueryResponse);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoModifyRequest) {
+        output.WriteRawTag(234, 1);
+        output.WriteMessage(UserInfoModifyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoModifyResponse) {
+        output.WriteRawTag(242, 1);
+        output.WriteMessage(UserInfoModifyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageRequest) {
+        output.WriteRawTag(202, 2);
+        output.WriteMessage(ChatPrivateMessageRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageResponse) {
+        output.WriteRawTag(210, 2);
+        output.WriteMessage(ChatPrivateMessageResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushMessage) {
+        output.WriteRawTag(218, 2);
+        output.WriteMessage(ChatPrivateMessagePushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushAckMessage) {
+        output.WriteRawTag(226, 2);
+        output.WriteMessage(ChatPrivateMessagePushAckMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageRequest) {
+        output.WriteRawTag(234, 2);
+        output.WriteMessage(ChatGroupMessageRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageResponse) {
+        output.WriteRawTag(242, 2);
+        output.WriteMessage(ChatGroupMessageResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushMessage) {
+        output.WriteRawTag(250, 2);
+        output.WriteMessage(ChatGroupMessagePushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushAckMessage) {
+        output.WriteRawTag(130, 3);
+        output.WriteMessage(ChatGroupMessagePushAckMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyRequest) {
+        output.WriteRawTag(138, 3);
+        output.WriteMessage(GroupCreateApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyResponse) {
+        output.WriteRawTag(146, 3);
+        output.WriteMessage(GroupCreateApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyRequest) {
+        output.WriteRawTag(154, 3);
+        output.WriteMessage(GroupParticipateInApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyResponse) {
+        output.WriteRawTag(162, 3);
+        output.WriteMessage(GroupParticipateInApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyPushMessage) {
+        output.WriteRawTag(170, 3);
+        output.WriteMessage(GroupParticipateInApplyPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyRequest) {
+        output.WriteRawTag(178, 3);
+        output.WriteMessage(GroupParticipateInReplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyResponse) {
+        output.WriteRawTag(186, 3);
+        output.WriteMessage(GroupParticipateInReplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyPushMessage) {
+        output.WriteRawTag(194, 3);
+        output.WriteMessage(GroupParticipateInReplyPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupSearchRequest) {
+        output.WriteRawTag(202, 3);
+        output.WriteMessage(GroupSearchRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupSearchResponse) {
+        output.WriteRawTag(210, 3);
+        output.WriteMessage(GroupSearchResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupListRequest) {
+        output.WriteRawTag(218, 3);
+        output.WriteMessage(GroupListRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupListResponse) {
+        output.WriteRawTag(226, 3);
+        output.WriteMessage(GroupListResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactListRequest) {
+        output.WriteRawTag(186, 4);
+        output.WriteMessage(ContactListRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactListResponse) {
+        output.WriteRawTag(194, 4);
+        output.WriteMessage(ContactListResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactMailCheckRequest) {
+        output.WriteRawTag(202, 4);
+        output.WriteMessage(ContactMailCheckRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactMailCheckResponse) {
+        output.WriteRawTag(210, 4);
+        output.WriteMessage(ContactMailCheckResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyRequest) {
+        output.WriteRawTag(218, 4);
+        output.WriteMessage(ContactApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyResponse) {
+        output.WriteRawTag(226, 4);
+        output.WriteMessage(ContactApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyingInfoPushMessage) {
+        output.WriteRawTag(234, 4);
+        output.WriteMessage(ContactApplyingInfoPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyRequest) {
+        output.WriteRawTag(242, 4);
+        output.WriteMessage(ContactReplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyResponse) {
+        output.WriteRawTag(250, 4);
+        output.WriteMessage(ContactReplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyingInfoPushMessage) {
+        output.WriteRawTag(130, 5);
+        output.WriteMessage(ContactReplyingInfoPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyRequest) {
+        output.WriteRawTag(138, 5);
+        output.WriteMessage(ContactRemarkModifyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyResponse) {
+        output.WriteRawTag(146, 5);
+        output.WriteMessage(ContactRemarkModifyResponse);
       }
     }
 
@@ -538,11 +1523,119 @@ namespace ProtocolBuffer {
       if (msgCase_ == MsgOneofCase.PasswordModifyCaptchaResponse) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(PasswordModifyCaptchaResponse);
       }
-      if (msgCase_ == MsgOneofCase.PassordModifyRequest) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PassordModifyRequest);
+      if (msgCase_ == MsgOneofCase.PasswordModifyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PasswordModifyRequest);
       }
-      if (msgCase_ == MsgOneofCase.PassordModifyResponse) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PassordModifyResponse);
+      if (msgCase_ == MsgOneofCase.PasswordModifyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PasswordModifyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoQueryRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UserInfoQueryRequest);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoQueryResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UserInfoQueryResponse);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoModifyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UserInfoModifyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.UserInfoModifyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UserInfoModifyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatPrivateMessageRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessageResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatPrivateMessageResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatPrivateMessagePushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushAckMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatPrivateMessagePushAckMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatGroupMessageRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessageResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatGroupMessageResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatGroupMessagePushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ChatGroupMessagePushAckMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChatGroupMessagePushAckMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupCreateApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupCreateApplyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupCreateApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInApplyPushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInApplyPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInReplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInReplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupParticipateInReplyPushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupParticipateInReplyPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.GroupSearchRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupSearchRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupSearchResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupSearchResponse);
+      }
+      if (msgCase_ == MsgOneofCase.GroupListRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupListRequest);
+      }
+      if (msgCase_ == MsgOneofCase.GroupListResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(GroupListResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactListRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactListRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactListResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactListResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactMailCheckRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactMailCheckRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactMailCheckResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactMailCheckResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactApplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactApplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactApplyingInfoPushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactApplyingInfoPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactReplyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactReplyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.ContactReplyingInfoPushMessage) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactReplyingInfoPushMessage);
+      }
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyRequest) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactRemarkModifyRequest);
+      }
+      if (msgCase_ == MsgOneofCase.ContactRemarkModifyResponse) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ContactRemarkModifyResponse);
       }
       return size;
     }
@@ -592,11 +1685,119 @@ namespace ProtocolBuffer {
         case MsgOneofCase.PasswordModifyCaptchaResponse:
           PasswordModifyCaptchaResponse = other.PasswordModifyCaptchaResponse;
           break;
-        case MsgOneofCase.PassordModifyRequest:
-          PassordModifyRequest = other.PassordModifyRequest;
+        case MsgOneofCase.PasswordModifyRequest:
+          PasswordModifyRequest = other.PasswordModifyRequest;
           break;
-        case MsgOneofCase.PassordModifyResponse:
-          PassordModifyResponse = other.PassordModifyResponse;
+        case MsgOneofCase.PasswordModifyResponse:
+          PasswordModifyResponse = other.PasswordModifyResponse;
+          break;
+        case MsgOneofCase.UserInfoQueryRequest:
+          UserInfoQueryRequest = other.UserInfoQueryRequest;
+          break;
+        case MsgOneofCase.UserInfoQueryResponse:
+          UserInfoQueryResponse = other.UserInfoQueryResponse;
+          break;
+        case MsgOneofCase.UserInfoModifyRequest:
+          UserInfoModifyRequest = other.UserInfoModifyRequest;
+          break;
+        case MsgOneofCase.UserInfoModifyResponse:
+          UserInfoModifyResponse = other.UserInfoModifyResponse;
+          break;
+        case MsgOneofCase.ChatPrivateMessageRequest:
+          ChatPrivateMessageRequest = other.ChatPrivateMessageRequest;
+          break;
+        case MsgOneofCase.ChatPrivateMessageResponse:
+          ChatPrivateMessageResponse = other.ChatPrivateMessageResponse;
+          break;
+        case MsgOneofCase.ChatPrivateMessagePushMessage:
+          ChatPrivateMessagePushMessage = other.ChatPrivateMessagePushMessage;
+          break;
+        case MsgOneofCase.ChatPrivateMessagePushAckMessage:
+          ChatPrivateMessagePushAckMessage = other.ChatPrivateMessagePushAckMessage;
+          break;
+        case MsgOneofCase.ChatGroupMessageRequest:
+          ChatGroupMessageRequest = other.ChatGroupMessageRequest;
+          break;
+        case MsgOneofCase.ChatGroupMessageResponse:
+          ChatGroupMessageResponse = other.ChatGroupMessageResponse;
+          break;
+        case MsgOneofCase.ChatGroupMessagePushMessage:
+          ChatGroupMessagePushMessage = other.ChatGroupMessagePushMessage;
+          break;
+        case MsgOneofCase.ChatGroupMessagePushAckMessage:
+          ChatGroupMessagePushAckMessage = other.ChatGroupMessagePushAckMessage;
+          break;
+        case MsgOneofCase.GroupCreateApplyRequest:
+          GroupCreateApplyRequest = other.GroupCreateApplyRequest;
+          break;
+        case MsgOneofCase.GroupCreateApplyResponse:
+          GroupCreateApplyResponse = other.GroupCreateApplyResponse;
+          break;
+        case MsgOneofCase.GroupParticipateInApplyRequest:
+          GroupParticipateInApplyRequest = other.GroupParticipateInApplyRequest;
+          break;
+        case MsgOneofCase.GroupParticipateInApplyResponse:
+          GroupParticipateInApplyResponse = other.GroupParticipateInApplyResponse;
+          break;
+        case MsgOneofCase.GroupParticipateInApplyPushMessage:
+          GroupParticipateInApplyPushMessage = other.GroupParticipateInApplyPushMessage;
+          break;
+        case MsgOneofCase.GroupParticipateInReplyRequest:
+          GroupParticipateInReplyRequest = other.GroupParticipateInReplyRequest;
+          break;
+        case MsgOneofCase.GroupParticipateInReplyResponse:
+          GroupParticipateInReplyResponse = other.GroupParticipateInReplyResponse;
+          break;
+        case MsgOneofCase.GroupParticipateInReplyPushMessage:
+          GroupParticipateInReplyPushMessage = other.GroupParticipateInReplyPushMessage;
+          break;
+        case MsgOneofCase.GroupSearchRequest:
+          GroupSearchRequest = other.GroupSearchRequest;
+          break;
+        case MsgOneofCase.GroupSearchResponse:
+          GroupSearchResponse = other.GroupSearchResponse;
+          break;
+        case MsgOneofCase.GroupListRequest:
+          GroupListRequest = other.GroupListRequest;
+          break;
+        case MsgOneofCase.GroupListResponse:
+          GroupListResponse = other.GroupListResponse;
+          break;
+        case MsgOneofCase.ContactListRequest:
+          ContactListRequest = other.ContactListRequest;
+          break;
+        case MsgOneofCase.ContactListResponse:
+          ContactListResponse = other.ContactListResponse;
+          break;
+        case MsgOneofCase.ContactMailCheckRequest:
+          ContactMailCheckRequest = other.ContactMailCheckRequest;
+          break;
+        case MsgOneofCase.ContactMailCheckResponse:
+          ContactMailCheckResponse = other.ContactMailCheckResponse;
+          break;
+        case MsgOneofCase.ContactApplyRequest:
+          ContactApplyRequest = other.ContactApplyRequest;
+          break;
+        case MsgOneofCase.ContactApplyResponse:
+          ContactApplyResponse = other.ContactApplyResponse;
+          break;
+        case MsgOneofCase.ContactApplyingInfoPushMessage:
+          ContactApplyingInfoPushMessage = other.ContactApplyingInfoPushMessage;
+          break;
+        case MsgOneofCase.ContactReplyRequest:
+          ContactReplyRequest = other.ContactReplyRequest;
+          break;
+        case MsgOneofCase.ContactReplyResponse:
+          ContactReplyResponse = other.ContactReplyResponse;
+          break;
+        case MsgOneofCase.ContactReplyingInfoPushMessage:
+          ContactReplyingInfoPushMessage = other.ContactReplyingInfoPushMessage;
+          break;
+        case MsgOneofCase.ContactRemarkModifyRequest:
+          ContactRemarkModifyRequest = other.ContactRemarkModifyRequest;
+          break;
+        case MsgOneofCase.ContactRemarkModifyResponse:
+          ContactRemarkModifyResponse = other.ContactRemarkModifyResponse;
           break;
       }
 
@@ -723,21 +1924,345 @@ namespace ProtocolBuffer {
             break;
           }
           case 178: {
-            global::ProtocolBuffer.PassordModifyRequest subBuilder = new global::ProtocolBuffer.PassordModifyRequest();
-            if (msgCase_ == MsgOneofCase.PassordModifyRequest) {
-              subBuilder.MergeFrom(PassordModifyRequest);
+            global::ProtocolBuffer.PasswordModifyRequest subBuilder = new global::ProtocolBuffer.PasswordModifyRequest();
+            if (msgCase_ == MsgOneofCase.PasswordModifyRequest) {
+              subBuilder.MergeFrom(PasswordModifyRequest);
             }
             input.ReadMessage(subBuilder);
-            PassordModifyRequest = subBuilder;
+            PasswordModifyRequest = subBuilder;
             break;
           }
           case 186: {
-            global::ProtocolBuffer.PassordModifyResponse subBuilder = new global::ProtocolBuffer.PassordModifyResponse();
-            if (msgCase_ == MsgOneofCase.PassordModifyResponse) {
-              subBuilder.MergeFrom(PassordModifyResponse);
+            global::ProtocolBuffer.PasswordModifyResponse subBuilder = new global::ProtocolBuffer.PasswordModifyResponse();
+            if (msgCase_ == MsgOneofCase.PasswordModifyResponse) {
+              subBuilder.MergeFrom(PasswordModifyResponse);
             }
             input.ReadMessage(subBuilder);
-            PassordModifyResponse = subBuilder;
+            PasswordModifyResponse = subBuilder;
+            break;
+          }
+          case 218: {
+            global::ProtocolBuffer.UserInfoQueryRequest subBuilder = new global::ProtocolBuffer.UserInfoQueryRequest();
+            if (msgCase_ == MsgOneofCase.UserInfoQueryRequest) {
+              subBuilder.MergeFrom(UserInfoQueryRequest);
+            }
+            input.ReadMessage(subBuilder);
+            UserInfoQueryRequest = subBuilder;
+            break;
+          }
+          case 226: {
+            global::ProtocolBuffer.UserInfoQueryResponse subBuilder = new global::ProtocolBuffer.UserInfoQueryResponse();
+            if (msgCase_ == MsgOneofCase.UserInfoQueryResponse) {
+              subBuilder.MergeFrom(UserInfoQueryResponse);
+            }
+            input.ReadMessage(subBuilder);
+            UserInfoQueryResponse = subBuilder;
+            break;
+          }
+          case 234: {
+            global::ProtocolBuffer.UserInfoModifyRequest subBuilder = new global::ProtocolBuffer.UserInfoModifyRequest();
+            if (msgCase_ == MsgOneofCase.UserInfoModifyRequest) {
+              subBuilder.MergeFrom(UserInfoModifyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            UserInfoModifyRequest = subBuilder;
+            break;
+          }
+          case 242: {
+            global::ProtocolBuffer.UserInfoModifyResponse subBuilder = new global::ProtocolBuffer.UserInfoModifyResponse();
+            if (msgCase_ == MsgOneofCase.UserInfoModifyResponse) {
+              subBuilder.MergeFrom(UserInfoModifyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            UserInfoModifyResponse = subBuilder;
+            break;
+          }
+          case 330: {
+            global::ProtocolBuffer.ChatPrivateMessageRequest subBuilder = new global::ProtocolBuffer.ChatPrivateMessageRequest();
+            if (msgCase_ == MsgOneofCase.ChatPrivateMessageRequest) {
+              subBuilder.MergeFrom(ChatPrivateMessageRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ChatPrivateMessageRequest = subBuilder;
+            break;
+          }
+          case 338: {
+            global::ProtocolBuffer.ChatPrivateMessageResponse subBuilder = new global::ProtocolBuffer.ChatPrivateMessageResponse();
+            if (msgCase_ == MsgOneofCase.ChatPrivateMessageResponse) {
+              subBuilder.MergeFrom(ChatPrivateMessageResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ChatPrivateMessageResponse = subBuilder;
+            break;
+          }
+          case 346: {
+            global::ProtocolBuffer.ChatPrivateMessagePushMessage subBuilder = new global::ProtocolBuffer.ChatPrivateMessagePushMessage();
+            if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushMessage) {
+              subBuilder.MergeFrom(ChatPrivateMessagePushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ChatPrivateMessagePushMessage = subBuilder;
+            break;
+          }
+          case 354: {
+            global::ProtocolBuffer.ChatPrivateMessagePushAckMessage subBuilder = new global::ProtocolBuffer.ChatPrivateMessagePushAckMessage();
+            if (msgCase_ == MsgOneofCase.ChatPrivateMessagePushAckMessage) {
+              subBuilder.MergeFrom(ChatPrivateMessagePushAckMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ChatPrivateMessagePushAckMessage = subBuilder;
+            break;
+          }
+          case 362: {
+            global::ProtocolBuffer.ChatGroupMessageRequest subBuilder = new global::ProtocolBuffer.ChatGroupMessageRequest();
+            if (msgCase_ == MsgOneofCase.ChatGroupMessageRequest) {
+              subBuilder.MergeFrom(ChatGroupMessageRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ChatGroupMessageRequest = subBuilder;
+            break;
+          }
+          case 370: {
+            global::ProtocolBuffer.ChatGroupMessageResponse subBuilder = new global::ProtocolBuffer.ChatGroupMessageResponse();
+            if (msgCase_ == MsgOneofCase.ChatGroupMessageResponse) {
+              subBuilder.MergeFrom(ChatGroupMessageResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ChatGroupMessageResponse = subBuilder;
+            break;
+          }
+          case 378: {
+            global::ProtocolBuffer.ChatGroupMessagePushMessage subBuilder = new global::ProtocolBuffer.ChatGroupMessagePushMessage();
+            if (msgCase_ == MsgOneofCase.ChatGroupMessagePushMessage) {
+              subBuilder.MergeFrom(ChatGroupMessagePushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ChatGroupMessagePushMessage = subBuilder;
+            break;
+          }
+          case 386: {
+            global::ProtocolBuffer.ChatGroupMessagePushAckMessage subBuilder = new global::ProtocolBuffer.ChatGroupMessagePushAckMessage();
+            if (msgCase_ == MsgOneofCase.ChatGroupMessagePushAckMessage) {
+              subBuilder.MergeFrom(ChatGroupMessagePushAckMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ChatGroupMessagePushAckMessage = subBuilder;
+            break;
+          }
+          case 394: {
+            global::ProtocolBuffer.GroupCreateApplyRequest subBuilder = new global::ProtocolBuffer.GroupCreateApplyRequest();
+            if (msgCase_ == MsgOneofCase.GroupCreateApplyRequest) {
+              subBuilder.MergeFrom(GroupCreateApplyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            GroupCreateApplyRequest = subBuilder;
+            break;
+          }
+          case 402: {
+            global::ProtocolBuffer.GroupCreateApplyResponse subBuilder = new global::ProtocolBuffer.GroupCreateApplyResponse();
+            if (msgCase_ == MsgOneofCase.GroupCreateApplyResponse) {
+              subBuilder.MergeFrom(GroupCreateApplyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            GroupCreateApplyResponse = subBuilder;
+            break;
+          }
+          case 410: {
+            global::ProtocolBuffer.GroupParticipateInApplyRequest subBuilder = new global::ProtocolBuffer.GroupParticipateInApplyRequest();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInApplyRequest) {
+              subBuilder.MergeFrom(GroupParticipateInApplyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInApplyRequest = subBuilder;
+            break;
+          }
+          case 418: {
+            global::ProtocolBuffer.GroupParticipateInApplyResponse subBuilder = new global::ProtocolBuffer.GroupParticipateInApplyResponse();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInApplyResponse) {
+              subBuilder.MergeFrom(GroupParticipateInApplyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInApplyResponse = subBuilder;
+            break;
+          }
+          case 426: {
+            global::ProtocolBuffer.GroupParticipateInApplyPushMessage subBuilder = new global::ProtocolBuffer.GroupParticipateInApplyPushMessage();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInApplyPushMessage) {
+              subBuilder.MergeFrom(GroupParticipateInApplyPushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInApplyPushMessage = subBuilder;
+            break;
+          }
+          case 434: {
+            global::ProtocolBuffer.GroupParticipateInReplyRequest subBuilder = new global::ProtocolBuffer.GroupParticipateInReplyRequest();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInReplyRequest) {
+              subBuilder.MergeFrom(GroupParticipateInReplyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInReplyRequest = subBuilder;
+            break;
+          }
+          case 442: {
+            global::ProtocolBuffer.GroupParticipateInReplyResponse subBuilder = new global::ProtocolBuffer.GroupParticipateInReplyResponse();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInReplyResponse) {
+              subBuilder.MergeFrom(GroupParticipateInReplyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInReplyResponse = subBuilder;
+            break;
+          }
+          case 450: {
+            global::ProtocolBuffer.GroupParticipateInReplyPushMessage subBuilder = new global::ProtocolBuffer.GroupParticipateInReplyPushMessage();
+            if (msgCase_ == MsgOneofCase.GroupParticipateInReplyPushMessage) {
+              subBuilder.MergeFrom(GroupParticipateInReplyPushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            GroupParticipateInReplyPushMessage = subBuilder;
+            break;
+          }
+          case 458: {
+            global::ProtocolBuffer.GroupSearchRequest subBuilder = new global::ProtocolBuffer.GroupSearchRequest();
+            if (msgCase_ == MsgOneofCase.GroupSearchRequest) {
+              subBuilder.MergeFrom(GroupSearchRequest);
+            }
+            input.ReadMessage(subBuilder);
+            GroupSearchRequest = subBuilder;
+            break;
+          }
+          case 466: {
+            global::ProtocolBuffer.GroupSearchResponse subBuilder = new global::ProtocolBuffer.GroupSearchResponse();
+            if (msgCase_ == MsgOneofCase.GroupSearchResponse) {
+              subBuilder.MergeFrom(GroupSearchResponse);
+            }
+            input.ReadMessage(subBuilder);
+            GroupSearchResponse = subBuilder;
+            break;
+          }
+          case 474: {
+            global::ProtocolBuffer.GroupListRequest subBuilder = new global::ProtocolBuffer.GroupListRequest();
+            if (msgCase_ == MsgOneofCase.GroupListRequest) {
+              subBuilder.MergeFrom(GroupListRequest);
+            }
+            input.ReadMessage(subBuilder);
+            GroupListRequest = subBuilder;
+            break;
+          }
+          case 482: {
+            global::ProtocolBuffer.GroupListResponse subBuilder = new global::ProtocolBuffer.GroupListResponse();
+            if (msgCase_ == MsgOneofCase.GroupListResponse) {
+              subBuilder.MergeFrom(GroupListResponse);
+            }
+            input.ReadMessage(subBuilder);
+            GroupListResponse = subBuilder;
+            break;
+          }
+          case 570: {
+            global::ProtocolBuffer.ContactListRequest subBuilder = new global::ProtocolBuffer.ContactListRequest();
+            if (msgCase_ == MsgOneofCase.ContactListRequest) {
+              subBuilder.MergeFrom(ContactListRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ContactListRequest = subBuilder;
+            break;
+          }
+          case 578: {
+            global::ProtocolBuffer.ContactListResponse subBuilder = new global::ProtocolBuffer.ContactListResponse();
+            if (msgCase_ == MsgOneofCase.ContactListResponse) {
+              subBuilder.MergeFrom(ContactListResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ContactListResponse = subBuilder;
+            break;
+          }
+          case 586: {
+            global::ProtocolBuffer.ContactMailCheckRequest subBuilder = new global::ProtocolBuffer.ContactMailCheckRequest();
+            if (msgCase_ == MsgOneofCase.ContactMailCheckRequest) {
+              subBuilder.MergeFrom(ContactMailCheckRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ContactMailCheckRequest = subBuilder;
+            break;
+          }
+          case 594: {
+            global::ProtocolBuffer.ContactMailCheckResponse subBuilder = new global::ProtocolBuffer.ContactMailCheckResponse();
+            if (msgCase_ == MsgOneofCase.ContactMailCheckResponse) {
+              subBuilder.MergeFrom(ContactMailCheckResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ContactMailCheckResponse = subBuilder;
+            break;
+          }
+          case 602: {
+            global::ProtocolBuffer.ContactApplyRequest subBuilder = new global::ProtocolBuffer.ContactApplyRequest();
+            if (msgCase_ == MsgOneofCase.ContactApplyRequest) {
+              subBuilder.MergeFrom(ContactApplyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ContactApplyRequest = subBuilder;
+            break;
+          }
+          case 610: {
+            global::ProtocolBuffer.ContactApplyResponse subBuilder = new global::ProtocolBuffer.ContactApplyResponse();
+            if (msgCase_ == MsgOneofCase.ContactApplyResponse) {
+              subBuilder.MergeFrom(ContactApplyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ContactApplyResponse = subBuilder;
+            break;
+          }
+          case 618: {
+            global::ProtocolBuffer.ContactApplyingInfoPushMessage subBuilder = new global::ProtocolBuffer.ContactApplyingInfoPushMessage();
+            if (msgCase_ == MsgOneofCase.ContactApplyingInfoPushMessage) {
+              subBuilder.MergeFrom(ContactApplyingInfoPushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ContactApplyingInfoPushMessage = subBuilder;
+            break;
+          }
+          case 626: {
+            global::ProtocolBuffer.ContactReplyRequest subBuilder = new global::ProtocolBuffer.ContactReplyRequest();
+            if (msgCase_ == MsgOneofCase.ContactReplyRequest) {
+              subBuilder.MergeFrom(ContactReplyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ContactReplyRequest = subBuilder;
+            break;
+          }
+          case 634: {
+            global::ProtocolBuffer.ContactReplyResponse subBuilder = new global::ProtocolBuffer.ContactReplyResponse();
+            if (msgCase_ == MsgOneofCase.ContactReplyResponse) {
+              subBuilder.MergeFrom(ContactReplyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ContactReplyResponse = subBuilder;
+            break;
+          }
+          case 642: {
+            global::ProtocolBuffer.ContactReplyingInfoPushMessage subBuilder = new global::ProtocolBuffer.ContactReplyingInfoPushMessage();
+            if (msgCase_ == MsgOneofCase.ContactReplyingInfoPushMessage) {
+              subBuilder.MergeFrom(ContactReplyingInfoPushMessage);
+            }
+            input.ReadMessage(subBuilder);
+            ContactReplyingInfoPushMessage = subBuilder;
+            break;
+          }
+          case 650: {
+            global::ProtocolBuffer.ContactRemarkModifyRequest subBuilder = new global::ProtocolBuffer.ContactRemarkModifyRequest();
+            if (msgCase_ == MsgOneofCase.ContactRemarkModifyRequest) {
+              subBuilder.MergeFrom(ContactRemarkModifyRequest);
+            }
+            input.ReadMessage(subBuilder);
+            ContactRemarkModifyRequest = subBuilder;
+            break;
+          }
+          case 658: {
+            global::ProtocolBuffer.ContactRemarkModifyResponse subBuilder = new global::ProtocolBuffer.ContactRemarkModifyResponse();
+            if (msgCase_ == MsgOneofCase.ContactRemarkModifyResponse) {
+              subBuilder.MergeFrom(ContactRemarkModifyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ContactRemarkModifyResponse = subBuilder;
             break;
           }
         }
@@ -2359,10 +3884,10 @@ namespace ProtocolBuffer {
 
   }
 
-  public sealed partial class PassordModifyRequest : pb::IMessage<PassordModifyRequest> {
-    private static readonly pb::MessageParser<PassordModifyRequest> _parser = new pb::MessageParser<PassordModifyRequest>(() => new PassordModifyRequest());
+  public sealed partial class PasswordModifyRequest : pb::IMessage<PasswordModifyRequest> {
+    private static readonly pb::MessageParser<PasswordModifyRequest> _parser = new pb::MessageParser<PasswordModifyRequest>(() => new PasswordModifyRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PassordModifyRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<PasswordModifyRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2375,22 +3900,22 @@ namespace ProtocolBuffer {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyRequest() {
+    public PasswordModifyRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyRequest(PassordModifyRequest other) : this() {
+    public PasswordModifyRequest(PasswordModifyRequest other) : this() {
       mailAddress_ = other.mailAddress_;
       captcha_ = other.captcha_;
       password_ = other.password_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyRequest Clone() {
-      return new PassordModifyRequest(this);
+    public PasswordModifyRequest Clone() {
+      return new PasswordModifyRequest(this);
     }
 
     /// <summary>Field number for the "mail_address" field.</summary>
@@ -2428,11 +3953,11 @@ namespace ProtocolBuffer {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as PassordModifyRequest);
+      return Equals(other as PasswordModifyRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PassordModifyRequest other) {
+    public bool Equals(PasswordModifyRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2491,7 +4016,7 @@ namespace ProtocolBuffer {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PassordModifyRequest other) {
+    public void MergeFrom(PasswordModifyRequest other) {
       if (other == null) {
         return;
       }
@@ -2532,10 +4057,10 @@ namespace ProtocolBuffer {
 
   }
 
-  public sealed partial class PassordModifyResponse : pb::IMessage<PassordModifyResponse> {
-    private static readonly pb::MessageParser<PassordModifyResponse> _parser = new pb::MessageParser<PassordModifyResponse>(() => new PassordModifyResponse());
+  public sealed partial class PasswordModifyResponse : pb::IMessage<PasswordModifyResponse> {
+    private static readonly pb::MessageParser<PasswordModifyResponse> _parser = new pb::MessageParser<PasswordModifyResponse>(() => new PasswordModifyResponse());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PassordModifyResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<PasswordModifyResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2548,21 +4073,21 @@ namespace ProtocolBuffer {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyResponse() {
+    public PasswordModifyResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyResponse(PassordModifyResponse other) : this() {
+    public PasswordModifyResponse(PasswordModifyResponse other) : this() {
       status_ = other.status_;
       mailAddress_ = other.mailAddress_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PassordModifyResponse Clone() {
-      return new PassordModifyResponse(this);
+    public PasswordModifyResponse Clone() {
+      return new PasswordModifyResponse(this);
     }
 
     /// <summary>Field number for the "status" field.</summary>
@@ -2589,11 +4114,11 @@ namespace ProtocolBuffer {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as PassordModifyResponse);
+      return Equals(other as PasswordModifyResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PassordModifyResponse other) {
+    public bool Equals(PasswordModifyResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2643,7 +4168,7 @@ namespace ProtocolBuffer {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PassordModifyResponse other) {
+    public void MergeFrom(PasswordModifyResponse other) {
       if (other == null) {
         return;
       }
@@ -2669,6 +4194,6875 @@ namespace ProtocolBuffer {
           }
           case 18: {
             MailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UserInfoQueryRequest : pb::IMessage<UserInfoQueryRequest> {
+    private static readonly pb::MessageParser<UserInfoQueryRequest> _parser = new pb::MessageParser<UserInfoQueryRequest>(() => new UserInfoQueryRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserInfoQueryRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryRequest(UserInfoQueryRequest other) : this() {
+      mailAddress_ = other.mailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryRequest Clone() {
+      return new UserInfoQueryRequest(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserInfoQueryRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserInfoQueryRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserInfoQueryRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UserInfoQueryResponse : pb::IMessage<UserInfoQueryResponse> {
+    private static readonly pb::MessageParser<UserInfoQueryResponse> _parser = new pb::MessageParser<UserInfoQueryResponse>(() => new UserInfoQueryResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserInfoQueryResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryResponse(UserInfoQueryResponse other) : this() {
+      mailAddress_ = other.mailAddress_;
+      nickname_ = other.nickname_;
+      sex_ = other.sex_;
+      age_ = other.age_;
+      country_ = other.country_;
+      province_ = other.province_;
+      city_ = other.city_;
+      createDate_ = other.createDate_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoQueryResponse Clone() {
+      return new UserInfoQueryResponse(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 2;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "sex" field.</summary>
+    public const int SexFieldNumber = 3;
+    private string sex_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Sex {
+      get { return sex_; }
+      set {
+        sex_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "age" field.</summary>
+    public const int AgeFieldNumber = 4;
+    private int age_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Age {
+      get { return age_; }
+      set {
+        age_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "country" field.</summary>
+    public const int CountryFieldNumber = 5;
+    private string country_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Country {
+      get { return country_; }
+      set {
+        country_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "province" field.</summary>
+    public const int ProvinceFieldNumber = 6;
+    private string province_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Province {
+      get { return province_; }
+      set {
+        province_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "city" field.</summary>
+    public const int CityFieldNumber = 7;
+    private string city_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string City {
+      get { return city_; }
+      set {
+        city_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "create_date" field.</summary>
+    public const int CreateDateFieldNumber = 8;
+    private string createDate_ = "";
+    /// <summary>
+    ///format YYYY-MM-DD
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CreateDate {
+      get { return createDate_; }
+      set {
+        createDate_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserInfoQueryResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserInfoQueryResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      if (Nickname != other.Nickname) return false;
+      if (Sex != other.Sex) return false;
+      if (Age != other.Age) return false;
+      if (Country != other.Country) return false;
+      if (Province != other.Province) return false;
+      if (City != other.City) return false;
+      if (CreateDate != other.CreateDate) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (Sex.Length != 0) hash ^= Sex.GetHashCode();
+      if (Age != 0) hash ^= Age.GetHashCode();
+      if (Country.Length != 0) hash ^= Country.GetHashCode();
+      if (Province.Length != 0) hash ^= Province.GetHashCode();
+      if (City.Length != 0) hash ^= City.GetHashCode();
+      if (CreateDate.Length != 0) hash ^= CreateDate.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Nickname);
+      }
+      if (Sex.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Sex);
+      }
+      if (Age != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Age);
+      }
+      if (Country.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Country);
+      }
+      if (Province.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Province);
+      }
+      if (City.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(City);
+      }
+      if (CreateDate.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(CreateDate);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      }
+      if (Sex.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sex);
+      }
+      if (Age != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Age);
+      }
+      if (Country.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Country);
+      }
+      if (Province.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Province);
+      }
+      if (City.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(City);
+      }
+      if (CreateDate.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CreateDate);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserInfoQueryResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
+      }
+      if (other.Sex.Length != 0) {
+        Sex = other.Sex;
+      }
+      if (other.Age != 0) {
+        Age = other.Age;
+      }
+      if (other.Country.Length != 0) {
+        Country = other.Country;
+      }
+      if (other.Province.Length != 0) {
+        Province = other.Province;
+      }
+      if (other.City.Length != 0) {
+        City = other.City;
+      }
+      if (other.CreateDate.Length != 0) {
+        CreateDate = other.CreateDate;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 26: {
+            Sex = input.ReadString();
+            break;
+          }
+          case 32: {
+            Age = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            Country = input.ReadString();
+            break;
+          }
+          case 50: {
+            Province = input.ReadString();
+            break;
+          }
+          case 58: {
+            City = input.ReadString();
+            break;
+          }
+          case 66: {
+            CreateDate = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UserInfoModifyRequest : pb::IMessage<UserInfoModifyRequest> {
+    private static readonly pb::MessageParser<UserInfoModifyRequest> _parser = new pb::MessageParser<UserInfoModifyRequest>(() => new UserInfoModifyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserInfoModifyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[17]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyRequest(UserInfoModifyRequest other) : this() {
+      mailAddress_ = other.mailAddress_;
+      nickname_ = other.nickname_;
+      sex_ = other.sex_;
+      age_ = other.age_;
+      country_ = other.country_;
+      province_ = other.province_;
+      city_ = other.city_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyRequest Clone() {
+      return new UserInfoModifyRequest(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 2;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "sex" field.</summary>
+    public const int SexFieldNumber = 3;
+    private string sex_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Sex {
+      get { return sex_; }
+      set {
+        sex_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "age" field.</summary>
+    public const int AgeFieldNumber = 4;
+    private int age_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Age {
+      get { return age_; }
+      set {
+        age_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "country" field.</summary>
+    public const int CountryFieldNumber = 5;
+    private string country_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Country {
+      get { return country_; }
+      set {
+        country_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "province" field.</summary>
+    public const int ProvinceFieldNumber = 6;
+    private string province_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Province {
+      get { return province_; }
+      set {
+        province_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "city" field.</summary>
+    public const int CityFieldNumber = 7;
+    private string city_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string City {
+      get { return city_; }
+      set {
+        city_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserInfoModifyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserInfoModifyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      if (Nickname != other.Nickname) return false;
+      if (Sex != other.Sex) return false;
+      if (Age != other.Age) return false;
+      if (Country != other.Country) return false;
+      if (Province != other.Province) return false;
+      if (City != other.City) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+      if (Sex.Length != 0) hash ^= Sex.GetHashCode();
+      if (Age != 0) hash ^= Age.GetHashCode();
+      if (Country.Length != 0) hash ^= Country.GetHashCode();
+      if (Province.Length != 0) hash ^= Province.GetHashCode();
+      if (City.Length != 0) hash ^= City.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Nickname);
+      }
+      if (Sex.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Sex);
+      }
+      if (Age != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Age);
+      }
+      if (Country.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Country);
+      }
+      if (Province.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Province);
+      }
+      if (City.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(City);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+      }
+      if (Sex.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sex);
+      }
+      if (Age != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Age);
+      }
+      if (Country.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Country);
+      }
+      if (Province.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Province);
+      }
+      if (City.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(City);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserInfoModifyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
+      }
+      if (other.Sex.Length != 0) {
+        Sex = other.Sex;
+      }
+      if (other.Age != 0) {
+        Age = other.Age;
+      }
+      if (other.Country.Length != 0) {
+        Country = other.Country;
+      }
+      if (other.Province.Length != 0) {
+        Province = other.Province;
+      }
+      if (other.City.Length != 0) {
+        City = other.City;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 26: {
+            Sex = input.ReadString();
+            break;
+          }
+          case 32: {
+            Age = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            Country = input.ReadString();
+            break;
+          }
+          case 50: {
+            Province = input.ReadString();
+            break;
+          }
+          case 58: {
+            City = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UserInfoModifyResponse : pb::IMessage<UserInfoModifyResponse> {
+    private static readonly pb::MessageParser<UserInfoModifyResponse> _parser = new pb::MessageParser<UserInfoModifyResponse>(() => new UserInfoModifyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserInfoModifyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyResponse(UserInfoModifyResponse other) : this() {
+      mailAddress_ = other.mailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserInfoModifyResponse Clone() {
+      return new UserInfoModifyResponse(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserInfoModifyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserInfoModifyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserInfoModifyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactListRequest : pb::IMessage<ContactListRequest> {
+    private static readonly pb::MessageParser<ContactListRequest> _parser = new pb::MessageParser<ContactListRequest>(() => new ContactListRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactListRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListRequest(ContactListRequest other) : this() {
+      mailAddress_ = other.mailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListRequest Clone() {
+      return new ContactListRequest(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactListRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactListRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactListRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactListResponse : pb::IMessage<ContactListResponse> {
+    private static readonly pb::MessageParser<ContactListResponse> _parser = new pb::MessageParser<ContactListResponse>(() => new ContactListResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactListResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListResponse(ContactListResponse other) : this() {
+      contacts_ = other.contacts_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactListResponse Clone() {
+      return new ContactListResponse(this);
+    }
+
+    /// <summary>Field number for the "contacts" field.</summary>
+    public const int ContactsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::ProtocolBuffer.ContactListResponse.Types.Contact> _repeated_contacts_codec
+        = pb::FieldCodec.ForMessage(10, global::ProtocolBuffer.ContactListResponse.Types.Contact.Parser);
+    private readonly pbc::RepeatedField<global::ProtocolBuffer.ContactListResponse.Types.Contact> contacts_ = new pbc::RepeatedField<global::ProtocolBuffer.ContactListResponse.Types.Contact>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::ProtocolBuffer.ContactListResponse.Types.Contact> Contacts {
+      get { return contacts_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactListResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactListResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!contacts_.Equals(other.contacts_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= contacts_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      contacts_.WriteTo(output, _repeated_contacts_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += contacts_.CalculateSize(_repeated_contacts_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactListResponse other) {
+      if (other == null) {
+        return;
+      }
+      contacts_.Add(other.contacts_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            contacts_.AddEntriesFrom(input, _repeated_contacts_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ContactListResponse message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class Contact : pb::IMessage<Contact> {
+        private static readonly pb::MessageParser<Contact> _parser = new pb::MessageParser<Contact>(() => new Contact());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Contact> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::ProtocolBuffer.ContactListResponse.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact(Contact other) : this() {
+          mailAddress_ = other.mailAddress_;
+          nickname_ = other.nickname_;
+          group_ = other.group_;
+          remarks_ = other.remarks_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Contact Clone() {
+          return new Contact(this);
+        }
+
+        /// <summary>Field number for the "mail_address" field.</summary>
+        public const int MailAddressFieldNumber = 1;
+        private string mailAddress_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string MailAddress {
+          get { return mailAddress_; }
+          set {
+            mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "nickname" field.</summary>
+        public const int NicknameFieldNumber = 2;
+        private string nickname_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Nickname {
+          get { return nickname_; }
+          set {
+            nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "group" field.</summary>
+        public const int GroupFieldNumber = 3;
+        private string group_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Group {
+          get { return group_; }
+          set {
+            group_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "remarks" field.</summary>
+        public const int RemarksFieldNumber = 4;
+        private string remarks_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Remarks {
+          get { return remarks_; }
+          set {
+            remarks_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Contact);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Contact other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (MailAddress != other.MailAddress) return false;
+          if (Nickname != other.Nickname) return false;
+          if (Group != other.Group) return false;
+          if (Remarks != other.Remarks) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+          if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+          if (Group.Length != 0) hash ^= Group.GetHashCode();
+          if (Remarks.Length != 0) hash ^= Remarks.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (MailAddress.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(MailAddress);
+          }
+          if (Nickname.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Nickname);
+          }
+          if (Group.Length != 0) {
+            output.WriteRawTag(26);
+            output.WriteString(Group);
+          }
+          if (Remarks.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(Remarks);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (MailAddress.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+          }
+          if (Nickname.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+          }
+          if (Group.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Group);
+          }
+          if (Remarks.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Remarks);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Contact other) {
+          if (other == null) {
+            return;
+          }
+          if (other.MailAddress.Length != 0) {
+            MailAddress = other.MailAddress;
+          }
+          if (other.Nickname.Length != 0) {
+            Nickname = other.Nickname;
+          }
+          if (other.Group.Length != 0) {
+            Group = other.Group;
+          }
+          if (other.Remarks.Length != 0) {
+            Remarks = other.Remarks;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                MailAddress = input.ReadString();
+                break;
+              }
+              case 18: {
+                Nickname = input.ReadString();
+                break;
+              }
+              case 26: {
+                Group = input.ReadString();
+                break;
+              }
+              case 34: {
+                Remarks = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
+
+  }
+
+  public sealed partial class ContactMailCheckRequest : pb::IMessage<ContactMailCheckRequest> {
+    private static readonly pb::MessageParser<ContactMailCheckRequest> _parser = new pb::MessageParser<ContactMailCheckRequest>(() => new ContactMailCheckRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactMailCheckRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckRequest(ContactMailCheckRequest other) : this() {
+      mailAddress_ = other.mailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckRequest Clone() {
+      return new ContactMailCheckRequest(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactMailCheckRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactMailCheckRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactMailCheckRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactMailCheckResponse : pb::IMessage<ContactMailCheckResponse> {
+    private static readonly pb::MessageParser<ContactMailCheckResponse> _parser = new pb::MessageParser<ContactMailCheckResponse>(() => new ContactMailCheckResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactMailCheckResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckResponse(ContactMailCheckResponse other) : this() {
+      mailAddress_ = other.mailAddress_;
+      status_ = other.status_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactMailCheckResponse Clone() {
+      return new ContactMailCheckResponse(this);
+    }
+
+    /// <summary>Field number for the "mail_address" field.</summary>
+    public const int MailAddressFieldNumber = 1;
+    private string mailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MailAddress {
+      get { return mailAddress_; }
+      set {
+        mailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 2;
+    private bool status_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactMailCheckResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactMailCheckResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MailAddress != other.MailAddress) return false;
+      if (Status != other.Status) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MailAddress.Length != 0) hash ^= MailAddress.GetHashCode();
+      if (Status != false) hash ^= Status.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MailAddress);
+      }
+      if (Status != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Status);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MailAddress);
+      }
+      if (Status != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactMailCheckResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MailAddress.Length != 0) {
+        MailAddress = other.MailAddress;
+      }
+      if (other.Status != false) {
+        Status = other.Status;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            MailAddress = input.ReadString();
+            break;
+          }
+          case 16: {
+            Status = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactApplyRequest : pb::IMessage<ContactApplyRequest> {
+    private static readonly pb::MessageParser<ContactApplyRequest> _parser = new pb::MessageParser<ContactApplyRequest>(() => new ContactApplyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactApplyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[23]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyRequest(ContactApplyRequest other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+      additionalMsg_ = other.additionalMsg_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyRequest Clone() {
+      return new ContactApplyRequest(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "additional_msg" field.</summary>
+    public const int AdditionalMsgFieldNumber = 3;
+    private string additionalMsg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AdditionalMsg {
+      get { return additionalMsg_; }
+      set {
+        additionalMsg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactApplyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactApplyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      if (AdditionalMsg != other.AdditionalMsg) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      if (AdditionalMsg.Length != 0) hash ^= AdditionalMsg.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+      if (AdditionalMsg.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(AdditionalMsg);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      if (AdditionalMsg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AdditionalMsg);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactApplyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+      if (other.AdditionalMsg.Length != 0) {
+        AdditionalMsg = other.AdditionalMsg;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+          case 26: {
+            AdditionalMsg = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactApplyResponse : pb::IMessage<ContactApplyResponse> {
+    private static readonly pb::MessageParser<ContactApplyResponse> _parser = new pb::MessageParser<ContactApplyResponse>(() => new ContactApplyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactApplyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[24]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyResponse(ContactApplyResponse other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyResponse Clone() {
+      return new ContactApplyResponse(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactApplyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactApplyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactApplyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactReplyRequest : pb::IMessage<ContactReplyRequest> {
+    private static readonly pb::MessageParser<ContactReplyRequest> _parser = new pb::MessageParser<ContactReplyRequest>(() => new ContactReplyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactReplyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[25]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyRequest(ContactReplyRequest other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+      isAccepted_ = other.isAccepted_;
+      additionalMsg_ = other.additionalMsg_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyRequest Clone() {
+      return new ContactReplyRequest(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_accepted" field.</summary>
+    public const int IsAcceptedFieldNumber = 3;
+    private bool isAccepted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsAccepted {
+      get { return isAccepted_; }
+      set {
+        isAccepted_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "additional_msg" field.</summary>
+    public const int AdditionalMsgFieldNumber = 4;
+    private string additionalMsg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AdditionalMsg {
+      get { return additionalMsg_; }
+      set {
+        additionalMsg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactReplyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactReplyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      if (IsAccepted != other.IsAccepted) return false;
+      if (AdditionalMsg != other.AdditionalMsg) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
+      if (AdditionalMsg.Length != 0) hash ^= AdditionalMsg.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+      if (IsAccepted != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(IsAccepted);
+      }
+      if (AdditionalMsg.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(AdditionalMsg);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      if (IsAccepted != false) {
+        size += 1 + 1;
+      }
+      if (AdditionalMsg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AdditionalMsg);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactReplyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+      if (other.IsAccepted != false) {
+        IsAccepted = other.IsAccepted;
+      }
+      if (other.AdditionalMsg.Length != 0) {
+        AdditionalMsg = other.AdditionalMsg;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+          case 24: {
+            IsAccepted = input.ReadBool();
+            break;
+          }
+          case 34: {
+            AdditionalMsg = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactReplyResponse : pb::IMessage<ContactReplyResponse> {
+    private static readonly pb::MessageParser<ContactReplyResponse> _parser = new pb::MessageParser<ContactReplyResponse>(() => new ContactReplyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactReplyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[26]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyResponse(ContactReplyResponse other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyResponse Clone() {
+      return new ContactReplyResponse(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactReplyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactReplyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactReplyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactApplyingInfoPushMessage : pb::IMessage<ContactApplyingInfoPushMessage> {
+    private static readonly pb::MessageParser<ContactApplyingInfoPushMessage> _parser = new pb::MessageParser<ContactApplyingInfoPushMessage>(() => new ContactApplyingInfoPushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactApplyingInfoPushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[27]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyingInfoPushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyingInfoPushMessage(ContactApplyingInfoPushMessage other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+      ApplyerInfo = other.applyerInfo_ != null ? other.ApplyerInfo.Clone() : null;
+      additionalMsg_ = other.additionalMsg_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactApplyingInfoPushMessage Clone() {
+      return new ContactApplyingInfoPushMessage(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_info" field.</summary>
+    public const int ApplyerInfoFieldNumber = 3;
+    private global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo applyerInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo ApplyerInfo {
+      get { return applyerInfo_; }
+      set {
+        applyerInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "additional_msg" field.</summary>
+    public const int AdditionalMsgFieldNumber = 4;
+    private string additionalMsg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AdditionalMsg {
+      get { return additionalMsg_; }
+      set {
+        additionalMsg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactApplyingInfoPushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactApplyingInfoPushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      if (!object.Equals(ApplyerInfo, other.ApplyerInfo)) return false;
+      if (AdditionalMsg != other.AdditionalMsg) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      if (applyerInfo_ != null) hash ^= ApplyerInfo.GetHashCode();
+      if (AdditionalMsg.Length != 0) hash ^= AdditionalMsg.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+      if (applyerInfo_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(ApplyerInfo);
+      }
+      if (AdditionalMsg.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(AdditionalMsg);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      if (applyerInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ApplyerInfo);
+      }
+      if (AdditionalMsg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AdditionalMsg);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactApplyingInfoPushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+      if (other.applyerInfo_ != null) {
+        if (applyerInfo_ == null) {
+          applyerInfo_ = new global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo();
+        }
+        ApplyerInfo.MergeFrom(other.ApplyerInfo);
+      }
+      if (other.AdditionalMsg.Length != 0) {
+        AdditionalMsg = other.AdditionalMsg;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (applyerInfo_ == null) {
+              applyerInfo_ = new global::ProtocolBuffer.ContactApplyingInfoPushMessage.Types.ApplyerInfo();
+            }
+            input.ReadMessage(applyerInfo_);
+            break;
+          }
+          case 34: {
+            AdditionalMsg = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ContactApplyingInfoPushMessage message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class ApplyerInfo : pb::IMessage<ApplyerInfo> {
+        private static readonly pb::MessageParser<ApplyerInfo> _parser = new pb::MessageParser<ApplyerInfo>(() => new ApplyerInfo());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<ApplyerInfo> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::ProtocolBuffer.ContactApplyingInfoPushMessage.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ApplyerInfo() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ApplyerInfo(ApplyerInfo other) : this() {
+          nickname_ = other.nickname_;
+          sex_ = other.sex_;
+          age_ = other.age_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ApplyerInfo Clone() {
+          return new ApplyerInfo(this);
+        }
+
+        /// <summary>Field number for the "nickname" field.</summary>
+        public const int NicknameFieldNumber = 1;
+        private string nickname_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Nickname {
+          get { return nickname_; }
+          set {
+            nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "sex" field.</summary>
+        public const int SexFieldNumber = 2;
+        private string sex_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Sex {
+          get { return sex_; }
+          set {
+            sex_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "age" field.</summary>
+        public const int AgeFieldNumber = 3;
+        private string age_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Age {
+          get { return age_; }
+          set {
+            age_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as ApplyerInfo);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(ApplyerInfo other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Nickname != other.Nickname) return false;
+          if (Sex != other.Sex) return false;
+          if (Age != other.Age) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
+          if (Sex.Length != 0) hash ^= Sex.GetHashCode();
+          if (Age.Length != 0) hash ^= Age.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Nickname.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Nickname);
+          }
+          if (Sex.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Sex);
+          }
+          if (Age.Length != 0) {
+            output.WriteRawTag(26);
+            output.WriteString(Age);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Nickname.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
+          }
+          if (Sex.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Sex);
+          }
+          if (Age.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Age);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(ApplyerInfo other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Nickname.Length != 0) {
+            Nickname = other.Nickname;
+          }
+          if (other.Sex.Length != 0) {
+            Sex = other.Sex;
+          }
+          if (other.Age.Length != 0) {
+            Age = other.Age;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Nickname = input.ReadString();
+                break;
+              }
+              case 18: {
+                Sex = input.ReadString();
+                break;
+              }
+              case 26: {
+                Age = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
+
+  }
+
+  public sealed partial class ContactReplyingInfoPushMessage : pb::IMessage<ContactReplyingInfoPushMessage> {
+    private static readonly pb::MessageParser<ContactReplyingInfoPushMessage> _parser = new pb::MessageParser<ContactReplyingInfoPushMessage>(() => new ContactReplyingInfoPushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactReplyingInfoPushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[28]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyingInfoPushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyingInfoPushMessage(ContactReplyingInfoPushMessage other) : this() {
+      applyerMailAddress_ = other.applyerMailAddress_;
+      targetMailAddress_ = other.targetMailAddress_;
+      additionalMsg_ = other.additionalMsg_;
+      isAccepted_ = other.isAccepted_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactReplyingInfoPushMessage Clone() {
+      return new ContactReplyingInfoPushMessage(this);
+    }
+
+    /// <summary>Field number for the "applyer_mail_address" field.</summary>
+    public const int ApplyerMailAddressFieldNumber = 1;
+    private string applyerMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerMailAddress {
+      get { return applyerMailAddress_; }
+      set {
+        applyerMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "target_mail_address" field.</summary>
+    public const int TargetMailAddressFieldNumber = 2;
+    private string targetMailAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TargetMailAddress {
+      get { return targetMailAddress_; }
+      set {
+        targetMailAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "additional_msg" field.</summary>
+    public const int AdditionalMsgFieldNumber = 3;
+    private string additionalMsg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AdditionalMsg {
+      get { return additionalMsg_; }
+      set {
+        additionalMsg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_accepted" field.</summary>
+    public const int IsAcceptedFieldNumber = 4;
+    private bool isAccepted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsAccepted {
+      get { return isAccepted_; }
+      set {
+        isAccepted_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactReplyingInfoPushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactReplyingInfoPushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerMailAddress != other.ApplyerMailAddress) return false;
+      if (TargetMailAddress != other.TargetMailAddress) return false;
+      if (AdditionalMsg != other.AdditionalMsg) return false;
+      if (IsAccepted != other.IsAccepted) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerMailAddress.Length != 0) hash ^= ApplyerMailAddress.GetHashCode();
+      if (TargetMailAddress.Length != 0) hash ^= TargetMailAddress.GetHashCode();
+      if (AdditionalMsg.Length != 0) hash ^= AdditionalMsg.GetHashCode();
+      if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerMailAddress.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetMailAddress);
+      }
+      if (AdditionalMsg.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(AdditionalMsg);
+      }
+      if (IsAccepted != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsAccepted);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerMailAddress);
+      }
+      if (TargetMailAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetMailAddress);
+      }
+      if (AdditionalMsg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AdditionalMsg);
+      }
+      if (IsAccepted != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactReplyingInfoPushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerMailAddress.Length != 0) {
+        ApplyerMailAddress = other.ApplyerMailAddress;
+      }
+      if (other.TargetMailAddress.Length != 0) {
+        TargetMailAddress = other.TargetMailAddress;
+      }
+      if (other.AdditionalMsg.Length != 0) {
+        AdditionalMsg = other.AdditionalMsg;
+      }
+      if (other.IsAccepted != false) {
+        IsAccepted = other.IsAccepted;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerMailAddress = input.ReadString();
+            break;
+          }
+          case 18: {
+            TargetMailAddress = input.ReadString();
+            break;
+          }
+          case 26: {
+            AdditionalMsg = input.ReadString();
+            break;
+          }
+          case 32: {
+            IsAccepted = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactRemarkModifyRequest : pb::IMessage<ContactRemarkModifyRequest> {
+    private static readonly pb::MessageParser<ContactRemarkModifyRequest> _parser = new pb::MessageParser<ContactRemarkModifyRequest>(() => new ContactRemarkModifyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactRemarkModifyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[29]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyRequest(ContactRemarkModifyRequest other) : this() {
+      contactEmail_ = other.contactEmail_;
+      contactRemark_ = other.contactRemark_;
+      contactGroup_ = other.contactGroup_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyRequest Clone() {
+      return new ContactRemarkModifyRequest(this);
+    }
+
+    /// <summary>Field number for the "contact_email" field.</summary>
+    public const int ContactEmailFieldNumber = 1;
+    private string contactEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ContactEmail {
+      get { return contactEmail_; }
+      set {
+        contactEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "contact_remark" field.</summary>
+    public const int ContactRemarkFieldNumber = 2;
+    private string contactRemark_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ContactRemark {
+      get { return contactRemark_; }
+      set {
+        contactRemark_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "contact_group" field.</summary>
+    public const int ContactGroupFieldNumber = 3;
+    private string contactGroup_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ContactGroup {
+      get { return contactGroup_; }
+      set {
+        contactGroup_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactRemarkModifyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactRemarkModifyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ContactEmail != other.ContactEmail) return false;
+      if (ContactRemark != other.ContactRemark) return false;
+      if (ContactGroup != other.ContactGroup) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ContactEmail.Length != 0) hash ^= ContactEmail.GetHashCode();
+      if (ContactRemark.Length != 0) hash ^= ContactRemark.GetHashCode();
+      if (ContactGroup.Length != 0) hash ^= ContactGroup.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ContactEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ContactEmail);
+      }
+      if (ContactRemark.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ContactRemark);
+      }
+      if (ContactGroup.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ContactGroup);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ContactEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactEmail);
+      }
+      if (ContactRemark.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactRemark);
+      }
+      if (ContactGroup.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactGroup);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactRemarkModifyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ContactEmail.Length != 0) {
+        ContactEmail = other.ContactEmail;
+      }
+      if (other.ContactRemark.Length != 0) {
+        ContactRemark = other.ContactRemark;
+      }
+      if (other.ContactGroup.Length != 0) {
+        ContactGroup = other.ContactGroup;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ContactEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            ContactRemark = input.ReadString();
+            break;
+          }
+          case 26: {
+            ContactGroup = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ContactRemarkModifyResponse : pb::IMessage<ContactRemarkModifyResponse> {
+    private static readonly pb::MessageParser<ContactRemarkModifyResponse> _parser = new pb::MessageParser<ContactRemarkModifyResponse>(() => new ContactRemarkModifyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ContactRemarkModifyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[30]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyResponse(ContactRemarkModifyResponse other) : this() {
+      userEmail_ = other.userEmail_;
+      contactEmail_ = other.contactEmail_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContactRemarkModifyResponse Clone() {
+      return new ContactRemarkModifyResponse(this);
+    }
+
+    /// <summary>Field number for the "user_email" field.</summary>
+    public const int UserEmailFieldNumber = 1;
+    private string userEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserEmail {
+      get { return userEmail_; }
+      set {
+        userEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "contact_email" field.</summary>
+    public const int ContactEmailFieldNumber = 2;
+    private string contactEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ContactEmail {
+      get { return contactEmail_; }
+      set {
+        contactEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ContactRemarkModifyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ContactRemarkModifyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserEmail != other.UserEmail) return false;
+      if (ContactEmail != other.ContactEmail) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserEmail.Length != 0) hash ^= UserEmail.GetHashCode();
+      if (ContactEmail.Length != 0) hash ^= ContactEmail.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(UserEmail);
+      }
+      if (ContactEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ContactEmail);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserEmail);
+      }
+      if (ContactEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ContactEmail);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ContactRemarkModifyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserEmail.Length != 0) {
+        UserEmail = other.UserEmail;
+      }
+      if (other.ContactEmail.Length != 0) {
+        ContactEmail = other.ContactEmail;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            UserEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            ContactEmail = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatMessage : pb::IMessage<ChatMessage> {
+    private static readonly pb::MessageParser<ChatMessage> _parser = new pb::MessageParser<ChatMessage>(() => new ChatMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[31]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatMessage(ChatMessage other) : this() {
+      senderEmail_ = other.senderEmail_;
+      dateTime_ = other.dateTime_;
+      msgContents_ = other.msgContents_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatMessage Clone() {
+      return new ChatMessage(this);
+    }
+
+    /// <summary>Field number for the "sender_email" field.</summary>
+    public const int SenderEmailFieldNumber = 1;
+    private string senderEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderEmail {
+      get { return senderEmail_; }
+      set {
+        senderEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "date_time" field.</summary>
+    public const int DateTimeFieldNumber = 2;
+    private string dateTime_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DateTime {
+      get { return dateTime_; }
+      set {
+        dateTime_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "msg_contents" field.</summary>
+    public const int MsgContentsFieldNumber = 3;
+    private string msgContents_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string MsgContents {
+      get { return msgContents_; }
+      set {
+        msgContents_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SenderEmail != other.SenderEmail) return false;
+      if (DateTime != other.DateTime) return false;
+      if (MsgContents != other.MsgContents) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SenderEmail.Length != 0) hash ^= SenderEmail.GetHashCode();
+      if (DateTime.Length != 0) hash ^= DateTime.GetHashCode();
+      if (MsgContents.Length != 0) hash ^= MsgContents.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SenderEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SenderEmail);
+      }
+      if (DateTime.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(DateTime);
+      }
+      if (MsgContents.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(MsgContents);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SenderEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderEmail);
+      }
+      if (DateTime.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DateTime);
+      }
+      if (MsgContents.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MsgContents);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SenderEmail.Length != 0) {
+        SenderEmail = other.SenderEmail;
+      }
+      if (other.DateTime.Length != 0) {
+        DateTime = other.DateTime;
+      }
+      if (other.MsgContents.Length != 0) {
+        MsgContents = other.MsgContents;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            SenderEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            DateTime = input.ReadString();
+            break;
+          }
+          case 26: {
+            MsgContents = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatPrivateMessageRequest : pb::IMessage<ChatPrivateMessageRequest> {
+    private static readonly pb::MessageParser<ChatPrivateMessageRequest> _parser = new pb::MessageParser<ChatPrivateMessageRequest>(() => new ChatPrivateMessageRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatPrivateMessageRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[32]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageRequest(ChatPrivateMessageRequest other) : this() {
+      Message = other.message_ != null ? other.Message.Clone() : null;
+      reciiverEmail_ = other.reciiverEmail_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageRequest Clone() {
+      return new ChatPrivateMessageRequest(this);
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 1;
+    private global::ProtocolBuffer.ChatMessage message_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatMessage Message {
+      get { return message_; }
+      set {
+        message_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "reciiver_email" field.</summary>
+    public const int ReciiverEmailFieldNumber = 2;
+    private string reciiverEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ReciiverEmail {
+      get { return reciiverEmail_; }
+      set {
+        reciiverEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatPrivateMessageRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatPrivateMessageRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Message, other.Message)) return false;
+      if (ReciiverEmail != other.ReciiverEmail) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (message_ != null) hash ^= Message.GetHashCode();
+      if (ReciiverEmail.Length != 0) hash ^= ReciiverEmail.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (message_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Message);
+      }
+      if (ReciiverEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ReciiverEmail);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
+      }
+      if (ReciiverEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReciiverEmail);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatPrivateMessageRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.message_ != null) {
+        if (message_ == null) {
+          message_ = new global::ProtocolBuffer.ChatMessage();
+        }
+        Message.MergeFrom(other.Message);
+      }
+      if (other.ReciiverEmail.Length != 0) {
+        ReciiverEmail = other.ReciiverEmail;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (message_ == null) {
+              message_ = new global::ProtocolBuffer.ChatMessage();
+            }
+            input.ReadMessage(message_);
+            break;
+          }
+          case 18: {
+            ReciiverEmail = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatPrivateMessageResponse : pb::IMessage<ChatPrivateMessageResponse> {
+    private static readonly pb::MessageParser<ChatPrivateMessageResponse> _parser = new pb::MessageParser<ChatPrivateMessageResponse>(() => new ChatPrivateMessageResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatPrivateMessageResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[33]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageResponse(ChatPrivateMessageResponse other) : this() {
+      senderEmail_ = other.senderEmail_;
+      receiverEmail_ = other.receiverEmail_;
+      status_ = other.status_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessageResponse Clone() {
+      return new ChatPrivateMessageResponse(this);
+    }
+
+    /// <summary>Field number for the "sender_email" field.</summary>
+    public const int SenderEmailFieldNumber = 1;
+    private string senderEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderEmail {
+      get { return senderEmail_; }
+      set {
+        senderEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "receiver_email" field.</summary>
+    public const int ReceiverEmailFieldNumber = 2;
+    private string receiverEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ReceiverEmail {
+      get { return receiverEmail_; }
+      set {
+        receiverEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 3;
+    private bool status_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatPrivateMessageResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatPrivateMessageResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SenderEmail != other.SenderEmail) return false;
+      if (ReceiverEmail != other.ReceiverEmail) return false;
+      if (Status != other.Status) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SenderEmail.Length != 0) hash ^= SenderEmail.GetHashCode();
+      if (ReceiverEmail.Length != 0) hash ^= ReceiverEmail.GetHashCode();
+      if (Status != false) hash ^= Status.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SenderEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SenderEmail);
+      }
+      if (ReceiverEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ReceiverEmail);
+      }
+      if (Status != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Status);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SenderEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderEmail);
+      }
+      if (ReceiverEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReceiverEmail);
+      }
+      if (Status != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatPrivateMessageResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SenderEmail.Length != 0) {
+        SenderEmail = other.SenderEmail;
+      }
+      if (other.ReceiverEmail.Length != 0) {
+        ReceiverEmail = other.ReceiverEmail;
+      }
+      if (other.Status != false) {
+        Status = other.Status;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            SenderEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            ReceiverEmail = input.ReadString();
+            break;
+          }
+          case 24: {
+            Status = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatPrivateMessagePushMessage : pb::IMessage<ChatPrivateMessagePushMessage> {
+    private static readonly pb::MessageParser<ChatPrivateMessagePushMessage> _parser = new pb::MessageParser<ChatPrivateMessagePushMessage>(() => new ChatPrivateMessagePushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatPrivateMessagePushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[34]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushMessage(ChatPrivateMessagePushMessage other) : this() {
+      senderEmail_ = other.senderEmail_;
+      receiverEmail_ = other.receiverEmail_;
+      Message = other.message_ != null ? other.Message.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushMessage Clone() {
+      return new ChatPrivateMessagePushMessage(this);
+    }
+
+    /// <summary>Field number for the "sender_email" field.</summary>
+    public const int SenderEmailFieldNumber = 1;
+    private string senderEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderEmail {
+      get { return senderEmail_; }
+      set {
+        senderEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "receiver_email" field.</summary>
+    public const int ReceiverEmailFieldNumber = 2;
+    private string receiverEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ReceiverEmail {
+      get { return receiverEmail_; }
+      set {
+        receiverEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 3;
+    private global::ProtocolBuffer.ChatMessage message_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatMessage Message {
+      get { return message_; }
+      set {
+        message_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatPrivateMessagePushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatPrivateMessagePushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SenderEmail != other.SenderEmail) return false;
+      if (ReceiverEmail != other.ReceiverEmail) return false;
+      if (!object.Equals(Message, other.Message)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SenderEmail.Length != 0) hash ^= SenderEmail.GetHashCode();
+      if (ReceiverEmail.Length != 0) hash ^= ReceiverEmail.GetHashCode();
+      if (message_ != null) hash ^= Message.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SenderEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SenderEmail);
+      }
+      if (ReceiverEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ReceiverEmail);
+      }
+      if (message_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SenderEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderEmail);
+      }
+      if (ReceiverEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReceiverEmail);
+      }
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatPrivateMessagePushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SenderEmail.Length != 0) {
+        SenderEmail = other.SenderEmail;
+      }
+      if (other.ReceiverEmail.Length != 0) {
+        ReceiverEmail = other.ReceiverEmail;
+      }
+      if (other.message_ != null) {
+        if (message_ == null) {
+          message_ = new global::ProtocolBuffer.ChatMessage();
+        }
+        Message.MergeFrom(other.Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            SenderEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            ReceiverEmail = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (message_ == null) {
+              message_ = new global::ProtocolBuffer.ChatMessage();
+            }
+            input.ReadMessage(message_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///TODO:
+  /// </summary>
+  public sealed partial class ChatPrivateMessagePushAckMessage : pb::IMessage<ChatPrivateMessagePushAckMessage> {
+    private static readonly pb::MessageParser<ChatPrivateMessagePushAckMessage> _parser = new pb::MessageParser<ChatPrivateMessagePushAckMessage>(() => new ChatPrivateMessagePushAckMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatPrivateMessagePushAckMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[35]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushAckMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushAckMessage(ChatPrivateMessagePushAckMessage other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatPrivateMessagePushAckMessage Clone() {
+      return new ChatPrivateMessagePushAckMessage(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatPrivateMessagePushAckMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatPrivateMessagePushAckMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatPrivateMessagePushAckMessage other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatGroupMessageRequest : pb::IMessage<ChatGroupMessageRequest> {
+    private static readonly pb::MessageParser<ChatGroupMessageRequest> _parser = new pb::MessageParser<ChatGroupMessageRequest>(() => new ChatGroupMessageRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatGroupMessageRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[36]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageRequest(ChatGroupMessageRequest other) : this() {
+      groupID_ = other.groupID_;
+      Message = other.message_ != null ? other.Message.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageRequest Clone() {
+      return new ChatGroupMessageRequest(this);
+    }
+
+    /// <summary>Field number for the "group_ID" field.</summary>
+    public const int GroupIDFieldNumber = 1;
+    private int groupID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupID {
+      get { return groupID_; }
+      set {
+        groupID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private global::ProtocolBuffer.ChatMessage message_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatMessage Message {
+      get { return message_; }
+      set {
+        message_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatGroupMessageRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatGroupMessageRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupID != other.GroupID) return false;
+      if (!object.Equals(Message, other.Message)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupID != 0) hash ^= GroupID.GetHashCode();
+      if (message_ != null) hash ^= Message.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupID);
+      }
+      if (message_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupID);
+      }
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatGroupMessageRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupID != 0) {
+        GroupID = other.GroupID;
+      }
+      if (other.message_ != null) {
+        if (message_ == null) {
+          message_ = new global::ProtocolBuffer.ChatMessage();
+        }
+        Message.MergeFrom(other.Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (message_ == null) {
+              message_ = new global::ProtocolBuffer.ChatMessage();
+            }
+            input.ReadMessage(message_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatGroupMessageResponse : pb::IMessage<ChatGroupMessageResponse> {
+    private static readonly pb::MessageParser<ChatGroupMessageResponse> _parser = new pb::MessageParser<ChatGroupMessageResponse>(() => new ChatGroupMessageResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatGroupMessageResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[37]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageResponse(ChatGroupMessageResponse other) : this() {
+      groupID_ = other.groupID_;
+      senderEmail_ = other.senderEmail_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessageResponse Clone() {
+      return new ChatGroupMessageResponse(this);
+    }
+
+    /// <summary>Field number for the "group_ID" field.</summary>
+    public const int GroupIDFieldNumber = 1;
+    private int groupID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupID {
+      get { return groupID_; }
+      set {
+        groupID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sender_email" field.</summary>
+    public const int SenderEmailFieldNumber = 2;
+    private string senderEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderEmail {
+      get { return senderEmail_; }
+      set {
+        senderEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatGroupMessageResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatGroupMessageResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupID != other.GroupID) return false;
+      if (SenderEmail != other.SenderEmail) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupID != 0) hash ^= GroupID.GetHashCode();
+      if (SenderEmail.Length != 0) hash ^= SenderEmail.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupID);
+      }
+      if (SenderEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SenderEmail);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupID);
+      }
+      if (SenderEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderEmail);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatGroupMessageResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupID != 0) {
+        GroupID = other.GroupID;
+      }
+      if (other.SenderEmail.Length != 0) {
+        SenderEmail = other.SenderEmail;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            SenderEmail = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChatGroupMessagePushMessage : pb::IMessage<ChatGroupMessagePushMessage> {
+    private static readonly pb::MessageParser<ChatGroupMessagePushMessage> _parser = new pb::MessageParser<ChatGroupMessagePushMessage>(() => new ChatGroupMessagePushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatGroupMessagePushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[38]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushMessage(ChatGroupMessagePushMessage other) : this() {
+      groupID_ = other.groupID_;
+      senderEmail_ = other.senderEmail_;
+      Message = other.message_ != null ? other.Message.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushMessage Clone() {
+      return new ChatGroupMessagePushMessage(this);
+    }
+
+    /// <summary>Field number for the "group_ID" field.</summary>
+    public const int GroupIDFieldNumber = 1;
+    private int groupID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupID {
+      get { return groupID_; }
+      set {
+        groupID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sender_email" field.</summary>
+    public const int SenderEmailFieldNumber = 2;
+    private string senderEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SenderEmail {
+      get { return senderEmail_; }
+      set {
+        senderEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 3;
+    private global::ProtocolBuffer.ChatMessage message_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ProtocolBuffer.ChatMessage Message {
+      get { return message_; }
+      set {
+        message_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatGroupMessagePushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatGroupMessagePushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupID != other.GroupID) return false;
+      if (SenderEmail != other.SenderEmail) return false;
+      if (!object.Equals(Message, other.Message)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupID != 0) hash ^= GroupID.GetHashCode();
+      if (SenderEmail.Length != 0) hash ^= SenderEmail.GetHashCode();
+      if (message_ != null) hash ^= Message.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupID);
+      }
+      if (SenderEmail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SenderEmail);
+      }
+      if (message_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupID);
+      }
+      if (SenderEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderEmail);
+      }
+      if (message_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Message);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatGroupMessagePushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupID != 0) {
+        GroupID = other.GroupID;
+      }
+      if (other.SenderEmail.Length != 0) {
+        SenderEmail = other.SenderEmail;
+      }
+      if (other.message_ != null) {
+        if (message_ == null) {
+          message_ = new global::ProtocolBuffer.ChatMessage();
+        }
+        Message.MergeFrom(other.Message);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupID = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            SenderEmail = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (message_ == null) {
+              message_ = new global::ProtocolBuffer.ChatMessage();
+            }
+            input.ReadMessage(message_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///TODO:
+  /// </summary>
+  public sealed partial class ChatGroupMessagePushAckMessage : pb::IMessage<ChatGroupMessagePushAckMessage> {
+    private static readonly pb::MessageParser<ChatGroupMessagePushAckMessage> _parser = new pb::MessageParser<ChatGroupMessagePushAckMessage>(() => new ChatGroupMessagePushAckMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatGroupMessagePushAckMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[39]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushAckMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushAckMessage(ChatGroupMessagePushAckMessage other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatGroupMessagePushAckMessage Clone() {
+      return new ChatGroupMessagePushAckMessage(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatGroupMessagePushAckMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatGroupMessagePushAckMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatGroupMessagePushAckMessage other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupInfo : pb::IMessage<GroupInfo> {
+    private static readonly pb::MessageParser<GroupInfo> _parser = new pb::MessageParser<GroupInfo>(() => new GroupInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[40]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupInfo(GroupInfo other) : this() {
+      groupId_ = other.groupId_;
+      groupName_ = other.groupName_;
+      groupIntro_ = other.groupIntro_;
+      groupMemberNumber_ = other.groupMemberNumber_;
+      creatorEmail_ = other.creatorEmail_;
+      members_ = other.members_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupInfo Clone() {
+      return new GroupInfo(this);
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 1;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_intro" field.</summary>
+    public const int GroupIntroFieldNumber = 3;
+    private string groupIntro_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupIntro {
+      get { return groupIntro_; }
+      set {
+        groupIntro_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_member_number" field.</summary>
+    public const int GroupMemberNumberFieldNumber = 4;
+    private int groupMemberNumber_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupMemberNumber {
+      get { return groupMemberNumber_; }
+      set {
+        groupMemberNumber_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "creator_email" field.</summary>
+    public const int CreatorEmailFieldNumber = 5;
+    private string creatorEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CreatorEmail {
+      get { return creatorEmail_; }
+      set {
+        creatorEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "members" field.</summary>
+    public const int MembersFieldNumber = 6;
+    private static readonly pb::FieldCodec<global::ProtocolBuffer.GroupInfo.Types.Member> _repeated_members_codec
+        = pb::FieldCodec.ForMessage(50, global::ProtocolBuffer.GroupInfo.Types.Member.Parser);
+    private readonly pbc::RepeatedField<global::ProtocolBuffer.GroupInfo.Types.Member> members_ = new pbc::RepeatedField<global::ProtocolBuffer.GroupInfo.Types.Member>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::ProtocolBuffer.GroupInfo.Types.Member> Members {
+      get { return members_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupId != other.GroupId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (GroupIntro != other.GroupIntro) return false;
+      if (GroupMemberNumber != other.GroupMemberNumber) return false;
+      if (CreatorEmail != other.CreatorEmail) return false;
+      if(!members_.Equals(other.members_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (GroupIntro.Length != 0) hash ^= GroupIntro.GetHashCode();
+      if (GroupMemberNumber != 0) hash ^= GroupMemberNumber.GetHashCode();
+      if (CreatorEmail.Length != 0) hash ^= CreatorEmail.GetHashCode();
+      hash ^= members_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (GroupIntro.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(GroupIntro);
+      }
+      if (GroupMemberNumber != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(GroupMemberNumber);
+      }
+      if (CreatorEmail.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(CreatorEmail);
+      }
+      members_.WriteTo(output, _repeated_members_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (GroupIntro.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupIntro);
+      }
+      if (GroupMemberNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupMemberNumber);
+      }
+      if (CreatorEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CreatorEmail);
+      }
+      size += members_.CalculateSize(_repeated_members_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.GroupIntro.Length != 0) {
+        GroupIntro = other.GroupIntro;
+      }
+      if (other.GroupMemberNumber != 0) {
+        GroupMemberNumber = other.GroupMemberNumber;
+      }
+      if (other.CreatorEmail.Length != 0) {
+        CreatorEmail = other.CreatorEmail;
+      }
+      members_.Add(other.members_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            GroupIntro = input.ReadString();
+            break;
+          }
+          case 32: {
+            GroupMemberNumber = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            CreatorEmail = input.ReadString();
+            break;
+          }
+          case 50: {
+            members_.AddEntriesFrom(input, _repeated_members_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the GroupInfo message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class Member : pb::IMessage<Member> {
+        private static readonly pb::MessageParser<Member> _parser = new pb::MessageParser<Member>(() => new Member());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Member> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::ProtocolBuffer.GroupInfo.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Member() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Member(Member other) : this() {
+          memberEmail_ = other.memberEmail_;
+          memberNickname_ = other.memberNickname_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Member Clone() {
+          return new Member(this);
+        }
+
+        /// <summary>Field number for the "member_email" field.</summary>
+        public const int MemberEmailFieldNumber = 1;
+        private string memberEmail_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string MemberEmail {
+          get { return memberEmail_; }
+          set {
+            memberEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "member_nickname" field.</summary>
+        public const int MemberNicknameFieldNumber = 2;
+        private string memberNickname_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string MemberNickname {
+          get { return memberNickname_; }
+          set {
+            memberNickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Member);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Member other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (MemberEmail != other.MemberEmail) return false;
+          if (MemberNickname != other.MemberNickname) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (MemberEmail.Length != 0) hash ^= MemberEmail.GetHashCode();
+          if (MemberNickname.Length != 0) hash ^= MemberNickname.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (MemberEmail.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(MemberEmail);
+          }
+          if (MemberNickname.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(MemberNickname);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (MemberEmail.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(MemberEmail);
+          }
+          if (MemberNickname.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(MemberNickname);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Member other) {
+          if (other == null) {
+            return;
+          }
+          if (other.MemberEmail.Length != 0) {
+            MemberEmail = other.MemberEmail;
+          }
+          if (other.MemberNickname.Length != 0) {
+            MemberNickname = other.MemberNickname;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                MemberEmail = input.ReadString();
+                break;
+              }
+              case 18: {
+                MemberNickname = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
+
+  }
+
+  public sealed partial class GroupSearchRequest : pb::IMessage<GroupSearchRequest> {
+    private static readonly pb::MessageParser<GroupSearchRequest> _parser = new pb::MessageParser<GroupSearchRequest>(() => new GroupSearchRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupSearchRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[41]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchRequest(GroupSearchRequest other) : this() {
+      groupName_ = other.groupName_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchRequest Clone() {
+      return new GroupSearchRequest(this);
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 1;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupSearchRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupSearchRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupName != other.GroupName) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GroupName);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupSearchRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            GroupName = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupSearchResponse : pb::IMessage<GroupSearchResponse> {
+    private static readonly pb::MessageParser<GroupSearchResponse> _parser = new pb::MessageParser<GroupSearchResponse>(() => new GroupSearchResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupSearchResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[42]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchResponse(GroupSearchResponse other) : this() {
+      groupName_ = other.groupName_;
+      results_ = other.results_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupSearchResponse Clone() {
+      return new GroupSearchResponse(this);
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 1;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "results" field.</summary>
+    public const int ResultsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::ProtocolBuffer.GroupInfo> _repeated_results_codec
+        = pb::FieldCodec.ForMessage(18, global::ProtocolBuffer.GroupInfo.Parser);
+    private readonly pbc::RepeatedField<global::ProtocolBuffer.GroupInfo> results_ = new pbc::RepeatedField<global::ProtocolBuffer.GroupInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::ProtocolBuffer.GroupInfo> Results {
+      get { return results_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupSearchResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupSearchResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupName != other.GroupName) return false;
+      if(!results_.Equals(other.results_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      hash ^= results_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GroupName);
+      }
+      results_.WriteTo(output, _repeated_results_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      size += results_.CalculateSize(_repeated_results_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupSearchResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      results_.Add(other.results_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 18: {
+            results_.AddEntriesFrom(input, _repeated_results_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupCreateApplyRequest : pb::IMessage<GroupCreateApplyRequest> {
+    private static readonly pb::MessageParser<GroupCreateApplyRequest> _parser = new pb::MessageParser<GroupCreateApplyRequest>(() => new GroupCreateApplyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupCreateApplyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[43]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyRequest(GroupCreateApplyRequest other) : this() {
+      creatorEmail_ = other.creatorEmail_;
+      groupName_ = other.groupName_;
+      groupIntro_ = other.groupIntro_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyRequest Clone() {
+      return new GroupCreateApplyRequest(this);
+    }
+
+    /// <summary>Field number for the "creator_email" field.</summary>
+    public const int CreatorEmailFieldNumber = 1;
+    private string creatorEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CreatorEmail {
+      get { return creatorEmail_; }
+      set {
+        creatorEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_intro" field.</summary>
+    public const int GroupIntroFieldNumber = 3;
+    private string groupIntro_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupIntro {
+      get { return groupIntro_; }
+      set {
+        groupIntro_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupCreateApplyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupCreateApplyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CreatorEmail != other.CreatorEmail) return false;
+      if (GroupName != other.GroupName) return false;
+      if (GroupIntro != other.GroupIntro) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CreatorEmail.Length != 0) hash ^= CreatorEmail.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (GroupIntro.Length != 0) hash ^= GroupIntro.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (CreatorEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(CreatorEmail);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (GroupIntro.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(GroupIntro);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (CreatorEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CreatorEmail);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (GroupIntro.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupIntro);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupCreateApplyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CreatorEmail.Length != 0) {
+        CreatorEmail = other.CreatorEmail;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.GroupIntro.Length != 0) {
+        GroupIntro = other.GroupIntro;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            CreatorEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            GroupIntro = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupCreateApplyResponse : pb::IMessage<GroupCreateApplyResponse> {
+    private static readonly pb::MessageParser<GroupCreateApplyResponse> _parser = new pb::MessageParser<GroupCreateApplyResponse>(() => new GroupCreateApplyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupCreateApplyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[44]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyResponse(GroupCreateApplyResponse other) : this() {
+      groupId_ = other.groupId_;
+      groupName_ = other.groupName_;
+      groupCreatorEmail_ = other.groupCreatorEmail_;
+      groupIntro_ = other.groupIntro_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupCreateApplyResponse Clone() {
+      return new GroupCreateApplyResponse(this);
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 1;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_creator_email" field.</summary>
+    public const int GroupCreatorEmailFieldNumber = 3;
+    private string groupCreatorEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupCreatorEmail {
+      get { return groupCreatorEmail_; }
+      set {
+        groupCreatorEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_intro" field.</summary>
+    public const int GroupIntroFieldNumber = 4;
+    private string groupIntro_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupIntro {
+      get { return groupIntro_; }
+      set {
+        groupIntro_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupCreateApplyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupCreateApplyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupId != other.GroupId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (GroupCreatorEmail != other.GroupCreatorEmail) return false;
+      if (GroupIntro != other.GroupIntro) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (GroupCreatorEmail.Length != 0) hash ^= GroupCreatorEmail.GetHashCode();
+      if (GroupIntro.Length != 0) hash ^= GroupIntro.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (GroupCreatorEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(GroupCreatorEmail);
+      }
+      if (GroupIntro.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(GroupIntro);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (GroupCreatorEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupCreatorEmail);
+      }
+      if (GroupIntro.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupIntro);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupCreateApplyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.GroupCreatorEmail.Length != 0) {
+        GroupCreatorEmail = other.GroupCreatorEmail;
+      }
+      if (other.GroupIntro.Length != 0) {
+        GroupIntro = other.GroupIntro;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            GroupCreatorEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            GroupIntro = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInApplyRequest : pb::IMessage<GroupParticipateInApplyRequest> {
+    private static readonly pb::MessageParser<GroupParticipateInApplyRequest> _parser = new pb::MessageParser<GroupParticipateInApplyRequest>(() => new GroupParticipateInApplyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInApplyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[45]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyRequest(GroupParticipateInApplyRequest other) : this() {
+      applyerEmail_ = other.applyerEmail_;
+      gourpId_ = other.gourpId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyRequest Clone() {
+      return new GroupParticipateInApplyRequest(this);
+    }
+
+    /// <summary>Field number for the "applyer_email" field.</summary>
+    public const int ApplyerEmailFieldNumber = 1;
+    private string applyerEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerEmail {
+      get { return applyerEmail_; }
+      set {
+        applyerEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "gourp_id" field.</summary>
+    public const int GourpIdFieldNumber = 2;
+    private int gourpId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GourpId {
+      get { return gourpId_; }
+      set {
+        gourpId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInApplyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInApplyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerEmail != other.ApplyerEmail) return false;
+      if (GourpId != other.GourpId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerEmail.Length != 0) hash ^= ApplyerEmail.GetHashCode();
+      if (GourpId != 0) hash ^= GourpId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerEmail);
+      }
+      if (GourpId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(GourpId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerEmail);
+      }
+      if (GourpId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GourpId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInApplyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerEmail.Length != 0) {
+        ApplyerEmail = other.ApplyerEmail;
+      }
+      if (other.GourpId != 0) {
+        GourpId = other.GourpId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerEmail = input.ReadString();
+            break;
+          }
+          case 16: {
+            GourpId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInApplyResponse : pb::IMessage<GroupParticipateInApplyResponse> {
+    private static readonly pb::MessageParser<GroupParticipateInApplyResponse> _parser = new pb::MessageParser<GroupParticipateInApplyResponse>(() => new GroupParticipateInApplyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInApplyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[46]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyResponse(GroupParticipateInApplyResponse other) : this() {
+      applyerEmail_ = other.applyerEmail_;
+      groupId_ = other.groupId_;
+      status_ = other.status_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyResponse Clone() {
+      return new GroupParticipateInApplyResponse(this);
+    }
+
+    /// <summary>Field number for the "applyer_email" field.</summary>
+    public const int ApplyerEmailFieldNumber = 1;
+    private string applyerEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerEmail {
+      get { return applyerEmail_; }
+      set {
+        applyerEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 2;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 3;
+    private bool status_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInApplyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInApplyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ApplyerEmail != other.ApplyerEmail) return false;
+      if (GroupId != other.GroupId) return false;
+      if (Status != other.Status) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ApplyerEmail.Length != 0) hash ^= ApplyerEmail.GetHashCode();
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (Status != false) hash ^= Status.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ApplyerEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(ApplyerEmail);
+      }
+      if (GroupId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(GroupId);
+      }
+      if (Status != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Status);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ApplyerEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerEmail);
+      }
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (Status != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInApplyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ApplyerEmail.Length != 0) {
+        ApplyerEmail = other.ApplyerEmail;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.Status != false) {
+        Status = other.Status;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            ApplyerEmail = input.ReadString();
+            break;
+          }
+          case 16: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Status = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInApplyPushMessage : pb::IMessage<GroupParticipateInApplyPushMessage> {
+    private static readonly pb::MessageParser<GroupParticipateInApplyPushMessage> _parser = new pb::MessageParser<GroupParticipateInApplyPushMessage>(() => new GroupParticipateInApplyPushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInApplyPushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[47]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyPushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyPushMessage(GroupParticipateInApplyPushMessage other) : this() {
+      gourpId_ = other.gourpId_;
+      groupName_ = other.groupName_;
+      applyerEmail_ = other.applyerEmail_;
+      applyerNickname_ = other.applyerNickname_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInApplyPushMessage Clone() {
+      return new GroupParticipateInApplyPushMessage(this);
+    }
+
+    /// <summary>Field number for the "gourp_id" field.</summary>
+    public const int GourpIdFieldNumber = 1;
+    private int gourpId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GourpId {
+      get { return gourpId_; }
+      set {
+        gourpId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_email" field.</summary>
+    public const int ApplyerEmailFieldNumber = 3;
+    private string applyerEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerEmail {
+      get { return applyerEmail_; }
+      set {
+        applyerEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_nickname" field.</summary>
+    public const int ApplyerNicknameFieldNumber = 4;
+    private string applyerNickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerNickname {
+      get { return applyerNickname_; }
+      set {
+        applyerNickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInApplyPushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInApplyPushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GourpId != other.GourpId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (ApplyerEmail != other.ApplyerEmail) return false;
+      if (ApplyerNickname != other.ApplyerNickname) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GourpId != 0) hash ^= GourpId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (ApplyerEmail.Length != 0) hash ^= ApplyerEmail.GetHashCode();
+      if (ApplyerNickname.Length != 0) hash ^= ApplyerNickname.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GourpId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GourpId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ApplyerNickname);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GourpId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GourpId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerNickname);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInApplyPushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GourpId != 0) {
+        GourpId = other.GourpId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.ApplyerEmail.Length != 0) {
+        ApplyerEmail = other.ApplyerEmail;
+      }
+      if (other.ApplyerNickname.Length != 0) {
+        ApplyerNickname = other.ApplyerNickname;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GourpId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            ApplyerEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            ApplyerNickname = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInReplyRequest : pb::IMessage<GroupParticipateInReplyRequest> {
+    private static readonly pb::MessageParser<GroupParticipateInReplyRequest> _parser = new pb::MessageParser<GroupParticipateInReplyRequest>(() => new GroupParticipateInReplyRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInReplyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[48]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyRequest(GroupParticipateInReplyRequest other) : this() {
+      groupId_ = other.groupId_;
+      groupName_ = other.groupName_;
+      applyerEmail_ = other.applyerEmail_;
+      applyerNickname_ = other.applyerNickname_;
+      isAccepted_ = other.isAccepted_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyRequest Clone() {
+      return new GroupParticipateInReplyRequest(this);
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 1;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_email" field.</summary>
+    public const int ApplyerEmailFieldNumber = 3;
+    private string applyerEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerEmail {
+      get { return applyerEmail_; }
+      set {
+        applyerEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_nickname" field.</summary>
+    public const int ApplyerNicknameFieldNumber = 4;
+    private string applyerNickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerNickname {
+      get { return applyerNickname_; }
+      set {
+        applyerNickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_accepted" field.</summary>
+    public const int IsAcceptedFieldNumber = 5;
+    private bool isAccepted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsAccepted {
+      get { return isAccepted_; }
+      set {
+        isAccepted_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInReplyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInReplyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupId != other.GroupId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (ApplyerEmail != other.ApplyerEmail) return false;
+      if (ApplyerNickname != other.ApplyerNickname) return false;
+      if (IsAccepted != other.IsAccepted) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (ApplyerEmail.Length != 0) hash ^= ApplyerEmail.GetHashCode();
+      if (ApplyerNickname.Length != 0) hash ^= ApplyerNickname.GetHashCode();
+      if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ApplyerNickname);
+      }
+      if (IsAccepted != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsAccepted);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerNickname);
+      }
+      if (IsAccepted != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInReplyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.ApplyerEmail.Length != 0) {
+        ApplyerEmail = other.ApplyerEmail;
+      }
+      if (other.ApplyerNickname.Length != 0) {
+        ApplyerNickname = other.ApplyerNickname;
+      }
+      if (other.IsAccepted != false) {
+        IsAccepted = other.IsAccepted;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            ApplyerEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            ApplyerNickname = input.ReadString();
+            break;
+          }
+          case 40: {
+            IsAccepted = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInReplyResponse : pb::IMessage<GroupParticipateInReplyResponse> {
+    private static readonly pb::MessageParser<GroupParticipateInReplyResponse> _parser = new pb::MessageParser<GroupParticipateInReplyResponse>(() => new GroupParticipateInReplyResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInReplyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[49]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyResponse(GroupParticipateInReplyResponse other) : this() {
+      groupId_ = other.groupId_;
+      groupName_ = other.groupName_;
+      applyerEmail_ = other.applyerEmail_;
+      applyerNickname_ = other.applyerNickname_;
+      isAccepted_ = other.isAccepted_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyResponse Clone() {
+      return new GroupParticipateInReplyResponse(this);
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 1;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_email" field.</summary>
+    public const int ApplyerEmailFieldNumber = 3;
+    private string applyerEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerEmail {
+      get { return applyerEmail_; }
+      set {
+        applyerEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "applyer_nickname" field.</summary>
+    public const int ApplyerNicknameFieldNumber = 4;
+    private string applyerNickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ApplyerNickname {
+      get { return applyerNickname_; }
+      set {
+        applyerNickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_accepted" field.</summary>
+    public const int IsAcceptedFieldNumber = 5;
+    private bool isAccepted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsAccepted {
+      get { return isAccepted_; }
+      set {
+        isAccepted_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInReplyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInReplyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupId != other.GroupId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (ApplyerEmail != other.ApplyerEmail) return false;
+      if (ApplyerNickname != other.ApplyerNickname) return false;
+      if (IsAccepted != other.IsAccepted) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (ApplyerEmail.Length != 0) hash ^= ApplyerEmail.GetHashCode();
+      if (ApplyerNickname.Length != 0) hash ^= ApplyerNickname.GetHashCode();
+      if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ApplyerNickname);
+      }
+      if (IsAccepted != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsAccepted);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (ApplyerEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerEmail);
+      }
+      if (ApplyerNickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplyerNickname);
+      }
+      if (IsAccepted != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInReplyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.ApplyerEmail.Length != 0) {
+        ApplyerEmail = other.ApplyerEmail;
+      }
+      if (other.ApplyerNickname.Length != 0) {
+        ApplyerNickname = other.ApplyerNickname;
+      }
+      if (other.IsAccepted != false) {
+        IsAccepted = other.IsAccepted;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            ApplyerEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            ApplyerNickname = input.ReadString();
+            break;
+          }
+          case 40: {
+            IsAccepted = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupParticipateInReplyPushMessage : pb::IMessage<GroupParticipateInReplyPushMessage> {
+    private static readonly pb::MessageParser<GroupParticipateInReplyPushMessage> _parser = new pb::MessageParser<GroupParticipateInReplyPushMessage>(() => new GroupParticipateInReplyPushMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupParticipateInReplyPushMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[50]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyPushMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyPushMessage(GroupParticipateInReplyPushMessage other) : this() {
+      groupId_ = other.groupId_;
+      groupName_ = other.groupName_;
+      isAccepted_ = other.isAccepted_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupParticipateInReplyPushMessage Clone() {
+      return new GroupParticipateInReplyPushMessage(this);
+    }
+
+    /// <summary>Field number for the "group_id" field.</summary>
+    public const int GroupIdFieldNumber = 1;
+    private int groupId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GroupId {
+      get { return groupId_; }
+      set {
+        groupId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "group_name" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_accepted" field.</summary>
+    public const int IsAcceptedFieldNumber = 3;
+    private bool isAccepted_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsAccepted {
+      get { return isAccepted_; }
+      set {
+        isAccepted_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupParticipateInReplyPushMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupParticipateInReplyPushMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GroupId != other.GroupId) return false;
+      if (GroupName != other.GroupName) return false;
+      if (IsAccepted != other.IsAccepted) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GroupId != 0) hash ^= GroupId.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (IsAccepted != false) hash ^= IsAccepted.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GroupId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (IsAccepted != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(IsAccepted);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GroupId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GroupId);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (IsAccepted != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupParticipateInReplyPushMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GroupId != 0) {
+        GroupId = other.GroupId;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.IsAccepted != false) {
+        IsAccepted = other.IsAccepted;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            GroupId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 24: {
+            IsAccepted = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupListRequest : pb::IMessage<GroupListRequest> {
+    private static readonly pb::MessageParser<GroupListRequest> _parser = new pb::MessageParser<GroupListRequest>(() => new GroupListRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupListRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[51]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListRequest(GroupListRequest other) : this() {
+      userEmail_ = other.userEmail_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListRequest Clone() {
+      return new GroupListRequest(this);
+    }
+
+    /// <summary>Field number for the "user_email" field.</summary>
+    public const int UserEmailFieldNumber = 1;
+    private string userEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserEmail {
+      get { return userEmail_; }
+      set {
+        userEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupListRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupListRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserEmail != other.UserEmail) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserEmail.Length != 0) hash ^= UserEmail.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(UserEmail);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserEmail);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupListRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserEmail.Length != 0) {
+        UserEmail = other.UserEmail;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            UserEmail = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GroupListResponse : pb::IMessage<GroupListResponse> {
+    private static readonly pb::MessageParser<GroupListResponse> _parser = new pb::MessageParser<GroupListResponse>(() => new GroupListResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GroupListResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ProtocolBuffer.ProtoMessageReflection.Descriptor.MessageTypes[52]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListResponse(GroupListResponse other) : this() {
+      userEmail_ = other.userEmail_;
+      groups_ = other.groups_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GroupListResponse Clone() {
+      return new GroupListResponse(this);
+    }
+
+    /// <summary>Field number for the "user_email" field.</summary>
+    public const int UserEmailFieldNumber = 1;
+    private string userEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserEmail {
+      get { return userEmail_; }
+      set {
+        userEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "groups" field.</summary>
+    public const int GroupsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::ProtocolBuffer.GroupInfo> _repeated_groups_codec
+        = pb::FieldCodec.ForMessage(18, global::ProtocolBuffer.GroupInfo.Parser);
+    private readonly pbc::RepeatedField<global::ProtocolBuffer.GroupInfo> groups_ = new pbc::RepeatedField<global::ProtocolBuffer.GroupInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::ProtocolBuffer.GroupInfo> Groups {
+      get { return groups_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GroupListResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GroupListResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserEmail != other.UserEmail) return false;
+      if(!groups_.Equals(other.groups_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserEmail.Length != 0) hash ^= UserEmail.GetHashCode();
+      hash ^= groups_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserEmail.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(UserEmail);
+      }
+      groups_.WriteTo(output, _repeated_groups_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserEmail);
+      }
+      size += groups_.CalculateSize(_repeated_groups_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GroupListResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserEmail.Length != 0) {
+        UserEmail = other.UserEmail;
+      }
+      groups_.Add(other.groups_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            UserEmail = input.ReadString();
+            break;
+          }
+          case 18: {
+            groups_.AddEntriesFrom(input, _repeated_groups_codec);
             break;
           }
         }

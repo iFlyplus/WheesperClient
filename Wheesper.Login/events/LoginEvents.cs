@@ -20,4 +20,6 @@ namespace Wheesper.Login.events
     public class PWModifyPWBackEvent : CompositePresentationEvent<object> { };
     public class PWModifyCaptchaNextEvent : CompositePresentationEvent<object> { };
     public class PWModifyCaptchaBackEvent : CompositePresentationEvent<object> { };
+
+
 }

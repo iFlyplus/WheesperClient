@@ -138,12 +138,52 @@ namespace Wheesper.Messaging
                 case ProtoMessage.MsgOneofCase.PasswordModifyCaptchaResponse:
                     eventAggregator.GetEvent<MsgPasswordModifyCaptchaResponseEvent>().Publish(message);
                     break;
-                case ProtoMessage.MsgOneofCase.PassordModifyRequest:
+                case ProtoMessage.MsgOneofCase.PasswordModifyRequest:
                     break;
-                case ProtoMessage.MsgOneofCase.PassordModifyResponse:
+                case ProtoMessage.MsgOneofCase.PasswordModifyResponse:
                     eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Publish(message);
                     break;
-
+                case ProtoMessage.MsgOneofCase.UserInfoQueryRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.UserInfoQueryResponse:
+                    eventAggregator.GetEvent<MsgUserInfoQueryResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.UserInfoModifyRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.UserInfoModifyResponse:
+                    eventAggregator.GetEvent<MsgUserInfoModifyResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactListRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactListResponse:
+                    eventAggregator.GetEvent<MsgContactListResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactMailCheckRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactMailCheckResponse:
+                    eventAggregator.GetEvent<MsgContactMailCheckResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactApplyRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactApplyResponse:
+                    eventAggregator.GetEvent<MsgContactApplyResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactReplyRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactReplyResponse:
+                    eventAggregator.GetEvent<MsgContactReplyResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactApplyingInfoPushMessage:
+                    eventAggregator.GetEvent<MsgContactApplyingInfoPushMessageEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactReplyingInfoPushMessage:
+                    eventAggregator.GetEvent<MsgContactReplyingInfoPushMessageEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactRemarkModifyRequest:
+                    break;
+                case ProtoMessage.MsgOneofCase.ContactRemarkModifyResponse:
+                    eventAggregator.GetEvent<MsgContactRemarkModifyResponseEvent>().Publish(message);
+                    break;
                 default:
                     break;
             }
@@ -152,6 +192,7 @@ namespace Wheesper.Messaging
         public void SendMessage(ProtoMessage message)
         {
             Debug.WriteLine("request type: {0}", message.MsgCase);
+            Debug.WriteLine(message);
             byte[] bufferForMessage = message.ToByteArray();
             int messageLength = bufferForMessage.Length;
             byte[] bufferForLength = BitConverter.GetBytes(messageLength);

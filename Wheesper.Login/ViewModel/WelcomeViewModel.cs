@@ -2,9 +2,13 @@
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.Unity;
-using Wheesper.Infrastructure.events;
+using Wheesper.Login.events;
 
 using System.Diagnostics;
+using Wheesper.Infrastructure.events;
+using Wheesper.Login.Model;
+using Wheesper.Messaging.events;
+using ProtocolBuffer;
 
 namespace Wheesper.Login.ViewModel
 {
@@ -13,27 +17,54 @@ namespace Wheesper.Login.ViewModel
         #region private member
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
+        private LoginModel loginModel = null;
         #endregion private member
 
-        #region Constructor
+        #region Constructor & deconstructor
         public WelcomeViewModel(IUnityContainer container)
         {
-            Debug.WriteLine("SignupViewModel constructor");
+            Debug.WriteLine("WelcomeViewModel constructor");
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
+            loginModel = this.container.Resolve<LoginModel>();
+
+            subevent();
         }
+
+        ~WelcomeViewModel()
+        {
+            Debug.WriteLine("WelcomeViewModel deconstructor");
+        }
+        #endregion Constructor & deconstructor
 
         public void Initialize(string welcomeMessage_1, string welcomeMessage_2)
         {
             WelcomeMessage_1 = welcomeMessage_1;
             WelcomeMessage_2 = welcomeMessage_2;
         }
-        #endregion Constructor
+        public void SetNickname(string name)
+        {
+            Nickname = name;
+        }
+
+        #region helper functoin
+        private void subevent()
+        {
+            Debug.WriteLine("WelcomeViewModel subscribe event");
+            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler, true);
+        }
+        #endregion helper function
 
         #region properties
+        private string nickname = null;
         private string welcomeMessage_1;
         private string welcomeMessage_2;
 
+        public string Nickname
+        {
+            get { return nickname; }
+            set { nickname = value; }
+        }
         public string WelcomeMessage_1
         {
             get
@@ -76,10 +107,38 @@ namespace Wheesper.Login.ViewModel
         }
         #endregion Command
 
-        #region event handler
+        #region Command Delegate Method
         private void start()
         {
-            eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
+            // when user click start, send a signin request
+            loginModel.sendSigninRequest();
+            // eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
+        }
+        #endregion Command Delegate Method
+
+        #region event handler
+
+        private void SigninResponseEventHandler(ProtoMessage message)
+        {
+            if (loginModel.currentState != State.SIGNUP)
+            {
+                return;
+            }
+            bool status = message.SigninResponse.Status;
+            Debug.WriteLine(status);
+            if (status)
+            {
+                // sign in successfully
+                Debug.WriteLine("enter wheesper from signup scenory");
+                eventAggregator.GetEvent<LoginEvent>().Publish(loginModel.email);
+                eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
+            }
+            else
+            {
+                // clear the pw and promt the user to try again or reset pw
+                //Password = null;
+                //PromtInfo = pwWrongMessage;
+            }
         }
         #endregion event handler
     }

@@ -59,6 +59,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -78,10 +80,14 @@
     <Compile Include="LoginModule.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CongratulationViewModel.cs" />
     <Compile Include="ViewModel\PWModifyViewModel.cs" />
     <Compile Include="ViewModel\SigninViewModel.cs" />
     <Compile Include="ViewModel\SignupViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Compile Include="View\CongratulationView.xaml.cs">
+      <DependentUpon>CongratulationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PWModifyCaptchaView.xaml.cs">
       <DependentUpon>PWModifyCaptchaView.xaml</DependentUpon>
     </Compile>
@@ -110,18 +116,11 @@
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Wheesper.Infrastructure\Wheesper.Infrastructure.csproj">
-      <Project>{a22310c9-6ec5-439c-a5d8-9ee672f10daa}</Project>
-      <Name>Wheesper.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Page Include="View\CongratulationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PWModifyCaptchaView.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -156,8 +155,18 @@
     </Page>
     <Page Include="View\WelcomeView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wheesper.Infrastructure\Wheesper.Infrastructure.csproj">
+      <Project>{a22310c9-6ec5-439c-a5d8-9ee672f10daa}</Project>
+      <Name>Wheesper.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,1 +1,0 @@
-https://blogs.msdn.microsoft.com/wpfsldesigner/2010/06/30/sample-data-in-the-wpf-and-silverlight-designer/

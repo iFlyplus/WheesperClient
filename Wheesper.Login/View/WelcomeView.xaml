@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Login.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             xmlns:prism="http://www.codeplex.com/prism"
+             mc:Ignorable="d" Background="White" >
+    
+    <Grid Height="283">
+        <TextBlock  TextWrapping="Wrap" 
+                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="61,20,61,0" Text="{Binding Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
+        <Button x:Name="SigninMailNext_BTN" Content="下一步" HorizontalAlignment="Center" Margin="401,180,50,0"   
+                    Command="{Binding StartCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Width="140" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

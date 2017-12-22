@@ -38,6 +38,7 @@ namespace Wheesper.Login
         private SignupDetailsView signupDetailsView = null;
         private SignupCaptchaView signupCaptchaView = null;
         private WelcomeView welcomeView = null;
+        private CongratulationView congratulationView = null;
         #endregion view
 
         #region Constructor & Deconstructor
@@ -51,19 +52,18 @@ namespace Wheesper.Login
 
             mainRegion = regionManager.Regions[RegionNames.MainRegion];
 
+
             if (signinMailView == null)
             {
                 signinMailView = (SigninMailView)container.Resolve(typeof(SigninMailView));
                 var viewModel = (SigninViewModel)container.Resolve(typeof(SigninViewModel));
                 signinMailView.DataContext = viewModel;
             }
-
             loadView(signinMailView);
 
             // subscribe event to setup communication betwween different viewModel
             subEvent();
         }
-
         ~LoginController()
         {
             Debug.WriteLine("LoginController Destructor.");
@@ -93,6 +93,8 @@ namespace Wheesper.Login
             eventAggregator.GetEvent<PWModifyPWBackEvent>().Subscribe(pwModifyPWBackEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<PWModifyCaptchaNextEvent>().Subscribe(pwModifyCaptchaNextEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<PWModifyCaptchaBackEvent>().Subscribe(pwModifyCaptchaBackEventHandler, ThreadOption.UIThread, true);
+
+            //eventAggregator.GetEvent<ShowWheesperViewEvent>().Subscribe(showWheesperViewEventHandler, ThreadOption.UIThread, true);
         }
 
         private void loadView(object view)
@@ -121,6 +123,7 @@ namespace Wheesper.Login
         private void signinPWNextEventHandler(object o)
         {
             Debug.WriteLine("SigninPWNextEvent hadler");
+            Debug.WriteLine("enter wheesper from signin scenory");
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Publish(0);
         }
         private void signinPWBackEventHandler(string email)
@@ -195,6 +198,7 @@ namespace Wheesper.Login
                 welcomeMessage_1 = welcomeMessage_1.Insert(welcomeMessage_1.Length, name);
                 string welcomeMessage_2 = " Welcome to Wheesper!";
                 viewModel.Initialize(welcomeMessage_1, welcomeMessage_2);
+                viewModel.SetNickname(name);
 
                 welcomeView.DataContext = viewModel;
             }
@@ -208,7 +212,7 @@ namespace Wheesper.Login
 
         private void pwModifyMailNextEventHandler(object o)
         {
-            Debug.WriteLine(" hadler");
+            Debug.WriteLine("PWModifyMailNextEventHandler hadler");
             if (pwModifyPWView == null)
             {
                 pwModifyPWView = (PWModifyPWView)container.Resolve(typeof(PWModifyPWView));
@@ -241,24 +245,36 @@ namespace Wheesper.Login
         private void pwModifyCaptchaNextEventHandler(object o)
         {
             Debug.WriteLine("PWModifyCaptchaNextEvent hadler");
-            if (welcomeView == null)
+            if (congratulationView == null)
             {
-                welcomeView = (WelcomeView)container.Resolve(typeof(WelcomeView));
-                var viewModel = (WelcomeViewModel)container.Resolve(typeof(WelcomeViewModel));
+                congratulationView = (CongratulationView)container.Resolve(typeof(CongratulationView));
+                var viewModel = (CongratulationViewModel)container.Resolve(typeof(CongratulationViewModel));
 
                 string welcomeMessage_1 = "Congratulations!";
                 string welcomeMessage_2 = " Password reset successful";
                 viewModel.Initialize(welcomeMessage_1, welcomeMessage_2);
 
-                welcomeView.DataContext = viewModel;
+                congratulationView.DataContext = viewModel;
             }
-            loadView(welcomeView);
+
+            loadView(congratulationView);
         }
         private void pwModifyCaptchaBackEventHandler(object o)
         {
             Debug.WriteLine("PWModifyCaptchaBackEvent hadler");
             loadView(pwModifyPWView);
         }
+        /*
+        private void showWheesperViewEventHandler(object o)
+        {
+            Debug.WriteLine("ShowWheesperViewEvent hadler");
+            if (wheesperView == null)
+            {
+                wheesperView = (WheesperView)container.Resolve(typeof(WheesperView));
+            }
+            loadView(wheesperView);
+            eventAggregator.GetEvent<LoginSucceedEvent>().Publish(0);
+        }*/
         #endregion event handler
     }
 }

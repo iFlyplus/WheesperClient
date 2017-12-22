@@ -8,6 +8,7 @@ using Wheesper.Login.Model;
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
 using System.Diagnostics;
+using Wheesper.Infrastructure.events;
 
 namespace Wheesper.Login.ViewModel
 {
@@ -26,12 +27,12 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
-            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler, true);
-            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler, true);
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
+            eventAggregator.GetEvent<MsgSignupInfoResponseEvent>().Subscribe(SignupInfoResponseEventHandler);
         }
         #endregion helper function
 
-        #region Constructor
+        #region Constructor & deconstructor
         public SignupViewModel(IUnityContainer container, LoginModel loginModel)
         {
             Debug.WriteLine("SignupViewModel constructor");
@@ -41,7 +42,12 @@ namespace Wheesper.Login.ViewModel
 
             subevent();
         }
-        #endregion Constructor
+
+        ~SignupViewModel()
+        {
+            Debug.WriteLine("SignupViewModel deconstructor");
+        }
+        #endregion Constructor & deconstructor
 
         #region helper variable
         private string emailInvalidMessage = "The email address you entered isn's vaild.";
@@ -276,6 +282,9 @@ namespace Wheesper.Login.ViewModel
 
         private void signupInfoBack()
         {
+            loginModel.currentState = State.SIGNIN;
+            Debug.Write("Client State change to ");
+            Debug.WriteLine(loginModel.currentState.ToString());
             eventAggregator.GetEvent<SignupInfoBackEvent>().Publish(0);
         }
         private bool canSignupInfoBack()
@@ -338,31 +347,27 @@ namespace Wheesper.Login.ViewModel
             bool status = message.SignupMailResponse.Status;
             if (status)
             {
-                Debug.WriteLine("mail can be used");
                 // TODO: exit animate_2 and enter signup details view
                 eventAggregator.GetEvent<SignupInfoNextEvent>().Publish(0);
             }
             else
             {
-                Debug.WriteLine("mail can not be used");
                 // TODO: exit animate_2 and return signup info view
                 PromtInfo = emailexistMessage.Insert(0, Email);
             }
         }
         private void SignupInfoResponseEventHandler(ProtoMessage message)
         {
-
-            Debug.WriteLine(message == null);
             bool status = message.SignupInfoResponse.Status;
             if (status)
             {
-                Debug.WriteLine("Captcha is correct, and signup success");
                 // TODO: exit animate_1 and enter welcome
+                //loginModel.sendSigninRequest();
+                //eventAggregator.GetEvent<LoginEvent>().Publish(Email);
                 eventAggregator.GetEvent<SignupCaptchaNextEvent>().Publish(Nickname);
             }
             else
             {
-                Debug.WriteLine("Captcha is incorrect, and signup failed");
                 // TODO: exit animate_1 and return signup captcha view
                 PromtInfo = captchaWrongMessage;
             }

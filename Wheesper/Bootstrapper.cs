@@ -40,13 +40,14 @@ namespace Wheesper.Desktop
         {
             var moduleCatalog = new ModuleCatalog();
 
-            //Type testModule = typeof(MessagingTest);
+            //Type testModule = typeof(TestModule);
             //moduleCatalog.AddModule(new ModuleInfo() { ModuleName = testModule.Name, ModuleType = testModule.AssemblyQualifiedName });
 
             Type loginModule = typeof(LoginModule);
             moduleCatalog.AddModule(new ModuleInfo() { ModuleName = loginModule.Name, ModuleType = loginModule.AssemblyQualifiedName });
             Type chatModule = typeof(ChatModule);
             moduleCatalog.AddModule(new ModuleInfo() { ModuleName = chatModule.Name, ModuleType = chatModule.AssemblyQualifiedName });
+
             return moduleCatalog;
         }
         #endregion overrire method

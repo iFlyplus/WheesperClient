@@ -20,6 +20,7 @@ namespace Wheesper.Login.Model
         private Regex pwRgx = null;
         private Regex captchaRgx = null;
 
+        public State currentState = State.SIGNIN;
         #region user info
         public string email = null;
         public string password = null;
@@ -49,7 +50,7 @@ namespace Wheesper.Login.Model
 
         public LoginModel(IUnityContainer container)
         {
-            Debug.WriteLine("LoginModel");
+            Debug.WriteLine("LoginModel constructor");
             this.container = container;
             messagingService = this.container.Resolve<IMessagingService>();
 
@@ -121,12 +122,17 @@ namespace Wheesper.Login.Model
         public void sendPWModifyRequest()
         {
             ProtoMessage message = new ProtoMessage();
-            message.PassordModifyRequest = new PassordModifyRequest();
-            message.PassordModifyRequest.MailAddress = email;
-            message.PassordModifyRequest.Password = email;
-            message.PassordModifyRequest.Captcha = captcha;
+            message.PasswordModifyRequest = new PasswordModifyRequest();
+            message.PasswordModifyRequest.MailAddress = email;
+            message.PasswordModifyRequest.Password = password;
+            message.PasswordModifyRequest.Captcha = captcha;
             messagingService.SendMessage(message);
         }
         #endregion login module function
+    }
+
+    public enum State
+    {
+        SIGNIN, SIGNUP, RESETPW
     }
 }

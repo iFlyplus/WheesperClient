@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
 using System.Diagnostics;
+using Wheesper.Infrastructure.events;
 
 namespace Wheesper.Login.ViewModel
 {
@@ -183,7 +184,7 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
-            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler);
+            eventAggregator.GetEvent<MsgSigninResponseEvent>().Subscribe(SigninResponseEventHandler, true);
         }
         
         private void prepare()
@@ -194,7 +195,7 @@ namespace Wheesper.Login.ViewModel
         }
         #endregion helper function
 
-        #region Constructor
+        #region Constructor & deconstructor
         public SigninViewModel(IUnityContainer container, LoginModel loginModel)
         {
             Debug.WriteLine("SigninViewModel constructor");
@@ -204,7 +205,11 @@ namespace Wheesper.Login.ViewModel
 
             subevent();
         }
-        #endregion Constructor
+        ~SigninViewModel()
+        {
+            Debug.WriteLine("SigninViewModel deconstructor");
+        }
+        #endregion Constructor & deconstructor
 
         #region Command Delegate Method
         private void signinMailNext()
@@ -256,6 +261,9 @@ namespace Wheesper.Login.ViewModel
 
         private void createAccount()
         {
+            loginModel.currentState = State.SIGNUP;
+            Debug.Write("Client State change to ");
+            Debug.WriteLine(loginModel.currentState.ToString());
             eventAggregator.GetEvent<CreateAccountEvent>().Publish(0);
         }
         private bool canCreateAccount()
@@ -265,6 +273,9 @@ namespace Wheesper.Login.ViewModel
 
         private void forgetPW()
         {
+            loginModel.currentState = State.RESETPW;
+            Debug.Write("Client State change to ");
+            Debug.WriteLine(loginModel.currentState.ToString());
             eventAggregator.GetEvent<ForgetPWEvent>().Publish(Email);
         }
         private bool canForgetPW()
@@ -276,11 +287,16 @@ namespace Wheesper.Login.ViewModel
         #region event handler
         private void SigninResponseEventHandler(ProtoMessage message)
         {
+            if (loginModel.currentState != State.SIGNIN)
+            {
+                return;
+            }
             bool status = message.SigninResponse.Status;
             Debug.WriteLine(status);
             if (status)
             {
                 // sign in successfully
+                eventAggregator.GetEvent<LoginEvent>().Publish(Email);
                 eventAggregator.GetEvent<SigninPWNextEvent>().Publish(0);
             }
             else

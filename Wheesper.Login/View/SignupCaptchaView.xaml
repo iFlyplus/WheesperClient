@@ -4,16 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Login.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" Margin="114,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="输入"/><Run Text="验证码"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="95,103,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="后退" HorizontalAlignment="Left" Margin="49,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="下一步" HorizontalAlignment="Left" Margin="191,191,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SignupCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="29,54,0,0" TextWrapping="Wrap" Text="我们刚向" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="82,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" Text="{Binding UIInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="196,54,0,0" TextWrapping="Wrap" Text="发送了一个代码" VerticalAlignment="Top"/>
+             mc:Ignorable="d" Background="White" >
 
+    <Grid>
+        <TextBox BorderThickness="0,0,0,1" Height="35" FontSize="28" HorizontalAlignment="Center" Margin="0,180,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="430" Style="{DynamicResource Input Box}"/>
+        <Button Content="后退" HorizontalAlignment="Center" Margin="82,240,373,0" VerticalAlignment="Top" Width="140" Command="{Binding SignupCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
+        <Button Content="下一步" HorizontalAlignment="Center" Margin="372,240,83,0" VerticalAlignment="Top" Width="140" Command="{Binding SignupCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
+        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="输入验证码" VerticalAlignment="Top"
+            HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="63,80,444,0" TextWrapping="Wrap" Text="我们刚向" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="156,80,179,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Text="{Binding Email, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource Text Body}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="414,80,49,0" TextWrapping="Wrap" Text="发送了验证码" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
     </Grid>
 </UserControl>

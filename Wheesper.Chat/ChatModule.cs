@@ -2,21 +2,37 @@
 using Microsoft.Practices.Unity;
 
 using System.Diagnostics;
+using Wheesper.Chat.ViewModel;
 
 namespace Wheesper.Chat
 {
     public class ChatModule : IModule
     {
-        private IUnityContainer container = null;
-        private ChatController controller = null;
+        #region private member
+        IUnityContainer container = null;
+        ChatController controller = null;
+        #endregion private member
 
         #region constructor
         public ChatModule(IUnityContainer container)
         {
             Debug.WriteLine("ChatModule constructor");
             this.container = container;
+
+            RegisterInstance();
         }
         #endregion constructor
+
+        # region Private Method
+        private void RegisterInstance()
+        {
+            //LoginModel loginModel = container.Resolve<LoginModel>();
+            //container.RegisterInstance(typeof(LoginModel), loginModel);
+
+            ChatViewModel chatViewModel = container.Resolve<ChatViewModel>();
+            container.RegisterInstance(typeof(ChatViewModel), chatViewModel);
+        }
+        # endregion Private Method
 
         #region IModule method
         public void Initialize()

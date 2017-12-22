@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Login.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="#FFF7F3F3">
-        <TextBlock HorizontalAlignment="Left" Margin="115,25,0,0" TextWrapping="Wrap" Text="重新设置密码" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,61,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,137,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="取消" HorizontalAlignment="Left" Margin="46,208,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Command="{Binding PWModifyPWModifyBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="下一步" HorizontalAlignment="Left" Margin="182,208,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PWModifyPWNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="80,103,0,0" TextWrapping="Wrap" Text="最少8个字符，区分大小写" VerticalAlignment="Top"/>
+             mc:Ignorable="d" Background="White" >
+
+    <Grid>
+        <TextBox x:Name="pwd" FontSize="28" Foreground="Transparent" Margin="0,180,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="430" BorderThickness="0,0,0,1" Height="35" Style="{DynamicResource PasswordBox}" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="取消" HorizontalAlignment="Center" Margin="20,240,311,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyPWBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=Default}" Style="{DynamicResource ButtonStyle1}"/>
+        <!--                                                                                                                                                            Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged--> 
+            <Button Content="下一步" HorizontalAlignment="Center" Margin="310,240,21,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyPWNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
+        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="重新设置密码" VerticalAlignment="Top"
+            HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
 
     </Grid>
 </UserControl>
