@@ -31,6 +31,9 @@ namespace Wheesper.Chat
 
             ChatViewModel chatViewModel = container.Resolve<ChatViewModel>();
             container.RegisterInstance(typeof(ChatViewModel), chatViewModel);
+
+            SolveContactApplyViewModel solveContactApplyViewModel = container.Resolve<SolveContactApplyViewModel>();
+            container.RegisterInstance(typeof(SolveContactApplyViewModel), solveContactApplyViewModel);
         }
         # endregion Private Method
 

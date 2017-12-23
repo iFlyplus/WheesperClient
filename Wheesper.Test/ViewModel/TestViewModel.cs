@@ -19,10 +19,11 @@ namespace Wheesper.Test.ViewModel
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         #endregion private menber
+        private bool isInit = true;
 
         public ListCollectionView Customers { get; private set; }
 
-
+        ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
         #region Constructor
         public TestViewModel(IUnityContainer container)
         {
@@ -30,32 +31,39 @@ namespace Wheesper.Test.ViewModel
             this.container = container;
             eventAggregator = this.container.Resolve<IEventAggregator>();
 
-            ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
+            Customers = new ListCollectionView(customers);
             customers.Add(new Customer("A", 1));
             customers.Add(new Customer("B", 2));
             customers.Add(new Customer("C", 3));
-            Customers = new ListCollectionView(customers);
             Customers.CurrentChanged += SelectedItemChanged;
         }
         #endregion Constructor
 
         private void SelectedItemChanged(object sender, EventArgs e)
         {
+            if (isInit == true)
+            {
+                isInit = false;
+                return;
+            }
             Customer current = Customers.CurrentItem as Customer;
             Debug.WriteLine(current.Name);
             Debug.WriteLine(current.Age);
+            //Customers.AddNewItem(current);
+            customers.Add(new Customer(current.Name, current.Age));
         }
     }
 
-    public class Customer
+    public class Customer:NotificationObject
     {
         public string Name { get; private set; }
-        public int Age { get; private set; }
+        public int Age { get { return age; } private set { age = value; } }
 
+        private int age;
         public Customer(string name, int age)
         {
             Name = name;
-            Age = age;
+            this.age = age;
         }
     }
 }

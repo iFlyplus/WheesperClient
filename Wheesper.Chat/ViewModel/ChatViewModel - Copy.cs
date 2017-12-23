@@ -15,7 +15,6 @@ using Wheesper.Chat.Model;
 using Wheesper.Infrastructure.events;
 using Wheesper.Messaging.events;
 using ProtocolBuffer;
-using Wheesper.Login.events;
 
 namespace Wheesper.Chat.ViewModel
 {
@@ -45,8 +44,7 @@ namespace Wheesper.Chat.ViewModel
                 currentUser = value;
             }
         }
-        //public ListCollectionView ContactsList { get; private set; }
-        public ObservableCollection<ContactList> Root = new ObservableCollection<ContactList>();
+        public ListCollectionView ContactsList { get; private set; }
         public string SearchBox_UserEMail
         {
             get { return searchBox_UserEMail; }
@@ -69,8 +67,8 @@ namespace Wheesper.Chat.ViewModel
         public ListCollectionView SystemMessages { get; private set; }
 
         private UserInfo currentUser = new UserInfo();
-        //private ObservableCollection<Contact> contactsList = new ObservableCollection<Contact>();
-        private string searchBox_UserEMail = "441@qq.com";
+        private ObservableCollection<Contact> contactsList = new ObservableCollection<Contact>();
+        private string searchBox_UserEMail = "440@qq.com";
         private string addContactDiscription = "Hello";
         private ObservableCollection<SystemMessage> systemMessages = new ObservableCollection<SystemMessage>();
         #endregion properties
@@ -107,34 +105,10 @@ namespace Wheesper.Chat.ViewModel
             }
             private set { }
         }
-        public DelegateCommand ShowSystemMessageCommond
-        {
-            get
-            {
-                if (showSystemMessageCommond == null)
-                    showSystemMessageCommond = new DelegateCommand(showSystemMessage, canShowsystemMessage);
-                return showSystemMessageCommond;
-            }
-            private set { }
-        }
-        public DelegateCommand CloseSystemMessageCommond
-        {
-            get
-            {
-                if (closeSystemMessageCommond == null)
-                    closeSystemMessageCommond = new DelegateCommand(closeSystemMessage, canCloseSystemMessage);
-                return closeSystemMessageCommond;
-            }
-            private set { }
-        }
-
         //private DelegateCommand 
         private DelegateCommand searchUserCommond = null;
         private DelegateCommand addContactRequestCommond = null;
         private DelegateCommand modifyContactInfoCommond = null;
-        private DelegateCommand showSystemMessageCommond = null;
-        private DelegateCommand closeSystemMessageCommond = null;
-
         #endregion Commond
 
         #region Command Delegate Method
@@ -184,18 +158,8 @@ namespace Wheesper.Chat.ViewModel
 
         private void showSystemMessage()
         {
-            eventAggregator.GetEvent<ShowSystemMessageViewEvent>().Publish(0);
         }
         private bool canShowsystemMessage()
-        {
-            return true;
-        }
-
-        private void closeSystemMessage()
-        {
-            eventAggregator.GetEvent<CloseSystemMessageViewEvent>().Publish(0);
-        }
-        private bool canCloseSystemMessage()
         {
             return true;
         }
@@ -210,8 +174,8 @@ namespace Wheesper.Chat.ViewModel
             eventAggregator = this.container.Resolve<IEventAggregator>();
             model = this.container.Resolve<WheesperModel>();
 
-            init();
             subevent();
+            init();
         }
 
         ~ChatViewModel()
@@ -224,49 +188,35 @@ namespace Wheesper.Chat.ViewModel
         private void subevent()
         {
             Debug.WriteLine("ChatViewModel subscribe event");
-            SystemMessages.CurrentChanged += systemMessageSelectedItemChaged;
+            // ContactsList.CurrentChanged += contactSelectedItemChanged;
             eventAggregator.GetEvent<LoginEvent>().Subscribe(loginEventHandler, true);
             eventAggregator.GetEvent<MsgUserInfoQueryResponseEvent>().Subscribe(userInfoQueryResponseEventHandler, true);
             eventAggregator.GetEvent<MsgContactListResponseEvent>().Subscribe(contactListResponseEventHandler, true);
             eventAggregator.GetEvent<MsgContactMailCheckResponseEvent>().Subscribe(contactMailCheckResponseEventHandler, true);
             eventAggregator.GetEvent<MsgContactApplyResponseEvent>().Subscribe(contactApplyResponseEventHandler, true);
-            eventAggregator.GetEvent<MsgContactApplyingInfoPushMessageEvent>().Subscribe(contactApplyingInfoPushMessageEventHandler, true);
             // MsgUserInfoModifyResponseEvent
             // MsgContactReplyResponseEvent
+            // MsgContactApplyingInfoPushMessageEvent
             // MsgContactReplyingInfoPushMessageEvent
             // MsgContactRemarkModifyResponseEvent
-
-
         }
         private void init()
         {
-            //ContactsList = new ListCollectionView(contactsList);
-            SystemMessages = new ListCollectionView(systemMessages);
+            ContactsList = new ListCollectionView(contactsList);
         }
         #endregion helper function
 
         #region event handler
-        private void systemMessageSelectedItemChaged(object sender, EventArgs e)
+        private void contactSelectedItemChanged(object sender, EventArgs e)
         {
-            // Customer current = Customers.CurrentItem as Customer;
-            SystemMessage systemMessage = SystemMessages.CurrentItem as SystemMessage;
 
-            systemMessages[systemMessages.IndexOf(systemMessage)].IsRead = true;
-                //ShowSolveContactApplyViewEvent
-            if(systemMessage.type==SystemMessageType.ContactApplyRequest)
-            {
-                Debug.WriteLine("show ");
-                eventAggregator.GetEvent<ShowSolveContactApplyViewEvent>().Publish(systemMessage.OriginMessage);
-            }
         }
-
 
         private void loginEventHandler(string email)
         {
             Debug.Write("From loginEventHandler in ChatViewModel: ", email);
             model.sendUserInfoQueryRequest(email);
             model.sendContactListRequest(email);
-            //model.sendContactMailCheckRequest(SearchBox_UserEMail);
         }
         private void userInfoQueryResponseEventHandler(ProtoMessage message)
         {
@@ -288,7 +238,6 @@ namespace Wheesper.Chat.ViewModel
             Debug.Write(CurrentUser.EMail);
             Debug.Write( CurrentUser.Nickname);
             Debug.WriteLine(CurrentUser.Province);
-            //model.sendContactApplyRequest(currentUser.EMail, SearchBox_UserEMail, AddContactDiscription);
         }
         private void contactListResponseEventHandler(ProtoMessage message)
         {
@@ -296,65 +245,17 @@ namespace Wheesper.Chat.ViewModel
             Google.Protobuf.Collections.RepeatedField<ContactListResponse.Types.Contact> tempList 
                          = message.ContactListResponse.Contacts;
             
-            for (int i = 0; i < tempList.Count; i++)
-            {
-                Contact c = new Contact()
-                {
-                    EMail = tempList[i].MailAddress,
-                    Nickname = tempList[i].Nickname,
-                    Group = tempList[i].Group,
-                    Remarks = tempList[i].Remarks
-                };
-                Debug.Write("Contact[");
-                Debug.Write(i);
-                Debug.Write("]: ");
-                Debug.Write("email: ");
-                Debug.Write(c.EMail);
-                Debug.Write("group: ");
-                Debug.WriteLine(c.Group);
-                bool isGroupExist = false;
-                for(int j = 0; j < Root.Count; j++)
-                {
-                    Debug.Write("add into group:");
-                    Debug.WriteLine(c.Group);
-                    if (Root[j].Groupname == c.Group)
-                    {
-                        Root[j].Add(c);
-                        isGroupExist = true;
-                    }
-                }
-                if (isGroupExist == false)
-                {
-                    Debug.Write("create group:");
-                    Debug.WriteLine(c.Group);
-                    Root.Add(new ContactList(c.Group));
-                    for (int j = 0; j < Root.Count; j++)
-                    {
-                        if (Root[j].Groupname == c.Group)
-                        {
-                            Root[j].Add(c);
-                            isGroupExist = true;
-                        }
-                    }
-                }
-
+            for (int i = 0; i < tempList.Count; i++){
+                Contact c = new Contact();
+                c.EMail = tempList[i].MailAddress;
+                c.Nickname = tempList[i].Nickname;
+                c.Group = tempList[i].Group;
+                c.Remarks = tempList[i].Remarks;
+                contactsList.AddNewItem(c);
             }
-
-            Debug.WriteLine("all in Root:");
-            for(int i = 0; i < Root.Count; i++)
-            {
-                Debug.Write("- ");
-                Debug.WriteLine(Root[i].Groupname);
-                Debug.Write("--- ");
-                Debug.Write("count: ");
-                Debug.WriteLine(Root[i].Contacts.Count);
-                Debug.Write("--- ");
-                Debug.WriteLine(Root[i].Contacts.ToString());
-                for (int j = 0; j < Root[i].Contacts.Count; j++)
-                {
-
-                }
-            }
+            
+            if (contactsList.Count == 0)
+                Debug.WriteLine("no contact exist now");
         }
         private void contactMailCheckResponseEventHandler(ProtoMessage message)
         {
@@ -364,17 +265,8 @@ namespace Wheesper.Chat.ViewModel
         private void contactApplyResponseEventHandler(ProtoMessage message)
         {
             Debug.WriteLine("ContactApplyResponseEvent handler");
-            systemMessages.Add(new SystemMessage() { Message = "Contact Apply Request has been send!", type = SystemMessageType.ContactApplySended, IsRead = false });
         }
-        private void contactApplyingInfoPushMessageEventHandler(ProtoMessage message)
-        {
-            Debug.WriteLine("ContactApplyingInfoPushMessageEvent handler");
-            systemMessages.Add(new SystemMessage() { Message = "A new Contact Apply Request!", type = SystemMessageType.ContactApplyRequest, IsRead = false, OriginMessage=message });
 
-            Debug.WriteLine("Accept Contact Application");
-            ContactApplyingInfoPushMessage m = message.ContactApplyingInfoPushMessage;
-            model.sendContactReplyRequest(m.ApplyerMailAddress, m.TargetMailAddress, true, "Hi");
-        }
         #endregion event handler
     }
 }

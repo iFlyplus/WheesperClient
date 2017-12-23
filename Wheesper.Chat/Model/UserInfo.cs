@@ -5,15 +5,6 @@ namespace Wheesper.Chat.Model
 {
     public class UserInfo : NotificationObject
     {
-        private string email = null;
-        private string nickname = null;
-        private string sex = null;
-        private int age = 0;
-        private string country = null;
-        private string province = null;
-        private string city = null;
-        private string createDate = null;
-
         public string EMail
         {
             get { return email; }
@@ -86,6 +77,15 @@ namespace Wheesper.Chat.Model
                 RaisePropertyChanged("CreateDate");
             }
         }
+
+        private string email = null;
+        private string nickname = null;
+        private string sex = null;
+        private int age = 0;
+        private string country = null;
+        private string province = null;
+        private string city = null;
+        private string createDate = null;
 
 
         private DateTime date = new DateTime();

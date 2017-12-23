@@ -11,7 +11,7 @@
             <DataTemplate>
                 <StackPanel>
                     <TextBlock Text="{Binding Path=Name}"/>
-                    <TextBox Text="{Binding Path=age}"/>
+                    <TextBlock Text="{Binding Path=Age}"/>
                 </StackPanel>
             </DataTemplate>
         </ListBox.ItemTemplate>

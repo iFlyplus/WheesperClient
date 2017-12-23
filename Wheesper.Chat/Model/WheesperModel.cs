@@ -106,4 +106,10 @@ namespace Wheesper.Chat.Model
         }
         #endregion Contact Function Request
     }
+
+    public enum SystemMessageType
+    {
+        ContactApplySended,
+        ContactApplyRequest
+    }
 }
