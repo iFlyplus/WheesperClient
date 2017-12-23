@@ -25,7 +25,7 @@ namespace Wheesper.Messaging
         private IEventAggregator eventAggregator = null;
         private Thread listenThread = null;
         private Socket client = null;
-        // private const string serverIP = "110.64.89.243";
+        //private const string serverIP = "110.64.89.243";
         private const int serverPort = 12345;
         private const string serverIP = "127.0.0.1";
         // private const int serverPort = 10103;

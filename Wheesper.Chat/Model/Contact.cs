@@ -4,26 +4,41 @@ namespace Wheesper.Chat.Model
     public class Contact
     {
         private string email = null;
-        private string nickName = null;
+        private string nickname = null;
+        private string group = null;
+        private string remarks = null;
         private string sex = null;
         private int age = 0;
-        private string country = null;
-        private string province = null;
-        private string city = null;
-        private string create_date = null;
 
-        public string EMail { get; set; }
-        public string NickName { get; set; }
-        public string Sex { get; set; }
-        public int Age { get; set; }
-        public string Country { get; set; }
-        public string Province { get; set; }
-        public string City { get; set; }
-        public string Create_date { get; set; }
-
-        public Contact()
+        public string EMail
         {
-
+            get { return email; }
+            set { email = value; }
+        }
+        public string Nickname
+        {
+            get { return nickname; }
+            set { nickname = value; }
+        }
+        public string Group
+        {
+            get { return group; }
+            set { group = value; }
+        }
+        public string Remarks
+        {
+            get { return remarks; }
+            set { remarks = value; }
+        }
+        public string Sex
+        {
+            get { return sex; }
+            set { sex = value; }
+        }
+        public int Age
+        {
+            get { return age; }
+            set { age = value; }
         }
     }
 }

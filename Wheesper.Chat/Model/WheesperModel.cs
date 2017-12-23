@@ -14,6 +14,8 @@ namespace Wheesper.Chat.Model
         #region private member
         private IUnityContainer container = null;
         private IMessagingService messagingService = null;
+        private Regex emailRgx = null;
+        private string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
         #endregion private member
 
         #region constructor
@@ -22,9 +24,18 @@ namespace Wheesper.Chat.Model
             Debug.WriteLine("WheesperModel constructor");
             this.container = container;
             messagingService = this.container.Resolve<IMessagingService>();
+
+            emailRgx = new Regex(emailPattern, RegexOptions.IgnoreCase);
         }
         #endregion constructor
 
+
+        #region Utility Function
+        public bool isEmailAddress(string address)
+        {
+            return emailRgx.IsMatch(address);
+        }
+        #endregion Utility FUnction
         #region Contact Function Request
         public void sendUserInfoQueryRequest(string email)
         {

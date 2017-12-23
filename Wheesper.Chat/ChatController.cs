@@ -48,14 +48,16 @@ namespace Wheesper.Chat
             Debug.WriteLine("ChatController sub event");
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Subscribe(showWheesperViewEventHandler, ThreadOption.UIThread, true);
         }
-
         private void loadView(object view)
         {
             foreach (var v in mainRegion.Views)
             {
                 mainRegion.Remove(v);
-                //Debug.WriteLine("remove view {0}", v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
             }
+            Debug.Write("add view ");
+            Debug.WriteLine(view);
             mainRegion.Add(view);
             mainRegion.Activate(view);
         }

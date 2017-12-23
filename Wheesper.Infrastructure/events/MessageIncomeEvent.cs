@@ -17,14 +17,10 @@ namespace Wheesper.Messaging.events
     public class MsgContactListResponseEvent : CompositePresentationEvent<ProtoMessage> { }
     public class MsgContactMailCheckResponseEvent : CompositePresentationEvent<ProtoMessage> { }
     public class MsgContactApplyResponseEvent : CompositePresentationEvent<ProtoMessage> { }
-    //
     public class MsgContactReplyResponseEvent : CompositePresentationEvent<ProtoMessage> { }
-    //
     public class MsgContactApplyingInfoPushMessageEvent : CompositePresentationEvent<ProtoMessage> { }
     public class MsgContactReplyingInfoPushMessageEvent : CompositePresentationEvent<ProtoMessage> { }
-    //
     public class MsgContactRemarkModifyResponseEvent : CompositePresentationEvent<ProtoMessage> { }
-
 
 
 }

@@ -4,9 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Chat.View"
+             xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Background="White" >
+
     <Grid>
-            
+        <ItemsControl DataContext="{Binding CurrentUser, Mode=OneWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding CurrentUser, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" >
+            <ItemsControl.ItemTemplate >
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Style="{DynamicResource Text Body}" Text="{Binding EMail, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock TextWrapping="Wrap" Style="{DynamicResource Text Body}" Text="{Binding Nickname, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock TextWrapping="Wrap" Style="{DynamicResource Text Body}" Text="{Binding Sex, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock TextWrapping="Wrap" Style="{DynamicResource Text Body}" Text="{Binding Age, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
