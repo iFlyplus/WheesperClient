@@ -20,11 +20,11 @@ using Wheesper.Login.events;
 namespace Wheesper.Chat.View
 {
     /// <summary>
-    /// Interaction logic for ChatView.xaml
+    /// Interaction logic for WheesperView.xaml
     /// </summary>
-    public partial class ChatView : UserControl
+    public partial class WheesperView : UserControl
     {
-        public ChatView(IUnityContainer container)
+        public WheesperView(IUnityContainer container)
         {
             InitializeComponent();
         }

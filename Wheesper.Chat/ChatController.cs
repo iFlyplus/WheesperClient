@@ -24,7 +24,7 @@ namespace Wheesper.Chat
         #endregion private member
 
         #region view
-        ChatView chatView = null;
+        WheesperView chatView = null;
         SystemMessageView systemMessageView = null;
         SolveContactApplyView solveContactApplyView = null;
         ContactView contactView = null;
@@ -82,7 +82,7 @@ namespace Wheesper.Chat
             Debug.WriteLine("ShowWheesperViewEvent handler from ChatController");
             if (chatView == null)
             {
-                chatView = (ChatView)container.Resolve(typeof(ChatView));
+                chatView = (WheesperView)container.Resolve(typeof(WheesperView));
                 var viewModel = (ChatViewModel)container.Resolve(typeof(ChatViewModel));
                 chatView.DataContext = viewModel;
             }

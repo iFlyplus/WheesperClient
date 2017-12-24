@@ -45,6 +45,14 @@ namespace Wheesper.Chat.ViewModel
                 currentUser = value;
             }
         }
+        public Contact CurrentContact
+        {
+            get { return currentContact; }
+            private set
+            {
+                currentContact = value;
+            }
+        }
         public ListCollectionView  Root { get; private set; }
         public ListCollectionView SystemMessages { get; private set; }
         public string SearchBox_UserEMail
@@ -56,7 +64,7 @@ namespace Wheesper.Chat.ViewModel
                 RaisePropertyChanged("SearchBox_UserEMail");
                 Debug.WriteLine(searchBox_UserEMail);
                 SearchUserCommond.RaiseCanExecuteChanged();
-                addContactRequestCommond.RaiseCanExecuteChanged();
+                addContactRequestCommand.RaiseCanExecuteChanged();
             }
         }
         public string AddContactDiscription
@@ -68,12 +76,24 @@ namespace Wheesper.Chat.ViewModel
                 RaisePropertyChanged("AddContactDiscription");
             }
         }
+        public string ChatMessageTextBox
+        {
+            get { return chatMessageTextBox; }
+            set
+            {
+                chatMessageTextBox = value;
+                Debug.WriteLine(chatMessageTextBox);
+                RaisePropertyChanged("ChatMessageTextBox");
+            }
+        }
 
         private UserInfo currentUser = new UserInfo();
+        private Contact currentContact = new Contact();
         public ObservableCollection<ContactList> root = new ObservableCollection<ContactList>();
         private ObservableCollection<SystemMessage> systemMessages = new ObservableCollection<SystemMessage>();
         private string searchBox_UserEMail = null;
         private string addContactDiscription = "Hello";
+        private string chatMessageTextBox = null;
         #endregion properties
 
 
@@ -82,9 +102,9 @@ namespace Wheesper.Chat.ViewModel
         {
             get
             {
-                if (searchUserCommond == null)
-                    searchUserCommond = new DelegateCommand(searchUser, canSearchUser);
-                return searchUserCommond;
+                if (searchUserCommand == null)
+                    searchUserCommand = new DelegateCommand(searchUser, canSearchUser);
+                return searchUserCommand;
             }
             private set { }
         }
@@ -92,9 +112,9 @@ namespace Wheesper.Chat.ViewModel
         {
             get
             {
-                if (addContactRequestCommond == null)
-                    addContactRequestCommond = new DelegateCommand(addContactRequest, canAddContactRequest);
-                return addContactRequestCommond;
+                if (addContactRequestCommand == null)
+                    addContactRequestCommand = new DelegateCommand(addContactRequest, canAddContactRequest);
+                return addContactRequestCommand;
             }
             private set { }
         }
@@ -102,9 +122,9 @@ namespace Wheesper.Chat.ViewModel
         {
             get
             {
-                if (modifyContactInfoCommond == null)
-                    modifyContactInfoCommond = new DelegateCommand(modifyContactInfo, canModifyContactInfo);
-                return modifyContactInfoCommond;
+                if (modifyContactInfoCommand == null)
+                    modifyContactInfoCommand = new DelegateCommand(modifyContactInfo, canModifyContactInfo);
+                return modifyContactInfoCommand;
             }
             private set { }
         }
@@ -112,9 +132,9 @@ namespace Wheesper.Chat.ViewModel
         {
             get
             {
-                if (showSystemMessageCommond == null)
-                    showSystemMessageCommond = new DelegateCommand(showSystemMessage, canShowsystemMessage);
-                return showSystemMessageCommond;
+                if (showSystemMessageCommand == null)
+                    showSystemMessageCommand = new DelegateCommand(showSystemMessage, canShowsystemMessage);
+                return showSystemMessageCommand;
             }
             private set { }
         }
@@ -122,23 +142,34 @@ namespace Wheesper.Chat.ViewModel
         {
             get
             {
-                if (closeSystemMessageCommond == null)
-                    closeSystemMessageCommond = new DelegateCommand(closeSystemMessage, canCloseSystemMessage);
-                return closeSystemMessageCommond;
+                if (closeSystemMessageCommand == null)
+                    closeSystemMessageCommand = new DelegateCommand(closeSystemMessage, canCloseSystemMessage);
+                return closeSystemMessageCommand;
+            }
+            private set { }
+        }
+        public DelegateCommand SendChatMessageCommond
+        {
+            get
+            {
+                if (sendChatMessageCommand == null)
+                    sendChatMessageCommand = new DelegateCommand(sendChatMessage, canSendChatMessage);
+                return sendChatMessageCommand;
             }
             private set { }
         }
 
         //private DelegateCommand 
-        private DelegateCommand searchUserCommond = null;
-        private DelegateCommand addContactRequestCommond = null;
-        private DelegateCommand modifyContactInfoCommond = null;
-        private DelegateCommand showSystemMessageCommond = null;
-        private DelegateCommand closeSystemMessageCommond = null;
-
+        private DelegateCommand searchUserCommand = null;
+        private DelegateCommand addContactRequestCommand = null;
+        private DelegateCommand modifyContactInfoCommand = null;
+        private DelegateCommand showSystemMessageCommand = null;
+        private DelegateCommand closeSystemMessageCommand = null;
+        private DelegateCommand sendChatMessageCommand = null;
         #endregion Commond
 
         #region Command Delegate Method
+
         private void searchUser()
         {
             if (model.isEmailAddress(SearchBox_UserEMail))
@@ -201,6 +232,35 @@ namespace Wheesper.Chat.ViewModel
             return true;
         }
 
+        private void sendChatMessage()
+        {
+            model.sendPrivateMessageRequest(CurrentContact.EMail, ChatMessageTextBox);
+            string receiverEMail = CurrentContact.EMail;
+            foreach (ContactList group in Root)
+            {
+                foreach (Contact contact in group.Contacts)
+                {
+                    if (receiverEMail == contact.EMail)
+                    {
+                        //Debug.Write()
+                        Message m = new Message()
+                        {
+                            SenderEMail = model.CurrentUser.EMail,
+                            RecevieEMail = receiverEMail,
+                            Content = ChatMessageTextBox,
+                            Data_time = DateTime.Now.ToString()
+                        };
+                        contact.ChatMessageList.Add(m);
+                        break;
+                    }
+                }
+            }
+            ChatMessageTextBox = null;
+        }
+        private bool canSendChatMessage()
+        {
+            return !string.IsNullOrWhiteSpace(ChatMessageTextBox);
+        }
         #endregion Command Delegate Method
 
         #region Constructor & deconstructor
@@ -243,7 +303,7 @@ namespace Wheesper.Chat.ViewModel
             // MsgChatPrivateMessagePushMessageEvent
             
 
-            // Event from view: key down a specify contact
+            // Event from view: 
             eventAggregator.GetEvent<MouseKeyDownAContactEvent>().Subscribe(mouseKeyDownAContactEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<MouseKeyDownASystemMessageEvent>().Subscribe(mouseKeyDownASystemMessageEventHandler, ThreadOption.UIThread, true);
         }
@@ -397,38 +457,37 @@ namespace Wheesper.Chat.ViewModel
         private void contactApplyResponseEventHandler(ProtoMessage message)
         {
             Debug.WriteLine("ContactApplyResponseEvent handler");
-            systemMessages.Add(new SystemMessage() { Message = "Contact Apply Request has been send!", type = SystemMessageType.ContactApplySended, IsRead = false });
+            SystemMessage m = new SystemMessage() { Message = "Contact Apply Request has been send!", type = SystemMessageType.ContactApplySended, IsRead = false };
+            systemMessages.Add(m);
 
-            Debug.WriteLine("all in systemMessages:");
-            for (int i = 0; i < systemMessages.Count; i++)
-            {
-                Debug.Write("- ");
-                Debug.Write("ID: ");
-                Debug.WriteLine(systemMessages[i].ID);
-                Debug.Write("- ");
-                Debug.Write("IsRead: ");
-                Debug.WriteLine(systemMessages[i].IsRead);
-                Debug.Write("- ");
-                Debug.Write("Message: ");
-                Debug.WriteLine(systemMessages[i].Message);
-            }
-
-            Debug.WriteLine("SystemMessages:");
+            Debug.WriteLine("create a systemMessages:");
             Debug.Write("- ");
-            Debug.Write("SourceCollection: ");
-            Debug.WriteLine(SystemMessages.SourceCollection);
+            Debug.Write("ID: ");
+            Debug.WriteLine(m.ID);
             Debug.Write("- ");
-            Debug.Write("IsEmpty: ");
-            Debug.WriteLine(SystemMessages.IsEmpty);
+            Debug.Write("IsRead: ");
+            Debug.WriteLine(m.IsRead);
             Debug.Write("- ");
-            Debug.Write("ToString: ");
-            Debug.WriteLine (SystemMessages.ToString());
+            Debug.Write("Message: ");
+            Debug.WriteLine(m.Message);
         }
 
         private void contactApplyingInfoPushMessageEventHandler(ProtoMessage message)
         {
             Debug.WriteLine("ContactApplyingInfoPushMessageEvent handler");
-            systemMessages.Add(new SystemMessage() { Message = "A new Contact Apply Request!", type = SystemMessageType.ContactApplyRequest, IsRead = false, OriginMessage=message });
+            SystemMessage m = new SystemMessage() { Message = "A new Contact Apply Request!", type = SystemMessageType.ContactApplyRequest, IsRead = false, OriginMessage = message };
+            systemMessages.Add(m);
+
+            Debug.WriteLine("create a systemMessages:");
+            Debug.Write("- ");
+            Debug.Write("ID: ");
+            Debug.WriteLine(m.ID);
+            Debug.Write("- ");
+            Debug.Write("IsRead: ");
+            Debug.WriteLine(m.IsRead);
+            Debug.Write("- ");
+            Debug.Write("Message: ");
+            Debug.WriteLine(m.Message);
         }
 
         private void chatPrivateMessageResponseEventHandler(ProtoMessage message)

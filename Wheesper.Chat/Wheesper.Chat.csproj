@@ -96,8 +96,11 @@
     <Compile Include="region\ChatRegionNames.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\SolveContactApplyViewModel.cs" />
-    <Compile Include="View\ChatView.xaml.cs">
-      <DependentUpon>ChatView.xaml</DependentUpon>
+    <Compile Include="View\C.xaml.cs">
+      <DependentUpon>C.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WheesperView.xaml.cs">
+      <DependentUpon>WheesperView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ContactView.xaml.cs">
       <DependentUpon>ContactView.xaml</DependentUpon>
@@ -125,7 +128,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="View\ChatView.xaml">
+    <Page Include="View\C.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WheesperView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
