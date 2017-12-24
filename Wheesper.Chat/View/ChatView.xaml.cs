@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wheesper.Login.events;
 
 namespace Wheesper.Chat.View
 {
@@ -20,7 +24,7 @@ namespace Wheesper.Chat.View
     /// </summary>
     public partial class ChatView : UserControl
     {
-        public ChatView()
+        public ChatView(IUnityContainer container)
         {
             InitializeComponent();
         }

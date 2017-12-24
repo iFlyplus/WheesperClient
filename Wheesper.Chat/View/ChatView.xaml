@@ -6,8 +6,87 @@
              xmlns:local="clr-namespace:Wheesper.Chat.View"
              xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="White" >
+             d:DesignHeight="440.411" d:DesignWidth="700.668" Background="White" >
     <Grid>
-        <UserControl prism:RegionManager.RegionName="SystemMessageRegion" Background="White" MinWidth="320"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#FFECF0F1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="_0_2" Grid.Column="0" Grid.Row="2" >
+                <UserControl prism:RegionManager.RegionName="RegionOne" />
+            </Grid>
+
+            <Grid x:Name="_0_0" Grid.Column="0" Grid.Row="0" >
+                <Image Source="pack://application:,,,/my.PNG" Margin="10,0,0,0" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Stretch"></Image>
+                <TextBlock Height="30" Width="120" FontSize="18" Text="{Binding CurrentUser.Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Button Content="系统消息" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Style="{DynamicResource LinkButton}" FontSize="15" Command="{Binding ShowSystemMessageCommond, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+            </Grid>
+            <Grid x:Name="_0_1" Grid.Column="0" Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="_0_1_0" Grid.Column="0">
+                    <TextBox x:Name="textBox" FontSize="18" Margin="5" BorderBrush="#FFAEAAAA"  Height="30" BorderThickness="1" Width="175" TextWrapping="Wrap" Text="{Binding SearchBox_UserEMail, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" MaxLines="1"/>
+                </Grid>
+                <Button Grid.Column="1" Content="添加好友" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Center" Style="{DynamicResource LinkButton}" FontSize="15" Command="{Binding AddContactRequest, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Height="Auto">
+            <Button Content="发送" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            <TextBox Grid.Column="1" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            <ListView HorizontalAlignment="Left" Height="269" Margin="0,31,0,0" VerticalAlignment="Top" Width="130">
+                <ListView.ItemTemplate>
+                    <HierarchicalDataTemplate>
+                        <Grid HorizontalAlignment="Left"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Background="LightGray">
+                                <TextBlock Text="{Binding Comment}"></TextBlock>
+                            </Grid>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
+                                <TextBlock Text="{Binding Published}"  Foreground="LightGray" Margin="10,0,0,0"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Right"  >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Background="Green">
+                                        <TextBlock Text="{Binding Comment}" Foreground="White"></TextBlock>
+                                    </Grid>
+                                    <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <TextBlock Text="{Binding Published}"  Foreground="LightGray" Margin="0,0,10,0"></TextBlock>
+                                        <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
     </Grid>
 </UserControl>
+
+<!--
+     <UserControl prism:RegionManager.RegionName="SystemMessageRegion"  Grid.Column="1"/>
+            -->

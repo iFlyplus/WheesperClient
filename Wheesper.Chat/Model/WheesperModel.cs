@@ -6,6 +6,7 @@ using Google.Protobuf;
 using Wheesper.Infrastructure.services;
 using ProtocolBuffer;
 using System.Diagnostics;
+using System;
 
 namespace Wheesper.Chat.Model
 {
@@ -16,7 +17,17 @@ namespace Wheesper.Chat.Model
         private IMessagingService messagingService = null;
         private Regex emailRgx = null;
         private string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+        private UserInfo currentUser = new UserInfo();
         #endregion private member
+
+        public UserInfo CurrentUser
+        {
+            get
+            {
+                return currentUser;
+            }
+            private set { }
+        }
 
         #region constructor
         public WheesperModel(IUnityContainer container)
@@ -102,6 +113,40 @@ namespace Wheesper.Chat.Model
             message.ContactRemarkModifyRequest.ContactEmail = contactEMail;
             message.ContactRemarkModifyRequest.ContactRemark = contactRemark;
             message.ContactRemarkModifyRequest.ContactGroup = contactGroup;
+            messagingService.SendMessage(message);
+        }
+
+        public void sendPrivateMessageRequest(string recevierEMail, string contents)
+        {
+            ProtoMessage message = new ProtoMessage();
+            var chatMessage = new ChatMessage()
+            {
+                SenderEmail = CurrentUser.EMail,
+                DateTime = DateTime.Now.ToString(),
+                MsgContents=contents 
+            };
+            message.ChatPrivateMessageRequest = new ChatPrivateMessageRequest()
+            {
+                Message = chatMessage,
+                ReciiverEmail = recevierEMail
+            };
+            messagingService.SendMessage(message);
+        }
+
+        public void sendGroupMessageRequest(int groupID, string contents)
+        {
+            ProtoMessage message = new ProtoMessage();
+            var chatMessage = new ChatMessage()
+            {
+                SenderEmail = CurrentUser.EMail,
+                DateTime = DateTime.Now.ToString(),
+                MsgContents = contents
+            };
+            message.ChatGroupMessageRequest = new ChatGroupMessageRequest()
+            {
+                Message = chatMessage,
+                GroupID=groupID
+            };
             messagingService.SendMessage(message);
         }
         #endregion Contact Function Request

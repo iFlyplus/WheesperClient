@@ -22,5 +22,24 @@ namespace Wheesper.Messaging.events
     public class MsgContactReplyingInfoPushMessageEvent : CompositePresentationEvent<ProtoMessage> { }
     public class MsgContactRemarkModifyResponseEvent : CompositePresentationEvent<ProtoMessage> { }
 
+    public class MsgChatPrivateMessageResponseEvent : CompositePresentationEvent<ProtoMessage> { }
+    public class MsgChatPrivateMessagePushMessageEvent : CompositePresentationEvent<ProtoMessage> { }
 
+    public class MsgChatGroupMessageResponseEvent : CompositePresentationEvent<ProtoMessage> { }
+    public class MsgChatGroupMessagePushMessageEvent : CompositePresentationEvent<ProtoMessage> { }
+    /*
+     ChatPrivateMessageRequest chatPrivateMessageRequest = 41;
+    ChatPrivateMessageResponse chatPrivateMessageResponse = 42;
+    ChatPrivateMessagePushMessage chatPrivateMessagePushMessage = 43;    
+    ChatPrivateMessagePushAckMessage chatPrivateMessagePushAckMessage = 44;
+
+        ChatGroupMessageRequest chatGroupMessageRequest = 45;
+    ChatGroupMessageResponse chatGroupMessageResponse = 46;
+    ChatGroupMessagePushMessage chatGroupMessagePushMessage = 47;
+
+        ChatGroupMessagePushAckMessage ChatGroupMessagePushAckMessage = 48;
+
+   // MsgChatPrivateMessageResponseEvent
+   // MsgChatPrivateMessagePushMessageEvent
+     */
 }

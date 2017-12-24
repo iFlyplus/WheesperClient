@@ -25,9 +25,9 @@ namespace Wheesper.Messaging
         private IEventAggregator eventAggregator = null;
         private Thread listenThread = null;
         private Socket client = null;
-        //private const string serverIP = "110.64.89.243";
+        private const string serverIP = "110.64.89.243";
         private const int serverPort = 12345;
-        private const string serverIP = "127.0.0.1";
+        //private const string serverIP = "127.0.0.1";
         // private const int serverPort = 10103;
 
         #region Constructor
@@ -183,6 +183,20 @@ namespace Wheesper.Messaging
                     break;
                 case ProtoMessage.MsgOneofCase.ContactRemarkModifyResponse:
                     eventAggregator.GetEvent<MsgContactRemarkModifyResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ChatPrivateMessageResponse:
+                    eventAggregator.GetEvent<MsgChatPrivateMessageResponseEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ChatPrivateMessagePushMessage:
+                    eventAggregator.GetEvent<MsgChatPrivateMessagePushMessageEvent>().Publish(message);
+                    break;
+                case ProtoMessage.MsgOneofCase.ChatGroupMessageResponse:
+                    eventAggregator.GetEvent<MsgChatGroupMessageResponseEvent>().Publish(message);
+                    break;
+                    break;
+                case ProtoMessage.MsgOneofCase.ChatGroupMessagePushMessage:
+                    eventAggregator.GetEvent<MsgChatGroupMessagePushMessageEvent>().Publish(message);
+                    break;
                     break;
                 default:
                     break;

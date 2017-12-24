@@ -5,8 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Chat.View"
              mc:Ignorable="d" 
+             Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ListBox ItemsSource="{Binding Path=SystemMessages}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=ID}" MouseDown="MouseDown_SystemMessage"/>
+                        <TextBlock Text="{Binding Path=Message}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

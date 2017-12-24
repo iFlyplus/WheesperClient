@@ -20,25 +20,26 @@ using Wheesper.Login.events;
 namespace Wheesper.Chat.View
 {
     /// <summary>
-    /// Interaction logic for SystemMessageView.xaml
+    /// Interaction logic for ContactView.xaml
     /// </summary>
-    public partial class SystemMessageView : UserControl
+    public partial class ContactView : UserControl
     {
         #region private menber
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         #endregion private menber
 
-        public SystemMessageView(IUnityContainer container)
+        public ContactView(IUnityContainer container)
         {
             InitializeComponent();
             this.container = container;
             eventAggregator = container.Resolve<IEventAggregator>();
         }
 
-        private void MouseDown_SystemMessage(object sender, MouseButtonEventArgs e)
+        private void MouseDown_Contact(object sender, MouseButtonEventArgs e)
         {
-            eventAggregator.GetEvent<MouseKeyDownASystemMessageEvent>().Publish(Convert.ToInt32(((System.Windows.Controls.TextBlock)e.Source).Text));
+            eventAggregator.GetEvent<MouseKeyDownAContactEvent>().Publish(((System.Windows.Controls.TextBlock)e.Source).Text);
         }
+
     }
 }

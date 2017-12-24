@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Wheesper.Desktop">
+
+    <HierarchicalDataTemplate DataType="{x:Type local:ContactList}" ItemsSource="{Binding Path=Contacts,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" x:Key="ListTemple" >
+        <Border x:Name="bord" Margin="-1,-1,0,-1">
+            <TextBlock Text="{Binding Groupname}" HorizontalAlignment="Left" Width="227" Padding="2" FontSize="15"></TextBlock>
+        </Border>
+    </HierarchicalDataTemplate>
+    <HierarchicalDataTemplate DataType="{x:Type local:Contact}"  x:Key="FriendTemple">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--
+            <Image Source="{Binding Path=HeadPath}" ></Image>
+            -->
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="6,2,2,2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  Height="25" HorizontalAlignment="Left" ></TextBlock>
+                    <TextBlock Text="{Binding Path=EMail}"  Height="20" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </HierarchicalDataTemplate>
+    
+</ResourceDictionary>

@@ -1,8 +1,5 @@
 ﻿
-using System.Collections.Generic;
-
-
-namespace Wheesper.Chat.Model
+namespace Wheesper.Desktop
 {
     public class Contact
     {
@@ -12,7 +9,6 @@ namespace Wheesper.Chat.Model
         private string remarks = null;
         private string sex = null;
         private int age = 0;
-        private List<Message> chatMessageList = new List<Message>();
 
         public string EMail
         {
@@ -44,12 +40,5 @@ namespace Wheesper.Chat.Model
             get { return age; }
             set { age = value; }
         }
-        public List<Message> ChatMessageList
-        {
-            get { return ChatMessageList; }
-            private set { }
-        }
-        
-
     }
 }

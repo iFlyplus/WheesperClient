@@ -85,6 +85,8 @@
     <Compile Include="ChatController.cs" />
     <Compile Include="ChatModule.cs" />
     <Compile Include="events\ChatEvents.cs" />
+    <Compile Include="FriendOrListTemplateSelector.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\ContactList.cs" />
     <Compile Include="Model\SystemMessage.cs" />
@@ -96,6 +98,9 @@
     <Compile Include="ViewModel\SolveContactApplyViewModel.cs" />
     <Compile Include="View\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactView.xaml.cs">
+      <DependentUpon>ContactView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SolveContactApplyView.xaml.cs">
       <DependentUpon>SolveContactApplyView.xaml</DependentUpon>
@@ -121,6 +126,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="View\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

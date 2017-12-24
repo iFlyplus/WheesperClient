@@ -1,19 +1,18 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Data;
 
-namespace Wheesper.Chat.Model
+namespace Wheesper.Desktop
 {
-    public class ContactList :BindableBase
+    public class ContactList
     {
         public ContactList(string listname)
         {
             Groupname = listname;
 
             Contacts = new ListCollectionView(contacts);
-            Contacts.CurrentChanged += contactSelectedItemChanged;
+            //Contacts.CurrentChanged += contactSelectedItemChanged;
         }
 
         public string Groupname
@@ -37,13 +36,10 @@ namespace Wheesper.Chat.Model
 
         private void contactSelectedItemChanged(object sender, EventArgs e)
         {
-            Debug.WriteLine(DateTime.Now.ToString());
+            /*
             Contact currentContact = Contacts.CurrentItem as Contact;
-            if (currentContact == null)
-                return;
             Debug.WriteLine("current select contact:");
-            // TODO: 
-            Debug.WriteLine(currentContact.EMail);
+            Debug.WriteLine(currentContact.EMail);*/
         }
     }
 }

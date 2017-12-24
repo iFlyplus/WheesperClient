@@ -28,17 +28,22 @@ namespace Wheesper.Chat.Model
             }
         }
         public SystemMessageType type { get; set; }
-        public int ID;
+        public string ID { get { return id.ToString(); }private set { } }
         public static int count = 0;
         public object OriginMessage = null;
+        public int Get_ID()
+        {
+            return id;
+        }
 
         private string message = null;
         private bool isRead = false;
-
+        private int id = 0;
         public SystemMessage()
         {
-            ID = count;
+            id = count;
             count++;
         }
+
     }
 }

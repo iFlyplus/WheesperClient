@@ -81,7 +81,7 @@ namespace Wheesper.Chat.ViewModel
 
         private void closeSolveContactApply()
         {
-            eventAggregator.GetEvent<CloseSolveContactApplyViewEvent>().Publish(0);
+            eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
         }
         private bool canCloseSolveContactApply()
         {

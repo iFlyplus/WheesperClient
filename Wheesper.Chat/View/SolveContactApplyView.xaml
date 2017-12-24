@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Button Content="accept" HorizontalAlignment="Center" Margin="78,164,82,0" VerticalAlignment="Top" Width="140" Command="{Binding AcceptContactApplyCommod, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
+        <Button Content="reject" HorizontalAlignment="Center" Margin="78,232,82,0" VerticalAlignment="Top" Width="140" Command="{Binding RejectContactApplyCommod, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
+        <Button Content="close" HorizontalAlignment="Center" Margin="78,95,82,0" VerticalAlignment="Top" Width="140" Command="{Binding CloseSolveContactApplyCommond, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
     </Grid>
 </UserControl>
