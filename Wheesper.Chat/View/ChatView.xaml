@@ -21,7 +21,7 @@
         </Grid>
 
         <Grid x:Name="_1_1" Grid.Row="1"  >
-            <ListView HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=_1_1, Mode=OneWay}" Height="Auto" ItemsSource="{Binding CurrentContact.ChatMessageList, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" BorderThickness="0">
+            <ListView  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=_1_1, Mode=OneWay}" Height="Auto" ItemsSource="{Binding CurrentContact.ChatMessageList, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" BorderThickness="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Left" Width="Auto" Height="auto">

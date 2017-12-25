@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,22 +16,13 @@ using System.Windows.Shapes;
 namespace Wheesper.Chat.View
 {
     /// <summary>
-    /// Interaction logic for ChatView.xaml
+    /// Interaction logic for UserInfoView.xaml
     /// </summary>
-    public partial class ChatView : UserControl
+    public partial class UserInfoView : UserControl
     {
-        public ChatView()
+        public UserInfoView()
         {
             InitializeComponent();
         }
-
-        private void MouseDown_CurrentChatMessage(object sender, MouseButtonEventArgs e)
-        {
-            Debug.WriteLine(((System.Windows.Controls.TextBlock)e.Source).Text);
-
-            
-        }
-
-
     }
 }

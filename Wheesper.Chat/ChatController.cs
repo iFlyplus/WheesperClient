@@ -33,6 +33,8 @@ namespace Wheesper.Chat
         ChatView chatView = null;
         FaceView faceView = null;
         ChangeContactInfoView changeContactInfoView = null;
+        ContactNotExistView contactNotExistView = null;
+        ContactExist contactExist = null;
         #endregion view
 
         #region constructor & deconstructor
@@ -68,6 +70,9 @@ namespace Wheesper.Chat
             eventAggregator.GetEvent<CloseSolveContactApplyViewEvent>().Subscribe(closeSolveContactApplyViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<ShowChangeContactInfoViewEvent>().Subscribe(showChangeContactInfoViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<CloseChangeContactInfoViewEvent>().Subscribe(closeChangeContactInfoViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<ShowUserExistViewEvent>().Subscribe(showUserExistViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<ShowUserNotExistViewEvent>().Subscribe(showUserNotExistViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<CloseUserExistOrNotExistViewEvent>().Subscribe(closeUserExistOrNotExistViewEventHandler, ThreadOption.UIThread, true);
         }
         private void loadView(object view)
         {
@@ -200,7 +205,7 @@ namespace Wheesper.Chat
             var viewModel = (SolveContactApplyViewModel)container.Resolve(typeof(SolveContactApplyViewModel));
             viewModel.ApplierEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.ApplyerMailAddress;
             viewModel.TargetEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.TargetMailAddress;
-            viewModel.Discription = "Hi";
+            viewModel.Discription = ((ProtoMessage)o).ContactApplyingInfoPushMessage.AdditionalMsg;
             solveContactApplyView.DataContext = viewModel;
 
             Debug.Write("add view to RegionOne ");
@@ -255,6 +260,81 @@ namespace Wheesper.Chat
             Debug.Write("remove view from RegionOne ");
             Debug.WriteLine(changeContactInfoView);
             regionOne.Remove(changeContactInfoView);
+            eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
+        }
+
+        private void showUserExistViewEventHandler(string mail)
+        {
+            Debug.WriteLine("ShowUserExistViewEvent handler from ChatController");
+            // Notice: create view once, but always refresh its viewmodel.
+            if (contactExist == null)
+            {
+                contactExist = (ContactExist)container.Resolve(typeof(ContactExist));
+            }
+            var viewModel = (ContactExistViewModel)container.Resolve(typeof(ContactExistViewModel));
+            viewModel.EMail = mail;
+            contactExist.DataContext = viewModel;
+
+            Debug.Write("add view to RegionOne ");
+            Debug.WriteLine(contactExist);
+
+            foreach (var v in regionOne.Views)
+            {
+                regionOne.Remove(v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
+            }
+            regionOne.Add(contactExist);
+            regionOne.Activate(contactExist);
+        }
+        private void showUserNotExistViewEventHandler(string mail)
+        {
+            Debug.WriteLine("ShowUserNotExistViewEvent handler from ChatController");
+            // Notice: create view once, but always refresh its viewmodel.
+            if (contactNotExistView == null)
+            {
+                contactNotExistView = (ContactNotExistView)container.Resolve(typeof(ContactNotExistView));
+            }
+            var viewModel = (ContactExistViewModel)container.Resolve(typeof(ContactExistViewModel));
+            viewModel.EMail = mail;
+            contactNotExistView.DataContext = viewModel;
+
+            Debug.Write("add view to RegionOne ");
+            Debug.WriteLine(contactNotExistView);
+
+            foreach (var v in regionOne.Views)
+            {
+                regionOne.Remove(v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
+            }
+            regionOne.Add(contactNotExistView);
+            regionOne.Activate(contactNotExistView);
+        }
+        private void closeUserExistOrNotExistViewEventHandler(bool isExist)
+        {
+            Debug.WriteLine("CloseUserExistOrNotExistViewEvent handler from ChatController");
+
+            foreach (var v in regionOne.Views)
+            {
+                regionOne.Remove(v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
+            }
+            /*
+            if (isExist)
+            {
+                Debug.Write("remove view from RegionOne ");
+                Debug.WriteLine(contactExist);
+                regionOne.Remove(contactExist);
+            }
+            else
+            {
+                Debug.Write("remove view from RegionOne ");
+                Debug.WriteLine(contactNotExistView);
+                regionOne.Remove(contactNotExistView);
+            }
+            */
             eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
         }
         #endregion event handler

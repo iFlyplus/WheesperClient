@@ -29,6 +29,7 @@ namespace Wheesper.Login.ViewModel
         #region helper function
         private void subevent()
         {
+            eventAggregator.GetEvent<MsgSignupMailResponseEvent>().Subscribe(SignupMailResponseEventHandler);
             eventAggregator.GetEvent<MsgPasswordModifyCaptchaResponseEvent>().Subscribe(PasswordModifyCaptchaResponseEventHandler);
             eventAggregator.GetEvent<MsgPasswordModifyResponseEvent>().Subscribe(PasswordModifyResponseEventHandler);
         }
@@ -51,12 +52,12 @@ namespace Wheesper.Login.ViewModel
         #endregion Constructor & deconstructor
 
         #region helper variable
-        private string emailNotExistMessage = " is already a Microsoft account. Try another name or claim one of these that's available. If it's yours, sign in now.";
-        private string emailNotValidMessage = "The email address you entered isn's vaild.";
+        private string emailNotExistMessage = "你输入的邮箱未注册成为Wheesper账号。";
+        private string emailNotValidMessage = "你输入的邮箱格式不正确.";
         private string pwNotValidMessage = "Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols.";
         private string captchaSend = "We just sent a code to ";
         private string captchaInvalidMessage = "Please enter the 4-digit code. The code only contains numbers.";
-        private string captchaWrongMessage = "That code didn't work. Check the code and try again.";
+        private string captchaWrongMessage = "你输入的验证码不正确，请确认后再次输入.";
         #endregion helper variable
 
         #region properties
@@ -70,7 +71,7 @@ namespace Wheesper.Login.ViewModel
             set
             {
                 promtInfo = value;
-                RaisePropertyChanged("Promt");
+                RaisePropertyChanged("PromtInfo");
             }
         }
 
@@ -245,7 +246,8 @@ namespace Wheesper.Login.ViewModel
             if (loginModel.isEmailAddress(Email))
             {
                 // TODO: enter animate_3
-                loginModel.sendPWCaptchaRequest();
+                PromtInfo = null;
+                loginModel.sendSignupMailRequest();
             }
             else
             {
@@ -339,8 +341,24 @@ namespace Wheesper.Login.ViewModel
         #endregion Command Delegate Method
 
         #region event handler
+        private void SignupMailResponseEventHandler(ProtoMessage message)
+        {
+            if (loginModel.currentState != State.RESETPW)
+                return;
+            bool status = message.SignupMailResponse.Status;
+            if (status)
+            {
+                PromtInfo = emailNotExistMessage;
+            }
+            else
+            {
+                loginModel.sendPWCaptchaRequest();
+            }
+        }
+
         private void PasswordModifyCaptchaResponseEventHandler(ProtoMessage message)
         {
+
             bool status = message.PasswordModifyCaptchaResponse.Status;
             if(status)
             {

@@ -156,7 +156,8 @@ namespace Wheesper.Chat.Model
     public enum SystemMessageType
     {
         ContactApplySended,
-        ContactApplyRequest
+        ContactApplyRequest,
+        ContactMailCheckResponse
     }
 
     public enum SystemState

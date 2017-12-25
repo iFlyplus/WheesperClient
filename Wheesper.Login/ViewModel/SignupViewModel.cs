@@ -50,11 +50,11 @@ namespace Wheesper.Login.ViewModel
         #endregion Constructor & deconstructor
 
         #region helper variable
-        private string emailInvalidMessage = "The email address you entered isn's vaild.";
-        private string emailexistMessage = " is already a Microsoft account. Try another name or claim one of these that's available. If it's yours, sign in now.";
+        private string emailInvalidMessage = "你输入的邮箱格式不正确.";
+        private string emailexistMessage = "你输入的邮箱已经被注册. 如果这个邮箱是你的，请直接登陆.";
         private string pwInvalidMessage = "Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols.";
         private string captchaInvalidMessage = "Please enter the 4-digit code. The code only contains numbers.";
-        private string captchaWrongMessage = "That code didn't work. Check the code and try again.";
+        private string captchaWrongMessage = "你输入的验证码不正确，请确认后再次输入.";
         #endregion helper variable
 
         #region properties
@@ -81,7 +81,7 @@ namespace Wheesper.Login.ViewModel
             set
             {
                 promtInfo = value;
-                RaisePropertyChanged("Promt");
+                RaisePropertyChanged("PromtInfo");
             }
         }
         public string Email
@@ -344,6 +344,8 @@ namespace Wheesper.Login.ViewModel
         #region event handler
         private void SignupMailResponseEventHandler(ProtoMessage message)
         {
+            if (loginModel.currentState != State.SIGNUP)
+                return;
             bool status = message.SignupMailResponse.Status;
             if (status)
             {
@@ -353,9 +355,10 @@ namespace Wheesper.Login.ViewModel
             else
             {
                 // TODO: exit animate_2 and return signup info view
-                PromtInfo = emailexistMessage.Insert(0, Email);
+                PromtInfo = emailexistMessage;
             }
         }
+
         private void SignupInfoResponseEventHandler(ProtoMessage message)
         {
             bool status = message.SignupInfoResponse.Status;

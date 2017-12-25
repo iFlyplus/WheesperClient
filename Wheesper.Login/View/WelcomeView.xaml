@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" Background="White" >
-    <Grid>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock  TextWrapping="Wrap" 
                 VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="0,150,0,0" Text="{Binding Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
         <Button x:Name="SigninMailNext_BTN" Content="登陆" HorizontalAlignment="Center" Margin="0,250,0,0"   

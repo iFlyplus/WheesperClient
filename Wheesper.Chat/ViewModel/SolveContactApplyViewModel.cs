@@ -91,7 +91,7 @@ namespace Wheesper.Chat.ViewModel
         private void acceptContactApply()
         {
             model.sendContactReplyRequest(ApplierEMail, TargetEMail, true, Discription);
-            model.sendContactListRequest(model.CurrentUser.EMail);
+            eventAggregator.GetEvent<CloseUserExistOrNotExistViewEvent>().Publish(true);
         }
         private bool canAcceptContactApply()
         {
@@ -101,6 +101,7 @@ namespace Wheesper.Chat.ViewModel
         private void rejectContactApply()
         {
             model.sendContactReplyRequest(ApplierEMail, TargetEMail, false, Discription);
+            eventAggregator.GetEvent<CloseUserExistOrNotExistViewEvent>().Publish(true);
         }
         private bool canRejectContactApply()
         {

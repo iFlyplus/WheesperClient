@@ -64,7 +64,7 @@ namespace Wheesper.Chat.ViewModel
                 RaisePropertyChanged("SearchBox_UserEMail");
                 Debug.WriteLine(searchBox_UserEMail);
                 SearchUserCommond.RaiseCanExecuteChanged();
-                addContactRequestCommand.RaiseCanExecuteChanged();
+                SearchUserCommond.RaiseCanExecuteChanged();
             }
         }
         public string AddContactDiscription
@@ -297,11 +297,12 @@ namespace Wheesper.Chat.ViewModel
             eventAggregator.GetEvent<MsgContactListResponseEvent>().Subscribe(contactListResponseEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<MsgContactMailCheckResponseEvent>().Subscribe(contactMailCheckResponseEventHandler, true);
             eventAggregator.GetEvent<MsgContactApplyResponseEvent>().Subscribe(contactApplyResponseEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<MsgContactReplyResponseEvent>().Subscribe(contactReplyResponseEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<MsgContactApplyingInfoPushMessageEvent>().Subscribe(contactApplyingInfoPushMessageEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<MsgContactReplyingInfoPushMessageEvent>().Subscribe(contactReplyingInfoPushMessageEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<MsgContactRemarkModifyResponseEvent>().Subscribe(contactRemarkModifyResponseEventHandler, ThreadOption.UIThread, true);
             // MsgUserInfoModifyResponseEvent
-            // MsgContactReplyResponseEvent
+            // 
             // 
             // 
 
@@ -491,7 +492,16 @@ namespace Wheesper.Chat.ViewModel
         private void contactMailCheckResponseEventHandler(ProtoMessage message)
         {
             Debug.WriteLine("ContactMailCheckResponseEvent handler");
-            
+            bool state = message.ContactMailCheckResponse.Status;
+            string email = message.ContactMailCheckResponse.MailAddress;
+            if (state)
+            {
+                eventAggregator.GetEvent<ShowUserExistViewEvent>().Publish(email);
+            }
+            else
+            {
+                eventAggregator.GetEvent<ShowUserNotExistViewEvent>().Publish(email);
+            }
         }
 
         private void contactApplyResponseEventHandler(ProtoMessage message)
@@ -510,6 +520,11 @@ namespace Wheesper.Chat.ViewModel
             Debug.Write("- ");
             Debug.Write("Message: ");
             Debug.WriteLine(m.Message);
+        }
+
+        private void contactReplyResponseEventHandler(ProtoMessage message)
+        {
+            model.sendContactListRequest(model.CurrentUser.EMail);
         }
 
         private void contactRemarkModifyResponseEventHandler(ProtoMessage message)

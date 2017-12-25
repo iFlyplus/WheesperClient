@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Wheesper.Chat.View.ContactExist"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wheesper.Chat.View"
+             mc:Ignorable="d" Background="White">
+    
+    <Grid Background="#FFECF0F1">
+        <TextBlock Text="该邮箱存在！" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Text Title}" FontSize="24"/>
+        <TextBlock Text="申请添加成为好友！" Margin="0,70,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBlock Text="验证信息：" Margin="0,120,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBox Width="230"  Margin="5,150,5,0" TextWrapping="Wrap" Text="{Binding Discription, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="120" FontSize="18" Style="{DynamicResource Input Box}"/>
+        <Button Content="发送验证" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="140" Command="{Binding ApplyCommod, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
+        <Button Content="返回" HorizontalAlignment="Center" Margin="0,0,0,5" VerticalAlignment="Bottom" Width="140" Style="{DynamicResource ButtonStyle1}" Command="{Binding CancelCommod, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+    </Grid>
+</UserControl>

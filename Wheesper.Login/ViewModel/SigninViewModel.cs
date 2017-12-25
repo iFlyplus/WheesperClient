@@ -22,8 +22,7 @@ namespace Wheesper.Login.ViewModel
         #endregion private menber
 
         #region properties
-        private string uiInfo = null;
-        private string promtInfo = null; // email wrong, pw wrong
+        private string promtInfo = null;
         public string Email
         {
             get
@@ -51,18 +50,6 @@ namespace Wheesper.Login.ViewModel
                 Debug.WriteLine(Password);
                 RaisePropertyChanged("Password");
                 SigninPWNextCommand.RaiseCanExecuteChanged();
-            }
-        }
-        public string UIInfo
-        {
-            get
-            {
-                return uiInfo;
-            }
-            set
-            {
-                uiInfo = value;
-                RaisePropertyChanged("UIInfo");
             }
         }
         public string PromtInfo
@@ -174,11 +161,9 @@ namespace Wheesper.Login.ViewModel
         }
 
         #region private helper variable
-        private string enterPW = "Enter the password for ";
-        private string emailInvalidMessage = "The email address you entered isn's vaild.";
-        private string pwWrongMessage = "Your account or password is incorrect. If you don't remember your password, ";
+        private string emailInvalidMessage = "你输入的邮箱格式不正确";
+        private string pwWrongMessage = "你输入的邮箱或密码不正确. ";
         private string networkFailMessage = "There's some problem with network. Please try again. If you continue to get this message, try again later.";
-        // private bool signinRequeststate = false;
         #endregion helper variable
 
         #region helper function
@@ -191,7 +176,6 @@ namespace Wheesper.Login.ViewModel
         {
             Password = null;
             PromtInfo = null;
-            UIInfo = enterPW.Insert(enterPW.Length, loginModel.email);
         }
         #endregion helper function
 

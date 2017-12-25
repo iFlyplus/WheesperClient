@@ -40,6 +40,9 @@ namespace Wheesper.Chat
 
             ChangeContactInfoViewModel changeContactInfoViewModel = container.Resolve<ChangeContactInfoViewModel>();
             container.RegisterInstance(typeof(ChangeContactInfoViewModel), changeContactInfoViewModel);
+
+            UserInfoViewModel userInfoViewModel = container.Resolve<UserInfoViewModel>();
+            container.RegisterInstance(typeof(UserInfoViewModel), userInfoViewModel);
         }
         # endregion Private Method
 
