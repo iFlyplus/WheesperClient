@@ -20,7 +20,9 @@
                                     <ColumnDefinition Width="40"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Source="pack://application:,,,/head.PNG"></Image>
+                                <Border CornerRadius="100" Height="40" Width="40" BorderThickness="1" Background="CadetBlue" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBox Text="{Binding FirstC}" Background="{x:Null}" FontSize="25" BorderThickness="0" IsEnabled="False" TextAlignment="Center" Foreground="White"/>
+                                </Border>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="6,2,2,2">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock FontSize="18" Text="{Binding Path=Nickname}"  Height="25" HorizontalAlignment="Left" ></TextBlock>

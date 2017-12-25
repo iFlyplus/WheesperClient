@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Wheesper.Chat.View.ChangeContactInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wheesper.Chat.View"
+             mc:Ignorable="d" Background="White">
+    <Grid Background="#FFECF0F1">
+        <Button Content="应用" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="140" Style="{DynamicResource ButtonStyle1}" Height="28" Command="{Binding ApplyCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+        <Button Content="后退" HorizontalAlignment="Center" Margin="0,0,0,5" VerticalAlignment="Bottom" Width="140" Style="{DynamicResource ButtonStyle1}" Command="{Binding CancelCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+        <TextBlock Text="修改备注信息" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" Style="{DynamicResource Text Title}"/>
+        <StackPanel Orientation="Horizontal" Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="好友：" FontSize="15" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Text="{Binding ContactEMail, Mode=OneWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" FontSize="15" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,120,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="备注：" FontSize="15" HorizontalAlignment="Left"></TextBlock>
+            <TextBox Text="{Binding Remarks, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" FontSize="15" Margin="10,0,0,0" HorizontalAlignment="Left" Style="{DynamicResource Input Box}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,160,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="组名：" FontSize="15" HorizontalAlignment="Left"></TextBlock>
+            <TextBox Text="{Binding Group, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" FontSize="15" Margin="10,0,0,0" HorizontalAlignment="Left" Style="{DynamicResource Input Box}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 
 using System.Diagnostics;
+using Wheesper.Chat.Model;
 using Wheesper.Chat.ViewModel;
 
 namespace Wheesper.Chat
@@ -28,12 +29,17 @@ namespace Wheesper.Chat
         {
             //LoginModel loginModel = container.Resolve<LoginModel>();
             //container.RegisterInstance(typeof(LoginModel), loginModel);
+            WheesperModel model = container.Resolve<WheesperModel>();
+            container.RegisterInstance(typeof(WheesperModel), model);
 
             ChatViewModel chatViewModel = container.Resolve<ChatViewModel>();
             container.RegisterInstance(typeof(ChatViewModel), chatViewModel);
 
             SolveContactApplyViewModel solveContactApplyViewModel = container.Resolve<SolveContactApplyViewModel>();
             container.RegisterInstance(typeof(SolveContactApplyViewModel), solveContactApplyViewModel);
+
+            ChangeContactInfoViewModel changeContactInfoViewModel = container.Resolve<ChangeContactInfoViewModel>();
+            container.RegisterInstance(typeof(ChangeContactInfoViewModel), changeContactInfoViewModel);
         }
         # endregion Private Method
 

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Wheesper.Chat.View
 {
     /// <summary>
-    /// Interaction logic for C.xaml
+    /// Interaction logic for FaceView.xaml
     /// </summary>
-    public partial class C : UserControl
+    public partial class FaceView : UserControl
     {
-        public C()
+        public FaceView()
         {
             InitializeComponent();
         }

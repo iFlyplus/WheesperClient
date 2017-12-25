@@ -77,6 +77,11 @@ namespace Wheesper.Chat.Model
                 RaisePropertyChanged("CreateDate");
             }
         }
+        public string FirstC
+        {
+            get { return nickname[0].ToString(); }
+            set { }
+        }
 
         private string email = null;
         private string nickname = null;

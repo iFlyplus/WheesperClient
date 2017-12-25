@@ -7,12 +7,10 @@
              xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" Background="White" >
 
-    <Grid Height="283">
+    <Grid>
         <TextBlock  TextWrapping="Wrap" 
-                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="61,20,61,0" Text="{Binding WelcomeMessage_1, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
-        <TextBlock  TextWrapping="Wrap" 
-                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="61,100,61,0" Text="{Binding WelcomeMessage_2, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
-        <Button x:Name="SigninMailNext_BTN" Content="下一步" HorizontalAlignment="Center" Margin="401,180,50,0"   
+                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="0,50,0,0" Text="恭喜你！密码重置成功" ></TextBlock>
+        <Button x:Name="SigninMailNext_BTN" Content="下一步" HorizontalAlignment="Center" Margin="0,250,0,0"   
                     Command="{Binding StartCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Width="140" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

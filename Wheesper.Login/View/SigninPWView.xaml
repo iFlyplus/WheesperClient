@@ -5,16 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Login.View"
              mc:Ignorable="d" Background="White" >
-    <Grid Width="490">
-        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="输入密码" VerticalAlignment="Top"
-                   d:LayoutOverrides="Width" HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
-        <TextBox x:Name="pwd" FontSize="28" Foreground="Transparent" Margin="0,180,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="430" BorderThickness="0,0,0,1" Height="35" Style="{DynamicResource PasswordBox}" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="上一步" HorizontalAlignment="Center" Margin="30,240,320,0" VerticalAlignment="Top" Width="140" Command="{Binding SigninPWBackCommand,NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
-        <Button Content="登陆" HorizontalAlignment="Center" Margin="320,240,30,0" VerticalAlignment="Top" Width="140" Command="{Binding SigninPWNextCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
-        <Button Content="忘记密码" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="88" Command="{Binding ForgetPWCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource LinkButton}" Height="26"/>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="输入密码" VerticalAlignment="Top"  HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
         <TextBlock HorizontalAlignment="Center" Margin="66,80,380,0" TextWrapping="Wrap" Text="输入" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
         <TextBlock HorizontalAlignment="Center" Margin="115,80,116,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Text="{Binding Email, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource Text Body}"/>
         <TextBlock HorizontalAlignment="Center" Margin="379,80,45,0" TextWrapping="Wrap" Text="的密码" VerticalAlignment="Top" Style="{DynamicResource Text Body}" Height="26" Width="66"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" Text="{Binding PromtInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Style="{DynamicResource Text Body}" Foreground="Red" FontSize="16" />
+
+        <TextBox x:Name="pwd" MaxLines="1" FontSize="28" Foreground="Transparent" Margin="0,190,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="430" BorderThickness="0,0,0,1" Height="35" Style="{DynamicResource PasswordBox}" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="上一步" HorizontalAlignment="Center" Margin="30,240,320,0" VerticalAlignment="Top" Width="140" Command="{Binding SigninPWBackCommand,NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
+        <Button Content="登陆" HorizontalAlignment="Center" Margin="320,240,30,0" VerticalAlignment="Top" Width="140" Command="{Binding SigninPWNextCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource ButtonStyle1}" Height="28"/>
+        <Button Content="忘记密码" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="88" Command="{Binding ForgetPWCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Style="{DynamicResource LinkButton}" Height="26"/>
 
     </Grid>
 </UserControl>

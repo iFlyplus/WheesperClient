@@ -6,16 +6,17 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              mc:Ignorable="d" Background="White" >
 
-    <Grid>
-        <TextBox FontSize="28" Width="430" BorderThickness="0,0,0,1" Height="35" HorizontalAlignment="Center" Margin="0,180,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Style="{DynamicResource Input Box}"/>
-        <Button Content="取消" HorizontalAlignment="Center" Margin="122,280,427,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
-        <Button Content="下一步" HorizontalAlignment="Center" Margin="412,280,137,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
-        <Button Content="重新发送" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Width="62" Command="{Binding PWModifyCaptchaResendCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LinkButton}" FontSize="15"/>
-        <TextBlock HorizontalAlignment="Center" Margin="122,84,457,0" TextWrapping="Wrap" Text="我们刚才向" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="验证你的身份" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="122,80,457,0" TextWrapping="Wrap" Text="我们刚才向" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="237,80,137,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="315" Style="{DynamicResource Text Body}"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="发送了一个代码。请查看你的电子邮件中的邮件，然后在此处输入代码。" VerticalAlignment="Top" Style="{DynamicResource Text Body}" Height="58" Width="444"/>
-        <TextBlock HorizontalAlignment="Center" Margin="237,84,137,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="315" Style="{DynamicResource Text Body}"/>
-        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="验证你的身份" VerticalAlignment="Top"
-            HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,180,0,0" TextWrapping="Wrap" Text="{Binding PromtInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Style="{DynamicResource Text Body}" Foreground="Red" FontSize="16" />
+
+        <TextBox MaxLines="1" FontSize="28" Width="430" BorderThickness="0,0,0,1" Height="35" HorizontalAlignment="Center" Margin="0,240,0,0" TextWrapping="Wrap" Text="{Binding Captcha, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Style="{DynamicResource Input Box}"/>
+        <Button Content="重新发送" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="62" Command="{Binding PWModifyCaptchaResendCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LinkButton}" FontSize="15"/>
+        <Button Content="取消" HorizontalAlignment="Center" Margin="122,330,427,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyCaptchaBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
+        <Button Content="下一步" HorizontalAlignment="Center" Margin="412,330,137,0" VerticalAlignment="Top" Width="140" Command="{Binding PWModifyCaptchaNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
 
     </Grid>
 </UserControl>

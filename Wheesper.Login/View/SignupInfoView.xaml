@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              mc:Ignorable="d" Background="White" >
 
-    <Grid>
-        <TextBox x:Name="pwd" FontSize="28" Foreground="Transparent" Margin="0,190,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="430" BorderThickness="0,0,0,1" Height="35" Style="{DynamicResource PasswordBox}" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,120,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="430" Style="{DynamicResource Input Box}" BorderThickness="0,0,0,1"/>
-        <Button Content="后退" HorizontalAlignment="Center" Margin="0,240,291,0" VerticalAlignment="Top" Width="140" Command="{Binding SignupInfoBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
-        <Button Content="下一步" HorizontalAlignment="Center" Margin="292,240,0,0" VerticalAlignment="Top" Width="139" Command="{Binding SignupInfoNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
-        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="创建用户" VerticalAlignment="Top"
-            HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,80,382,0" TextWrapping="Wrap" Text="邮箱:" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,160,382,0" TextWrapping="Wrap" Text="密码:" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="创建用户" VerticalAlignment="Top"  HorizontalAlignment="Center" Style="{DynamicResource Text Title}"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,80,0,0" TextWrapping="Wrap" Text="{Binding PromtInfo, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Style="{DynamicResource Text Body}" Foreground="Red" FontSize="16" />
+        <TextBlock HorizontalAlignment="Center" Margin="0,120,382,0" TextWrapping="Wrap" Text="邮箱:" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBox HorizontalAlignment="Center" MaxLines="1" Margin="0,160,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="430" Style="{DynamicResource Input Box}" BorderThickness="0,0,0,1"/>
+
+        <TextBlock HorizontalAlignment="Center" Margin="0,200,382,0" TextWrapping="Wrap" Text="密码:" VerticalAlignment="Top" Style="{DynamicResource Text Body}"/>
+        <TextBox x:Name="pwd" FontSize="28" MaxLines="1" Foreground="Transparent" Margin="0,240,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="430" BorderThickness="0,0,0,1" Height="35" Style="{DynamicResource PasswordBox}" Text="{Binding Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="后退" HorizontalAlignment="Center" Margin="0,300,291,0" VerticalAlignment="Top" Width="140" Command="{Binding SignupInfoBackCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
+        <Button Content="下一步" HorizontalAlignment="Center" Margin="292,300,0,0" VerticalAlignment="Top" Width="139" Command="{Binding SignupInfoNextCommand, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ButtonStyle1}"/>
     </Grid>
 </UserControl>

@@ -14,13 +14,40 @@ namespace Wheesper.Chat.ViewModel
         private IUnityContainer container = null;
         private IEventAggregator eventAggregator = null;
         private WheesperModel model = null;
-
         #endregion private menber
 
         #region properties
-        public string ApplierEMail { get; set; }
-        public string TargetEMail { get; set; }
-        public string Discription { get; set; }
+        public string ApplierEMail
+        {
+            get { return applierEMail; }
+            set
+            {
+                applierEMail = value;
+                RaisePropertyChanged("ApplierEMail");
+            }
+        }
+        public string TargetEMail
+        {
+            get { return targetEMail; }
+            set
+            {
+                targetEMail = value;
+                RaisePropertyChanged("TargetEMail");
+            }
+        }
+        public string Discription
+        {
+            get { return discription; }
+            set
+            {
+                discription = value;
+                RaisePropertyChanged("Discription");
+            }
+        }
+
+        private string applierEMail { get; set; }
+        private string targetEMail { get; set; }
+        private string discription { get; set; }
         #endregion properties
 
         #region Commond
@@ -64,6 +91,7 @@ namespace Wheesper.Chat.ViewModel
         private void acceptContactApply()
         {
             model.sendContactReplyRequest(ApplierEMail, TargetEMail, true, Discription);
+            model.sendContactListRequest(model.CurrentUser.EMail);
         }
         private bool canAcceptContactApply()
         {
@@ -81,7 +109,7 @@ namespace Wheesper.Chat.ViewModel
 
         private void closeSolveContactApply()
         {
-            eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
+            eventAggregator.GetEvent<ShowSystemMessageViewEvent>().Publish(0);
         }
         private bool canCloseSolveContactApply()
         {
@@ -111,9 +139,7 @@ namespace Wheesper.Chat.ViewModel
         private void subevent()
         {
             Debug.WriteLine("SolveContactApplyViewModel subscribe event");
-
         }
-
         #endregion helper function
     }
 }

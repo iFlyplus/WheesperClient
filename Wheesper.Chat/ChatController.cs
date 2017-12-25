@@ -10,6 +10,7 @@ using Wheesper.Chat.ViewModel;
 using Wheesper.Login.events;
 using Wheesper.Chat.region;
 using ProtocolBuffer;
+using Wheesper.Chat.Model;
 
 namespace Wheesper.Chat
 {
@@ -20,14 +21,18 @@ namespace Wheesper.Chat
         IEventAggregator eventAggregator = null;
         IRegionManager regionManager = null;
         IRegion mainRegion = null;
-        IRegion systemMessageRegion = null;
+        IRegion regionOne = null;
+        IRegion regionTwo = null;
         #endregion private member
 
         #region view
-        WheesperView chatView = null;
+        WheesperView wheesperView = null;
         SystemMessageView systemMessageView = null;
         SolveContactApplyView solveContactApplyView = null;
         ContactView contactView = null;
+        ChatView chatView = null;
+        FaceView faceView = null;
+        ChangeContactInfoView changeContactInfoView = null;
         #endregion view
 
         #region constructor & deconstructor
@@ -38,7 +43,7 @@ namespace Wheesper.Chat
             eventAggregator = this.container.Resolve<IEventAggregator>();
             regionManager = this.container.Resolve<IRegionManager>();
 
-            // delay systemMessageRegion init until ShowWheesperViewEvent handler
+            // delay regionOne init until ShowWheesperViewEvent handler
             mainRegion = regionManager.Regions[RegionNames.MainRegion];
 
             subevent();
@@ -56,10 +61,13 @@ namespace Wheesper.Chat
             Debug.WriteLine("ChatController sub event");
             eventAggregator.GetEvent<ShowWheesperViewEvent>().Subscribe(showWheesperViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<LoadContactViewEvent>().Subscribe(loadContactViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<LoadChatViewEvent>().Subscribe(loadChatViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<ShowSystemMessageViewEvent>().Subscribe(showSystemMessageViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<CloseSystemMessageViewEvent>().Subscribe(closeSystemMessageViewEventHandler, ThreadOption.UIThread, true);
-            eventAggregator.GetEvent<ShowSolveContactApplyViewEvent>().Subscribe(solveContactApplyViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<ShowSolveContactApplyViewEvent>().Subscribe(showSolveContactApplyViewEventHandler, ThreadOption.UIThread, true);
             eventAggregator.GetEvent<CloseSolveContactApplyViewEvent>().Subscribe(closeSolveContactApplyViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<ShowChangeContactInfoViewEvent>().Subscribe(showChangeContactInfoViewEventHandler, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<CloseChangeContactInfoViewEvent>().Subscribe(closeChangeContactInfoViewEventHandler, ThreadOption.UIThread, true);
         }
         private void loadView(object view)
         {
@@ -80,18 +88,37 @@ namespace Wheesper.Chat
         private void showWheesperViewEventHandler(object o)
         {
             Debug.WriteLine("ShowWheesperViewEvent handler from ChatController");
-            if (chatView == null)
+            if (wheesperView == null)
             {
-                chatView = (WheesperView)container.Resolve(typeof(WheesperView));
+                wheesperView = (WheesperView)container.Resolve(typeof(WheesperView));
                 var viewModel = (ChatViewModel)container.Resolve(typeof(ChatViewModel));
-                chatView.DataContext = viewModel;
+                wheesperView.DataContext = viewModel;
             }
-            loadView(chatView);
+            loadView(wheesperView);
 
-            // only now can region find ChatRegionNames.SystemMessageName
-            systemMessageRegion = regionManager.Regions[ChatRegionNames.RegionOne];
+            // only now can region manager find region define in wheesperView: region one & regiono two
+            regionOne = regionManager.Regions[ChatRegionNames.RegionOne];
+            regionTwo = regionManager.Regions[ChatRegionNames.RegionTwo];
             eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
+
+            if (faceView == null)
+            {
+                faceView = (FaceView)container.Resolve(typeof(FaceView));
+                var viewModel = (ChatViewModel)container.Resolve(typeof(ChatViewModel));
+                faceView.DataContext = viewModel;
+            }
+            Debug.Write("add view to RegionTwo ");
+            Debug.WriteLine(faceView);
+            foreach (var v in regionTwo.Views)
+            {
+                regionTwo.Remove(v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
+            }
+            regionTwo.Add(faceView);
+            regionTwo.Activate(faceView);
         }
+
         private void loadContactViewEventHandler(object o)
         {
             if (contactView == null)
@@ -102,15 +129,36 @@ namespace Wheesper.Chat
             }
             Debug.Write("add view to RegionOne ");
             Debug.WriteLine(contactView);
-            foreach (var v in systemMessageRegion.Views)
+            foreach (var v in regionOne.Views)
             {
-                systemMessageRegion.Remove(v);
+                regionOne.Remove(v);
                 Debug.Write("remove view ");
                 Debug.WriteLine(v);
             }
-            systemMessageRegion.Add(contactView);
-            systemMessageRegion.Activate(contactView);
+            regionOne.Add(contactView);
+            regionOne.Activate(contactView);
         }
+
+        private void loadChatViewEventHandler(object o)
+        {
+            if (chatView == null)
+            {
+                chatView = (ChatView)container.Resolve(typeof(ChatView));
+                var viewModel = (ChatViewModel)container.Resolve(typeof(ChatViewModel));
+                chatView.DataContext = viewModel;
+            }
+            Debug.Write("add view to RegionTwo ");
+            Debug.WriteLine(chatView);
+            foreach (var v in regionTwo.Views)
+            {
+                regionTwo.Remove(v);
+                Debug.Write("remove view ");
+                Debug.WriteLine(v);
+            }
+            regionTwo.Add(chatView);
+            regionTwo.Activate(chatView);
+        }
+
         private void showSystemMessageViewEventHandler(object o)
         {
             Debug.WriteLine("ShowSystemMessageViewEvent handler from ChatController");
@@ -122,14 +170,14 @@ namespace Wheesper.Chat
             }
             Debug.Write("add view to RegionOne ");
             Debug.WriteLine(systemMessageView);
-            foreach (var v in systemMessageRegion.Views)
+            foreach (var v in regionOne.Views)
             {
-                systemMessageRegion.Remove(v);
+                regionOne.Remove(v);
                 Debug.Write("remove view ");
                 Debug.WriteLine(v);
             }
-            systemMessageRegion.Add(systemMessageView);
-            systemMessageRegion.Activate(systemMessageView);
+            regionOne.Add(systemMessageView);
+            regionOne.Activate(systemMessageView);
         }
         private void closeSystemMessageViewEventHandler(object o)
         {
@@ -137,33 +185,35 @@ namespace Wheesper.Chat
 
             Debug.Write("remove view from RegionOne ");
             Debug.WriteLine(systemMessageView);
-            systemMessageRegion.Remove(systemMessageView);
+            regionOne.Remove(systemMessageView);
             eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
         }
-        private void solveContactApplyViewEventHandler(object o)
+
+        private void showSolveContactApplyViewEventHandler(object o)
         {
             Debug.WriteLine("ShowSolveContactApplyViewEvent handler from ChatController");
+            // Notice: create view once, but always refresh its viewmodel.
             if (solveContactApplyView == null)
             {
                 solveContactApplyView = (SolveContactApplyView)container.Resolve(typeof(SolveContactApplyView));
-                var viewModel = (SolveContactApplyViewModel)container.Resolve(typeof(SolveContactApplyViewModel));
-
-                viewModel.ApplierEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.ApplyerMailAddress;
-                viewModel.TargetEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.TargetMailAddress;
-                viewModel.Discription = "Hi";
-                solveContactApplyView.DataContext = viewModel;
             }
+            var viewModel = (SolveContactApplyViewModel)container.Resolve(typeof(SolveContactApplyViewModel));
+            viewModel.ApplierEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.ApplyerMailAddress;
+            viewModel.TargetEMail = ((ProtoMessage)o).ContactApplyingInfoPushMessage.TargetMailAddress;
+            viewModel.Discription = "Hi";
+            solveContactApplyView.DataContext = viewModel;
+
             Debug.Write("add view to RegionOne ");
             Debug.WriteLine(solveContactApplyView);
 
-            foreach (var v in systemMessageRegion.Views)
+            foreach (var v in regionOne.Views)
             {
-                systemMessageRegion.Remove(v);
+                regionOne.Remove(v);
                 Debug.Write("remove view ");
                 Debug.WriteLine(v);
             }
-            systemMessageRegion.Add(solveContactApplyView);
-            systemMessageRegion.Activate(solveContactApplyView);
+            regionOne.Add(solveContactApplyView);
+            regionOne.Activate(solveContactApplyView);
         }
         private void closeSolveContactApplyViewEventHandler(object o)
         {
@@ -171,7 +221,41 @@ namespace Wheesper.Chat
 
             Debug.Write("remove view from RegionOne ");
             Debug.WriteLine(solveContactApplyView);
-            systemMessageRegion.Remove(solveContactApplyView);
+            regionOne.Remove(solveContactApplyView);
+        }
+
+        private void showChangeContactInfoViewEventHandler(object o)
+        {
+            Debug.WriteLine("ShowChangeContactInfoViewEvent handler from ChatController");
+            if (changeContactInfoView == null)
+            {
+                changeContactInfoView = (ChangeContactInfoView)container.Resolve(typeof(ChangeContactInfoView));
+            }
+            var viewModel = (ChangeContactInfoViewModel)container.Resolve(typeof(ChangeContactInfoViewModel));
+            viewModel.ContactEMail = ((Contact)o).EMail;
+            viewModel.Remarks = ((Contact)o).Remarks;
+            viewModel.Group = ((Contact)o).Group;
+            changeContactInfoView.DataContext = viewModel;
+
+            foreach (var v in regionOne.Views)
+            {
+                regionOne.Remove(v);
+                Debug.Write("Remove view from RegionOne ");
+                Debug.WriteLine(v);
+            }
+            regionOne.Add(changeContactInfoView);
+            regionOne.Activate(changeContactInfoView);
+            Debug.Write("add view to RegionOne ");
+            Debug.WriteLine(solveContactApplyView);
+        }
+        private void closeChangeContactInfoViewEventHandler(object o)
+        {
+            Debug.WriteLine("CloseChangeContactInfoViewEvent handler from ChatController");
+
+            Debug.Write("remove view from RegionOne ");
+            Debug.WriteLine(changeContactInfoView);
+            regionOne.Remove(changeContactInfoView);
+            eventAggregator.GetEvent<LoadContactViewEvent>().Publish(0);
         }
         #endregion event handler
     }

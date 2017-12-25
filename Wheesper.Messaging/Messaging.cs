@@ -82,6 +82,7 @@ namespace Wheesper.Messaging
             {
                 while (true)
                 {
+                    
                     client.Receive(bufferForLength, 4, SocketFlags.None);
                     byte[] temp = new byte[4];
                     for (int i = 0; i < 4; i++)

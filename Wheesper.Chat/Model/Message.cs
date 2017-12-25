@@ -33,6 +33,11 @@ namespace Wheesper.Chat.Model
             get { return recevieNickname; }
             set { recevieNickname = value; }
         }
+        public string FirstC
+        {
+            get { return SenderNickname[0].ToString(); }
+            set { }
+        }
 
         private string senderEMail = null;
         private string recevieEMail = null;

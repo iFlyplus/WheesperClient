@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Wheesper.Chat.View.FaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wheesper.Chat.View"
+             mc:Ignorable="d" Background="White">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="欢迎！" FontSize="25" Style="{DynamicResource Text Title}"></TextBlock>
+            <TextBlock Text="{Binding CurrentUser.Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" FontSize="25" Margin="10,0,0,0" Style="{DynamicResource Text Title}"/>
+        </StackPanel>
+        <TextBlock Text="体验Wheesper聊天功能！" Margin="0,400,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Text Title}"></TextBlock>
+        <Image HorizontalAlignment="Center" Height="200" Margin="0,150,0,0" VerticalAlignment="Top" Width="200" Source="pack://application:,,,/welcome.png"/>
+    </Grid>
+</UserControl>

@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:Wheesper.Login.View"
              xmlns:prism="http://www.codeplex.com/prism"
              mc:Ignorable="d" Background="White" >
-    
-    <Grid Height="283">
+    <Grid>
         <TextBlock  TextWrapping="Wrap" 
-                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="61,20,61,0" Text="{Binding Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
-        <Button x:Name="SigninMailNext_BTN" Content="下一步" HorizontalAlignment="Center" Margin="401,180,50,0"   
+                VerticalAlignment="Top" HorizontalAlignment="Center" Style="{DynamicResource Text Title}" Margin="0,150,0,0" Text="{Binding Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" ></TextBlock>
+        <Button x:Name="SigninMailNext_BTN" Content="登陆" HorizontalAlignment="Center" Margin="0,250,0,0"   
                     Command="{Binding StartCommand, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Width="140" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top"/>
+        <TextBlock Style="{DynamicResource Text Title}" HorizontalAlignment="Center" Margin="0,50,0,0" TextWrapping="Wrap" Text="恭喜你！注册成功" VerticalAlignment="Top" FontSize="36"/>
     </Grid>
 </UserControl>

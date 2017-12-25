@@ -27,8 +27,10 @@
             </Grid>
 
             <Grid x:Name="_0_0" Grid.Column="0" Grid.Row="0" >
-                <Image Source="pack://application:,,,/my.PNG" Margin="10,0,0,0" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Stretch"></Image>
-                <TextBlock Height="30" Width="120" FontSize="18" Text="{Binding CurrentUser.Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Border CornerRadius="100" BorderThickness="1" Background="CadetBlue" Margin="10,0,0,0" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                    <TextBox Text="{Binding CurrentUser.FirstC}" Background="{x:Null}" FontSize="35" BorderThickness="0" IsEnabled="False" TextAlignment="Center" Foreground="White"/>
+                </Border>
+                <TextBlock Height="30" Width="120" FontSize="18" Text="{Binding CurrentUser.Nickname, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" Margin="70,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Button Content="系统消息" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Style="{DynamicResource LinkButton}" FontSize="15" Command="{Binding ShowSystemMessageCommond, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
             </Grid>
             <Grid x:Name="_0_1" Grid.Column="0" Grid.Row="1" >
@@ -44,44 +46,7 @@
         </Grid>
 
         <Grid Grid.Column="1" Height="Auto">
-            <Button Content="发送" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Column="1" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-            <ListView HorizontalAlignment="Left" Height="269" Margin="0,31,0,0" VerticalAlignment="Top" Width="130">
-                <ListView.ItemTemplate>
-                    <HierarchicalDataTemplate>
-                        <Grid HorizontalAlignment="Left"  >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Background="LightGray">
-                                <TextBlock Text="{Binding Comment}"></TextBlock>
-                            </Grid>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
-                                <TextBlock Text="{Binding Published}"  Foreground="LightGray" Margin="10,0,0,0"></TextBlock>
-                            </StackPanel>
-                        </Grid>
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Right"  >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Background="Green">
-                                        <TextBlock Text="{Binding Comment}" Foreground="White"></TextBlock>
-                                    </Grid>
-                                    <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <TextBlock Text="{Binding Published}"  Foreground="LightGray" Margin="0,0,10,0"></TextBlock>
-                                        <TextBlock Text="{Binding Name}" Foreground="LightGray"></TextBlock>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
-                    </HierarchicalDataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <UserControl prism:RegionManager.RegionName="RegionTwo" />
         </Grid>
 
     </Grid>

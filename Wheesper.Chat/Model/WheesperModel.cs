@@ -110,6 +110,7 @@ namespace Wheesper.Chat.Model
         public void sendContactRemarkModifyRequest(string contactEMail, string contactRemark, string contactGroup)
         {
             ProtoMessage message = new ProtoMessage();
+            message.ContactRemarkModifyRequest = new ContactRemarkModifyRequest();
             message.ContactRemarkModifyRequest.ContactEmail = contactEMail;
             message.ContactRemarkModifyRequest.ContactRemark = contactRemark;
             message.ContactRemarkModifyRequest.ContactGroup = contactGroup;
@@ -156,5 +157,11 @@ namespace Wheesper.Chat.Model
     {
         ContactApplySended,
         ContactApplyRequest
+    }
+
+    public enum SystemState
+    {
+        JustLogin,
+        Chatting
     }
 }

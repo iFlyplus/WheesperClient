@@ -74,7 +74,7 @@ namespace Wheesper.Login.ViewModel
             set
             {
                 promtInfo = value;
-                RaisePropertyChanged("Promt");
+                RaisePropertyChanged("PromtInfo");
             }
         }
         #endregion properties

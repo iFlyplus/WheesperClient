@@ -5,18 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wheesper.Chat.View"
              mc:Ignorable="d" 
-             Background="White"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <ListBox ItemsSource="{Binding Path=SystemMessages}">
+             Background="White">
+    <Grid Background="#FFECF0F1">
+        <TextBlock Text="系统消息" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0,5,0,0"/>
+        <ListBox ItemsSource="{Binding Path=SystemMessages}" Margin="0,40,0,35" BorderThickness="0" Background="#FFECF0F1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=ID}" MouseDown="MouseDown_SystemMessage"/>
-                        <TextBlock Text="{Binding Path=Message}"/>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="消息：" FontSize="15" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock Text="{Binding Path=ID}" FontSize="15" MouseDown="MouseDown_SystemMessage" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Path=Message}" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Content="后退" HorizontalAlignment="Center" Margin="0,0,0,5" VerticalAlignment="Bottom" Width="140" Style="{DynamicResource ButtonStyle1}" Command="{Binding CloseSystemMessageCommond, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+
     </Grid>
 </UserControl>
